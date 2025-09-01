@@ -54,10 +54,11 @@ const prompt = ai.definePrompt({
   Embed the original YouTube video using a Youtube video tag.
   Youtube video tags look like this:
   <YoutubeVideo id="[the Youtube Video ID goes here]"></YoutubeVideo>
+  For example if the video id is "12345", the tag should be "<YoutubeVideo id="12345"></YoutubeVideo>".
   Do not include a Youtube video url in the text, just include the tag.
   Be concise and do not embellish any of the information.
 
-  Article Draft:`, 
+  Article Draft:`,
 });
 
 const generateArticleDraftFromYouTubeFlow = ai.defineFlow(
