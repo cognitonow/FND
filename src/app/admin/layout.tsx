@@ -1,23 +1,19 @@
+
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { LayoutDashboard, Newspaper, LogOut, Brush, Home } from 'lucide-react';
-
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarFooter, SidebarInset } from '@/components/ui/sidebar';
 import Link from 'next/link';
-import { BugCatcher, LogEntry } from '@/components/BugCatcher';
+import { BugCatcher } from '@/components/BugCatcher';
+import { LogProvider, useLogs } from '@/context/LogContext';
+
+function BugCatcherWrapper() {
+  const { logs, clearLogs } = useLogs();
+  return <BugCatcher logs={logs} onClear={clearLogs} />;
+}
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
-  const [logs, setLogs] = useState<LogEntry[]>([]);
-
-  const addLog = (log: Omit<LogEntry, 'id' | 'timestamp'>) => {
-    setLogs(prevLogs => [...prevLogs, { ...log, id: Date.now().toString(), timestamp: new Date() }]);
-  };
-
-  const clearLogs = () => {
-    setLogs([]);
-  };
-  
   return (
     <SidebarProvider>
       <Sidebar>
@@ -61,23 +57,18 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
       </Sidebar>
       <SidebarInset>
         <div className="p-4 sm:p-6 lg:p-8">
-          {React.Children.map(children, child => {
-              if (React.isValidElement(child)) {
-                // @ts-ignore 
-                return React.cloneElement(child, { addLog });
-              }
-              return child;
-          })}
+            {children}
         </div>
-        <BugCatcher logs={logs} onClear={clearLogs} />
+        <BugCatcherWrapper />
       </SidebarInset>
     </SidebarProvider>
   );
 }
 
-
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
+    <LogProvider>
       <AdminLayoutContent>{children}</AdminLayoutContent>
+    </LogProvider>
   );
 }

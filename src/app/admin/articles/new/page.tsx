@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -16,7 +17,7 @@ import { createArticle, generateDraftAction, generateSeoAction } from "@/lib/act
 import type { Article } from "@/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Wand2, Youtube } from "lucide-react";
-import type { LogEntry } from "@/components/BugCatcher";
+import { useLogs } from "@/context/LogContext";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required."),
@@ -25,17 +26,13 @@ const formSchema = z.object({
   keywords: z.string().optional(),
 });
 
-type NewArticlePageProps = {
-  addLog?: (log: Omit<LogEntry, 'id' | 'timestamp'>) => void;
-};
-
-
-export default function NewArticlePage({ addLog }: NewArticlePageProps) {
+export default function NewArticlePage() {
   const router = useRouter();
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
   const [isAiLoading, setAiLoading] = useState(false);
   const [youtubeUrl, setYoutubeUrl] = useState('');
+  const { addLog } = useLogs();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,22 +50,22 @@ export default function NewArticlePage({ addLog }: NewArticlePageProps) {
       return;
     }
     setAiLoading(true);
-    addLog?.({ type: 'info', source: 'handleGenerateDraft', message: `Starting draft generation for: ${youtubeUrl}` });
+    addLog({ type: 'info', source: 'handleGenerateDraft', message: `Starting draft generation for: ${youtubeUrl}` });
     try {
       const result = await generateDraftAction({ youtubeVideoUrl: youtubeUrl });
       form.setValue('content', result.articleDraft);
 
       if (result.articleDraft.includes('was unable to retrieve')) {
          toast({ variant: 'destructive', title: "Draft Generation Failed", description: "Could not retrieve video details. Check URL." });
-         addLog?.({ type: 'warning', source: 'handleGenerateDraft', message: `Could not retrieve video details. It's likely the URL is invalid or the video is private.` });
+         addLog({ type: 'warning', source: 'handleGenerateDraft', message: `Could not retrieve video details. It's likely the URL is invalid or the video is private.` });
       } else {
         toast({ description: "Article draft generated successfully." });
-        addLog?.({ type: 'success', source: 'handleGenerateDraft', message: `Draft generated successfully.` });
+        addLog({ type: 'success', source: 'handleGenerateDraft', message: `Draft generated successfully.` });
       }
     } catch (error: any) {
       const errorMessage = error.message || "An unknown error occurred.";
       toast({ variant: 'destructive', title: "Draft Generation Failed", description: "See logs for details." });
-      addLog?.({ type: 'error', source: 'handleGenerateDraft', message: errorMessage });
+      addLog({ type: 'error', source: 'handleGenerateDraft', message: errorMessage });
       console.error("Draft Generation Failed:", error);
     } finally {
       setAiLoading(false);
@@ -82,7 +79,7 @@ export default function NewArticlePage({ addLog }: NewArticlePageProps) {
       return;
     }
     setAiLoading(true);
-    addLog?.({ type: 'info', source: 'handleGenerateSeo', message: `Starting SEO generation.` });
+    addLog({ type: 'info', source: 'handleGenerateSeo', message: `Starting SEO generation.` });
     try {
       const result = await generateSeoAction({ articleContent: content });
       form.setValue('title', result.title);
@@ -90,11 +87,11 @@ export default function NewArticlePage({ addLog }: NewArticlePageProps) {
       const slug = result.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       form.setValue('slug', slug);
       toast({ description: "SEO metadata generated successfully." });
-      addLog?.({ type: 'success', source: 'handleGenerateSeo', message: `SEO metadata generated successfully.` });
+      addLog({ type: 'success', source: 'handleGenerateSeo', message: `SEO metadata generated successfully.` });
     } catch (error: any) {
         const errorMessage = error.message || "An unknown error occurred.";
         toast({ variant: 'destructive', title: "SEO Generation Failed", description: "See logs for details." });
-        addLog?.({ type: 'error', source: 'handleGenerateSeo', message: errorMessage });
+        addLog({ type: 'error', source: 'handleGenerateSeo', message: errorMessage });
         console.error("SEO Generation Failed:", error);
     } finally {
       setAiLoading(false);
