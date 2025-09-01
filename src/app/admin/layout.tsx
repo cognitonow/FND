@@ -1,23 +1,12 @@
 "use client";
 
 import React from 'react';
-import { usePathname } from 'next/navigation';
 import { LayoutDashboard, Newspaper, LogOut, Brush, Home } from 'lucide-react';
 
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarFooter, SidebarInset } from '@/components/ui/sidebar';
 import Link from 'next/link';
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
-  if (pathname === '/admin/login') {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-          You are redirecting to the dashboard...
-      </div>
-    );
-  }
-
   return (
     <SidebarProvider>
       <Sidebar>
