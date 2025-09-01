@@ -59,7 +59,10 @@ export default async function ArticlesPage() {
                        <DropdownMenuItem asChild><Link href={`/articles/${article.slug}`} target="_blank">View</Link></DropdownMenuItem>
                       <form action={async () => {
                           "use server";
-                          if(article.id) await deleteArticle(article.id);
+                          if(article.id) {
+                            await deleteArticle(article.id);
+                            revalidatePath('/admin/articles');
+                          }
                       }}>
                           <button type="submit" className="w-full text-left relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 text-red-600 focus:text-red-600">Delete</button>
                       </form>
