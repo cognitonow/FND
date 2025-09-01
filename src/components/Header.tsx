@@ -1,0 +1,25 @@
+import Link from 'next/link';
+import { Button } from './ui/button';
+
+export default function Header() {
+  return (
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <Link href="/" className="text-xl font-bold tracking-tight">
+          FND.ME
+        </Link>
+        <nav className="flex items-center gap-4">
+          <Button variant="ghost" asChild>
+            <Link href="/">Portfolio</Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href="/articles">Articles</Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/admin/login">Admin</Link>
+          </Button>
+        </nav>
+      </div>
+    </header>
+  );
+}

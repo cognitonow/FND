@@ -1,1 +1,5 @@
-// Flows will be imported for their side effects in this file.
+import { config } from 'dotenv';
+config();
+
+import '@/ai/flows/generate-article-draft-from-youtube.ts';
+import '@/ai/flows/generate-seo-optimized-metadata.ts';
