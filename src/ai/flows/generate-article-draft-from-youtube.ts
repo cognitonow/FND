@@ -66,21 +66,20 @@ const prompt = ai.definePrompt({
     videoId: z.string(),
   })},
   output: {schema: z.object({ articleDraft: z.string() })},
-  prompt: `You are an expert content writer. Your task is to generate a placeholder article draft based on the provided YouTube video details.
+  prompt: `<YoutubeVideo id="{{videoId}}"></YoutubeVideo>
 
-  The video ID is {{videoId}}.
-  The video title is "{{title}}".
-  The video description is "{{description}}".
+You are an expert content writer. Your task is to generate a placeholder article draft based on the provided YouTube video details.
 
-  <YoutubeVideo id="{{videoId}}"></YoutubeVideo>
+The video title is "{{title}}".
+The video description is "{{description}}".
 
-  ## Introduction
+## Introduction
 
-  Write a brief introduction based on the video's description.
+Write a brief introduction based on the video's description.
 
-  ## Key Takeaways
+## Key Takeaways
 
-  Based on the video's description, create a few H2 subheadings with a short paragraph under each. Do not add a conclusion.
+Based on the video's description, create a few H2 subheadings with a short paragraph under each. Do not add a conclusion.
 `,
 });
 
