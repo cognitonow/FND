@@ -67,12 +67,18 @@ const prompt = ai.definePrompt({
   input: {schema: GenerateArticleDraftFromYouTubeInputSchema},
   output: {schema: GenerateArticleDraftFromYouTubeOutputSchema},
   tools: [getYoutubeVideoDetailsTool],
-  prompt: `You are an expert content writer. Your task is to generate a comprehensive article draft based on a YouTube video.
+  prompt: `You are an expert content writer. Your task is to generate a comprehensive article draft based on the provided YouTube video URL.
 
-Use the 'getYoutubeVideoDetails' tool with the provided '{{{youtubeVideoUrl}}}' to get the video's title, description, and chapters.
+First, use the 'getYoutubeVideoDetails' tool with the provided 'youtubeVideoUrl' to get the video's title, description, and chapters.
 
 {{#if (lookup tool_response 'getYoutubeVideoDetails' 'title')}}
-Write a complete article in markdown format. Start by embedding the video using the '<YoutubeVideo id="VIDEO_ID"></YoutubeVideo>' tag (extract the VIDEO_ID from the URL). Then, write an introduction based on the description, and use the chapters as H2 subheadings for the main sections of the article. Elaborate on each chapter's topic. Do not add a conclusion.
+You have successfully retrieved the video details. Now, write a complete article in markdown format.
+
+1.  Start by embedding the video. Use the format '<YoutubeVideo id="VIDEO_ID"></YoutubeVideo>'. You will need to extract the VIDEO_ID from the 'youtubeVideoUrl'.
+2.  Write an introduction for the article. You can use the video's description for inspiration.
+3.  Use the video's chapters as H2 subheadings (e.g., '## Chapter Title') for the main sections of the article.
+4.  Under each chapter subheading, write a paragraph or two elaborating on the topic of that chapter.
+5.  Do not add a concluding paragraph.
 {{else}}
 I was unable to retrieve the video details from the provided YouTube URL. Therefore, I cannot generate the article draft. Please ensure the URL is correct and the video is publicly accessible.
 {{/if}}
