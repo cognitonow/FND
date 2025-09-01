@@ -64,17 +64,15 @@ const prompt = ai.definePrompt({
   tools: [getYoutubeVideoDetailsTool],
   prompt: `You are an expert content writer who specializes in creating blog posts from YouTube videos.
   
-  Your task is to generate a well-structured and comprehensive article draft based on the provided YouTube video.
+  Your task is to generate a well-structured and comprehensive article draft based on the YouTube video URL provided.
 
-  1. Use the getYoutubeVideoDetails tool to extract the video's title, description, and chapters.
+  1. Use the getYoutubeVideoDetails tool to extract the video's title, description, and chapters. The URL to use is: {{{youtubeVideoUrl}}}
   2. The article's main title (H1) should be the video's title.
   3. Start the article by embedding the YouTube video for viewing. Use a Youtube video tag like this: <YoutubeVideo id="[the Youtube Video ID goes here]"></YoutubeVideo>. For example if the video id is "12345", the tag should be "<YoutubeVideo id="12345"></YoutubeVideo>". Do not include a Youtube video url in the text, just include the tag.
   4. After the video, write a brief introduction based on the video's description.
   5. Use the video's chapters as the main sections of the article. Each chapter title should be a subheading (H2).
   6. Under each subheading, write a few paragraphs that elaborate on the chapter's topic. You must watch the video content for that chapter to generate the text.
   7. The entire article should be written in clear, engaging markdown format. Do not include any concluding remarks or summaries at the end.
-
-  Here is the YouTube video URL: {{{youtubeVideoUrl}}}.
   
   Begin generating the article now.`,
 });
