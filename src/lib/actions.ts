@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc, serverTimestamp, query, orderBy, limit, DocumentData } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc, serverTimestamp, query, orderBy, limit, DocumentData, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import type { Article } from "@/types";
 import { generateArticleDraftFromYouTube, GenerateArticleDraftFromYouTubeInput } from "@/ai/flows/generate-article-draft-from-youtube";
