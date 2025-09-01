@@ -6,7 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from 'next/navigation';
 import { useState, useTransition, useEffect } from 'react';
-import { getArticle, updateArticle, generateDraftAction, generateSeoAction } from "@/lib/actions";
+import { getArticle, updateArticle, generateArticleAction } from "@/lib/actions";
 import type { Article } from "@/types";
 import { useLogs } from "@/context/LogContext";
 
@@ -18,7 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Wand2, Youtube } from "lucide-react";
+import { Wand2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 
 const formSchema = z.object({
@@ -66,60 +66,37 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
     fetchArticle();
   }, [params.id, form, router, toast]);
 
-  const handleGenerateDraft = async () => {
+  const handleGenerateArticle = async () => {
     if (!youtubeUrl) {
       toast({ variant: 'destructive', description: "Please enter a YouTube URL." });
       return;
     }
     setAiLoading(true);
-    addLog({ type: 'info', source: 'handleGenerateDraft', message: `Starting draft generation for: ${youtubeUrl}` });
+    addLog({ type: 'info', source: 'handleGenerateArticle', message: `Starting article generation for: ${youtubeUrl}` });
     try {
-      const result = await generateDraftAction({ youtubeVideoUrl: youtubeUrl, writingRules });
+      const result = await generateArticleAction({ youtubeVideoUrl: youtubeUrl, writingRules });
       
       if (result.error) {
-        toast({ variant: 'destructive', title: "Draft Generation Failed", description: result.error });
-        addLog({ type: 'warning', source: 'handleGenerateDraft', message: `Draft generation failed: ${result.error}` });
+        toast({ variant: 'destructive', title: "Generation Failed", description: result.error });
+        addLog({ type: 'warning', source: 'handleGenerateArticle', message: `Generation failed: ${result.error}` });
       } else {
         form.setValue('content', result.articleDraft);
-        toast({ description: "Article draft generated successfully." });
-        addLog({ type: 'success', source: 'handleGenerateDraft', message: `Draft generated successfully.` });
+        form.setValue('title', result.title);
+        form.setValue('keywords', result.keywords);
+        const slug = result.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        form.setValue('slug', slug);
+        toast({ description: "Article generated successfully." });
+        addLog({ type: 'success', source: 'handleGenerateArticle', message: `Article generated successfully.` });
       }
     } catch (error: any) {
       const errorMessage = error.message || "An unknown error occurred.";
-      toast({ variant: 'destructive', title: "Draft Generation Failed", description: "See logs for details." });
-      addLog({ type: 'error', source: 'handleGenerateDraft', message: errorMessage });
-      console.error("Draft Generation Failed:", error);
+      toast({ variant: 'destructive', title: "Generation Failed", description: "See logs for details." });
+      addLog({ type: 'error', source: 'handleGenerateArticle', message: errorMessage });
+      console.error("Article Generation Failed:", error);
     } finally {
       setAiLoading(false);
     }
   };
-
-  const handleGenerateSeo = async () => {
-    const content = form.getValues('content');
-    if (!content) {
-      toast({ variant: 'destructive', description: "Article content is empty." });
-      return;
-    }
-    setAiLoading(true);
-    addLog({ type: 'info', source: 'handleGenerateSeo', message: `Starting SEO generation.` });
-    try {
-      const result = await generateSeoAction({ articleContent: content });
-      form.setValue('title', result.title);
-      form.setValue('keywords', result.keywords);
-      const slug = result.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-      form.setValue('slug', slug);
-      toast({ description: "SEO metadata generated successfully." });
-      addLog({ type: 'success', source: 'handleGenerateSeo', message: `SEO metadata generated successfully.` });
-    } catch (error: any) {
-        const errorMessage = error.message || "An unknown error occurred.";
-        toast({ variant: 'destructive', title: "SEO Generation Failed", description: "See logs for details." });
-        addLog({ type: 'error', source: 'handleGenerateSeo', message: errorMessage });
-        console.error("SEO Generation Failed:", error);
-    } finally {
-      setAiLoading(false);
-    }
-  };
-
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
@@ -234,14 +211,9 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
                     </TabsList>
                     <TabsContent value="youtube" className="pt-4">
                       <div className="space-y-2">
-                          <Label>Generate Draft from YouTube</Label>
-                          <div className="flex gap-2">
-                              <Input placeholder="https://youtube.com/watch?v=..." value={youtubeUrl} onChange={(e) => setYoutubeUrl(e.target.value)} />
-                              <Button variant="outline" size="icon" onClick={handleGenerateDraft} disabled={isAiLoading}>
-                                  <Youtube className="h-4 w-4" />
-                              </Button>
-                          </div>
-                          <p className="text-sm text-muted-foreground">Requires a YouTube Data API Key.</p>
+                          <Label>Generate from YouTube</Label>
+                           <p className="text-sm text-muted-foreground pb-2">Generates a full article, including title, slug, and keywords, from a YouTube video.</p>
+                          <Input placeholder="https://youtube.com/watch?v=..." value={youtubeUrl} onChange={(e) => setYoutubeUrl(e.target.value)} />
                       </div>
                     </TabsContent>
                     <TabsContent value="rules" className="pt-4">
@@ -259,12 +231,11 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
                   </Tabs>
 
                   <div className="border-t pt-6 space-y-2">
-                      <Label>Generate SEO Title & Keywords</Label>
-                      <p className="text-sm text-muted-foreground">Generates a title, slug, and keywords based on the article content.</p>
-                        <Button variant="outline" className="w-full" onClick={handleGenerateSeo} disabled={isAiLoading}>
+                     <Button variant="outline" className="w-full" onClick={handleGenerateArticle} disabled={isAiLoading}>
                           <Wand2 className="mr-2 h-4 w-4" />
-                          Generate SEO Meta
+                          {isAiLoading ? 'Generating...' : 'Generate Article'}
                       </Button>
+                      <p className="text-sm text-muted-foreground text-center">Requires a YouTube Data API Key.</p>
                   </div>
                 </CardContent>
             </Card>

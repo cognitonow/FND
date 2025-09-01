@@ -6,6 +6,7 @@ import { db } from "@/lib/firebase";
 import type { Article } from "@/types";
 import { generateArticleDraftFromYouTube, GenerateArticleDraftFromYouTubeInput } from "@/ai/flows/generate-article-draft-from-youtube";
 import { generateSeoOptimizedMetadata, GenerateSeoOptimizedMetadataInput } from "@/ai/flows/generate-seo-optimized-metadata";
+import { generateArticleFromYouTube, GenerateArticleFromYouTubeInput } from "@/ai/flows/generate-article-from-youtube";
 
 function articleToJSON(doc: DocumentData): Article {
   const data = doc.data();
@@ -94,10 +95,6 @@ export async function deleteArticle(id: string) {
   }
 }
 
-export async function generateDraftAction(input: GenerateArticleDraftFromYouTubeInput) {
-    return await generateArticleDraftFromYouTube(input);
-}
-
-export async function generateSeoAction(input: GenerateSeoOptimizedMetadataInput) {
-    return await generateSeoOptimizedMetadata(input);
+export async function generateArticleAction(input: GenerateArticleFromYouTubeInput) {
+    return await generateArticleFromYouTube(input);
 }

@@ -3,3 +3,4 @@ config();
 
 import '@/ai/flows/generate-article-draft-from-youtube.ts';
 import '@/ai/flows/generate-seo-optimized-metadata.ts';
+import '@/ai/flows/generate-article-from-youtube.ts';
