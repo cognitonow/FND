@@ -29,7 +29,7 @@ const SimpleMarkdownParser = ({ text }: { text: string }) => {
 
 export function ArticleContent({ content }: ArticleContentProps) {
   const youtubeTagRegex = /<YoutubeVideo id="([^"]+)"><\/YoutubeVideo>/;
-  const match = content.match(youtubeTagregegg);
+  const match = content.match(youtubeTagRegex);
 
   let videoId = null;
   let remainingContent = content;
