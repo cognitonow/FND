@@ -57,8 +57,14 @@ export default function NewArticlePage({ addLog }: NewArticlePageProps) {
     try {
       const result = await generateDraftAction({ youtubeVideoUrl: youtubeUrl });
       form.setValue('content', result.articleDraft);
-      toast({ description: "Article draft generated successfully." });
-      addLog?.({ type: 'success', source: 'handleGenerateDraft', message: `Draft generated successfully.` });
+
+      if (result.articleDraft.startsWith('I was unable to retrieve')) {
+         toast({ variant: 'destructive', title: "Draft Generation Failed", description: "Could not retrieve video details. Check URL." });
+         addLog?.({ type: 'warning', source: 'handleGenerateDraft', message: `Could not retrieve video details. It's likely the URL is invalid or the video is private.` });
+      } else {
+        toast({ description: "Article draft generated successfully." });
+        addLog?.({ type: 'success', source: 'handleGenerateDraft', message: `Draft generated successfully.` });
+      }
     } catch (error: any) {
       const errorMessage = error.message || "An unknown error occurred.";
       toast({ variant: 'destructive', title: "Draft Generation Failed", description: "See logs for details." });
