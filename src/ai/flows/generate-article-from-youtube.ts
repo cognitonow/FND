@@ -10,7 +10,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import { generateArticleDraftFromYouTube, type GenerateArticleDraftFromYouTubeOutput } from './generate-article-draft-from-youtube';
+import { generateArticleDraftFromYouTube } from './generate-article-draft-from-youtube';
 import { generateSeoOptimizedMetadata } from './generate-seo-optimized-metadata';
 import { getVideoDetails } from '@/services/youtube';
 
@@ -62,25 +62,18 @@ const generateArticleFromYouTubeFlow = ai.defineFlow(
         return { articleDraft: '', title: '', keywords: '', error: 'Could not retrieve video details.' };
     }
 
-    // Step 2: Generate the article draft
-    const draftResult = await generateArticleDraftFromYouTube({
-      youtubeVideoUrl: input.youtubeVideoUrl,
-      writingRules: input.writingRules,
-    });
+    // Step 2: Generate draft and SEO meta in parallel
+    const [draftResult, seoResult] = await Promise.all([
+        generateArticleDraftFromYouTube({
+            videoId: videoId,
+            title: videoDetails.title,
+            description: videoDetails.description,
+            writingRules: input.writingRules,
+        }),
+        generateSeoOptimizedMetadata({ articleContent: `${videoDetails.title}\n${videoDetails.description}` })
+    ]);
     
-    if (draftResult.error || !draftResult.articleDraft) {
-        return {
-            articleDraft: '',
-            title: '',
-            keywords: '',
-            error: draftResult.error || 'Failed to generate article draft.',
-        };
-    }
-    
-    // Step 3: Generate SEO metadata from the draft
-    const seoResult = await generateSeoOptimizedMetadata({ articleContent: draftResult.articleDraft });
-
-    // Step 4: Combine the results
+    // Step 3: Combine the results
     return {
         articleDraft: draftResult.articleDraft,
         title: seoResult.title,
