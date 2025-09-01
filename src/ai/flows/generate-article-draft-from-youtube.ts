@@ -72,7 +72,9 @@ export async function generateArticleDraftFromYouTube(
 
 const prompt = ai.definePrompt({
   name: 'generateArticleDraftFromYouTubePrompt',
-  input: {schema: GenerateArticleDraftFromYouTubeInputSchema},
+  input: {schema: GenerateArticleDraftFromYouTubeInputSchema.extend({
+    videoId: z.string().optional(),
+  })},
   output: {schema: GenerateArticleDraftFromYouTubeOutputSchema},
   tools: [getYoutubeVideoDetailsTool],
   prompt: `You are an expert content writer. Your task is to generate a placeholder article draft based on the provided YouTube video.
@@ -82,7 +84,7 @@ First, call the getYoutubeVideoDetails tool with the youtubeVideoUrl.
 {{#if tool_response.error}}
   I am unable to generate an article draft. Reason: {{tool_response.error}}
 {{else}}
-  <YoutubeVideo id="{{youtubeVideoUrl.split('v=')[1]}}"></YoutubeVideo>
+  <YoutubeVideo id="{{videoId}}"></YoutubeVideo>
 
   ## Introduction
 
@@ -102,7 +104,8 @@ const generateArticleDraftFromYouTubeFlow = ai.defineFlow(
     outputSchema: GenerateArticleDraftFromYouTubeOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
+    const videoId = new URL(input.youtubeVideoUrl).searchParams.get('v');
+    const {output} = await prompt({...input, videoId: videoId || ''});
     return output!;
   }
 );
