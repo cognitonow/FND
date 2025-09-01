@@ -26,6 +26,7 @@ const formSchema = z.object({
   slug: z.string().min(1, "Slug is required.").regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must be lowercase and contain only letters, numbers, and hyphens."),
   content: z.string().min(1, "Content is required."),
   keywords: z.string().optional(),
+  thumbnailUrl: z.string().url().optional().or(z.literal('')),
 });
 
 type EditArticlePageProps = {
@@ -49,6 +50,7 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
       slug: "",
       content: "",
       keywords: "",
+      thumbnailUrl: "",
     },
   });
   
@@ -83,6 +85,9 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
         form.setValue('content', result.articleDraft);
         form.setValue('title', result.title);
         form.setValue('keywords', result.keywords);
+         if (result.thumbnailUrl) {
+            form.setValue('thumbnailUrl', result.thumbnailUrl);
+        }
         const slug = result.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
         form.setValue('slug', slug);
         toast({ description: "Article generated successfully." });
@@ -185,6 +190,18 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
                                 <FormLabel>Keywords</FormLabel>
                                 <FormControl><Input placeholder="tech, ai, design" {...field} /></FormControl>
                                 <FormDescription>Comma-separated keywords for SEO.</FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="thumbnailUrl"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Thumbnail URL</FormLabel>
+                                <FormControl><Input placeholder="https://example.com/image.png" {...field} /></FormControl>
+                                <FormDescription>The URL for the article's thumbnail image.</FormDescription>
                                 <FormMessage />
                             </FormItem>
                             )}

@@ -26,9 +26,13 @@ export async function getVideoDetails(videoId: string) {
             return null;
         }
 
+        // Prefer high quality, but fall back to medium or default.
+        const thumbnailUrl = video.snippet.thumbnails?.high?.url || video.snippet.thumbnails?.medium?.url || video.snippet.thumbnails?.default?.url || '';
+
         return {
             title: video.snippet.title || '',
             description: video.snippet.description || '',
+            thumbnailUrl: thumbnailUrl,
         };
     } catch (error: any) {
         console.error('Error fetching YouTube video details:', error.message);

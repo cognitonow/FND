@@ -16,6 +16,7 @@ export interface Article {
   slug: string;
   content: string;
   keywords: string;
+  thumbnailUrl?: string;
   createdAt?: string | Timestamp;
   updatedAt?: string | Timestamp;
 }

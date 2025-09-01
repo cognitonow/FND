@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { format } from 'date-fns';
 import { getArticles, deleteArticle } from '@/lib/actions';
 import { Button } from '@/components/ui/button';
@@ -29,6 +30,7 @@ export default async function ArticlesPage() {
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead className="w-16 hidden sm:table-cell"></TableHead>
               <TableHead>Title</TableHead>
               <TableHead className="hidden md:table-cell">Created</TableHead>
               <TableHead className="hidden md:table-cell">Last Updated</TableHead>
@@ -38,6 +40,13 @@ export default async function ArticlesPage() {
           <TableBody>
             {articles.length > 0 ? articles.map((article) => (
               <TableRow key={article.id}>
+                <TableCell className="hidden sm:table-cell">
+                    {article.thumbnailUrl ? (
+                        <Image src={article.thumbnailUrl} alt={article.title} width={64} height={36} className="rounded-md object-cover" />
+                    ) : (
+                        <div className="w-16 h-9 bg-muted rounded-md"></div>
+                    )}
+                </TableCell>
                 <TableCell className="font-medium">{article.title}</TableCell>
                 <TableCell className="hidden md:table-cell">
                     {article.createdAt ? format(new Date(article.createdAt as string), 'PPP') : 'N/A'}
@@ -72,7 +81,7 @@ export default async function ArticlesPage() {
               </TableRow>
             )) : (
                 <TableRow>
-                    <TableCell colSpan={4} className="text-center h-24">No articles found.</TableCell>
+                    <TableCell colSpan={5} className="text-center h-24">No articles found.</TableCell>
                 </TableRow>
             )}
           </TableBody>

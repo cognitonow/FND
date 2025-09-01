@@ -10,8 +10,9 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import { generateArticleDraftFromYouTube, type GenerateArticleDraftFromYouTubeInput, type GenerateArticleDraftFromYouTubeOutput } from './generate-article-draft-from-youtube';
-import { generateSeoOptimizedMetadata, type GenerateSeoOptimizedMetadataInput, type GenerateSeoOptimizedMetadataOutput } from './generate-seo-optimized-metadata';
+import { generateArticleDraftFromYouTube, type GenerateArticleDraftFromYouTubeOutput } from './generate-article-draft-from-youtube';
+import { generateSeoOptimizedMetadata } from './generate-seo-optimized-metadata';
+import { getVideoDetails } from '@/services/youtube';
 
 
 const GenerateArticleFromYouTubeInputSchema = z.object({
@@ -28,6 +29,7 @@ const GenerateArticleFromYouTubeOutputSchema = z.object({
   articleDraft: z.string().describe('The generated article draft.'),
   title: z.string().describe('The SEO-friendly title for the article.'),
   keywords: z.string().describe('Comma-separated keywords for the article.'),
+  thumbnailUrl: z.string().optional().describe('The URL of the video thumbnail.'),
   error: z.string().optional().describe('An error message if the process failed.'),
 });
 export type GenerateArticleFromYouTubeOutput = z.infer<
@@ -49,8 +51,22 @@ const generateArticleFromYouTubeFlow = ai.defineFlow(
     outputSchema: GenerateArticleFromYouTubeOutputSchema,
   },
   async (input) => {
-    // Step 1: Generate the article draft
-    const draftResult = await generateArticleDraftFromYouTube(input);
+    
+    // Step 1: Get Video Details (including thumbnail)
+    const videoId = new URL(input.youtubeVideoUrl).searchParams.get('v');
+    if (!videoId) {
+        return { articleDraft: '', title: '', keywords: '', error: 'Could not extract video ID from URL.' };
+    }
+    const videoDetails = await getVideoDetails(videoId);
+    if (!videoDetails) {
+        return { articleDraft: '', title: '', keywords: '', error: 'Could not retrieve video details.' };
+    }
+
+    // Step 2: Generate the article draft
+    const draftResult = await generateArticleDraftFromYouTube({
+      youtubeVideoUrl: input.youtubeVideoUrl,
+      writingRules: input.writingRules,
+    });
     
     if (draftResult.error || !draftResult.articleDraft) {
         return {
@@ -61,14 +77,15 @@ const generateArticleFromYouTubeFlow = ai.defineFlow(
         };
     }
     
-    // Step 2: Generate SEO metadata from the draft
+    // Step 3: Generate SEO metadata from the draft
     const seoResult = await generateSeoOptimizedMetadata({ articleContent: draftResult.articleDraft });
 
-    // Step 3: Combine the results
+    // Step 4: Combine the results
     return {
         articleDraft: draftResult.articleDraft,
         title: seoResult.title,
         keywords: seoResult.keywords,
+        thumbnailUrl: videoDetails.thumbnailUrl,
     };
   }
 );
