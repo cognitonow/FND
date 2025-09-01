@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useTransition, useEffect } from 'react';
 import { getArticle, updateArticle, generateDraftAction, generateSeoAction } from "@/lib/actions";
 import type { Article } from "@/types";
+import type { LogEntry } from "@/components/BugCatcher";
 
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -25,7 +26,12 @@ const formSchema = z.object({
   keywords: z.string().optional(),
 });
 
-export default function EditArticlePage({ params }: { params: { id: string } }) {
+type EditArticlePageProps = {
+    params: { id: string };
+    addLog?: (log: Omit<LogEntry, 'id' | 'timestamp'>) => void;
+};
+
+export default function EditArticlePage({ params, addLog }: EditArticlePageProps) {
   const router = useRouter();
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
@@ -63,12 +69,17 @@ export default function EditArticlePage({ params }: { params: { id: string } }) 
       return;
     }
     setAiLoading(true);
+    addLog?.({ type: 'info', source: 'handleGenerateDraft', message: `Starting draft generation for: ${youtubeUrl}` });
     try {
       const result = await generateDraftAction({ youtubeVideoUrl: youtubeUrl });
       form.setValue('content', result.articleDraft);
       toast({ description: "Article draft generated successfully." });
-    } catch (error) {
-      toast({ variant: 'destructive', title: "Draft Generation Failed", description: "Could not generate draft from the provided URL." });
+       addLog?.({ type: 'success', source: 'handleGenerateDraft', message: `Draft generated successfully.` });
+    } catch (error: any) {
+      const errorMessage = error.message || "An unknown error occurred.";
+      toast({ variant: 'destructive', title: "Draft Generation Failed", description: "See logs for details." });
+      addLog?.({ type: 'error', source: 'handleGenerateDraft', message: errorMessage });
+      console.error("Draft Generation Failed:", error);
     } finally {
       setAiLoading(false);
     }
@@ -81,6 +92,7 @@ export default function EditArticlePage({ params }: { params: { id: string } }) 
       return;
     }
     setAiLoading(true);
+    addLog?.({ type: 'info', source: 'handleGenerateSeo', message: `Starting SEO generation.` });
     try {
       const result = await generateSeoAction({ articleContent: content });
       form.setValue('title', result.title);
@@ -88,8 +100,12 @@ export default function EditArticlePage({ params }: { params: { id: string } }) 
       const slug = result.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       form.setValue('slug', slug);
       toast({ description: "SEO metadata generated successfully." });
-    } catch (error) {
-        toast({ variant: 'destructive', title: "SEO Generation Failed", description: "Could not generate SEO metadata." });
+      addLog?.({ type: 'success', source: 'handleGenerateSeo', message: `SEO metadata generated successfully.` });
+    } catch (error: any) {
+        const errorMessage = error.message || "An unknown error occurred.";
+        toast({ variant: 'destructive', title: "SEO Generation Failed", description: "See logs for details." });
+        addLog?.({ type: 'error', source: 'handleGenerateSeo', message: errorMessage });
+        console.error("SEO Generation Failed:", error);
     } finally {
       setAiLoading(false);
     }
@@ -167,7 +183,7 @@ export default function EditArticlePage({ params }: { params: { id: string } }) 
                         <FormField
                             control={form.control}
                             name="content"
-                            render={({ field }) => (
+                            render={({ field })=> (
                             <FormItem>
                                 <FormLabel>Content</FormLabel>
                                 <FormControl><Textarea placeholder="Once upon a time..." {...field} rows={15} /></FormControl>
