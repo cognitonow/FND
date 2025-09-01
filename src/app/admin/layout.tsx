@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { LayoutDashboard, Newspaper, LogOut, Brush, Home } from 'lucide-react';
 
@@ -11,23 +11,29 @@ import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, S
 import Link from 'next/link';
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (!user) {
+    if (!loading && !user && pathname !== '/admin/login') {
       router.push('/admin/login');
     }
-  }, [user, router]);
+  }, [user, loading, router, pathname]);
 
   const handleLogout = async () => {
     await signOut(auth);
     router.push('/admin/login');
   };
 
-  if (!user) {
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+  
+  if (loading || !user) {
     return <AuthLoading>{null}</AuthLoading>;
   }
+
 
   return (
     <SidebarProvider>
