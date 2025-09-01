@@ -1,39 +1,22 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { signOut } from 'firebase/auth';
+import React from 'react';
+import { usePathname } from 'next/navigation';
 import { LayoutDashboard, Newspaper, LogOut, Brush, Home } from 'lucide-react';
 
-import { AuthProvider, useAuth, AuthLoading } from '@/hooks/use-auth';
-import { auth } from '@/lib/firebase';
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarFooter, SidebarInset } from '@/components/ui/sidebar';
 import Link from 'next/link';
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
-  const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    if (!loading && !user && pathname !== '/admin/login') {
-      router.push('/admin/login');
-    }
-  }, [user, loading, router, pathname]);
-
-  const handleLogout = async () => {
-    await signOut(auth);
-    router.push('/admin/login');
-  };
-
   if (pathname === '/admin/login') {
-    return <>{children}</>;
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+          You are redirecting to the dashboard...
+      </div>
+    );
   }
-  
-  if (loading || !user) {
-    return <AuthLoading>{null}</AuthLoading>;
-  }
-
 
   return (
     <SidebarProvider>
@@ -68,7 +51,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton onClick={handleLogout}>
+              <SidebarMenuButton>
                 <LogOut />
                 Logout
               </SidebarMenuButton>
@@ -86,8 +69,6 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <AuthProvider>
       <AdminLayoutContent>{children}</AdminLayoutContent>
-    </AuthProvider>
   );
 }

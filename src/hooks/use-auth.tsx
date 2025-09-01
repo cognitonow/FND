@@ -34,7 +34,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+    // This is a mock auth hook since auth is disabled.
+    return {
+        user: { uid: 'mock-user' },
+        loading: false
+    }
+};
 
 export function AuthLoading({ children }: { children: ReactNode }) {
   const { loading } = useAuth();
