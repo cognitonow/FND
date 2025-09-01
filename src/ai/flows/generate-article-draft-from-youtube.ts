@@ -39,6 +39,7 @@ const GenerateArticleDraftFromYouTubeInputSchema = z.object({
   youtubeVideoUrl: z
     .string()
     .describe('The URL of the YouTube video to generate an article draft from.'),
+  writingRules: z.string().optional().describe('A set of rules or instructions to guide the AI writing style.')
 });
 export type GenerateArticleDraftFromYouTubeInput = z.infer<
   typeof GenerateArticleDraftFromYouTubeInputSchema
@@ -64,6 +65,7 @@ const prompt = ai.definePrompt({
   name: 'generateArticleDraftFromYouTubePrompt',
   input: {schema: YoutubeVideoDetailsSchema.extend({
     videoId: z.string(),
+    writingRules: z.string().optional(),
   })},
   output: {schema: z.object({ articleDraft: z.string() })},
   prompt: `<YoutubeVideo id="{{videoId}}"></YoutubeVideo>
@@ -72,6 +74,11 @@ You are an expert content writer. Your task is to generate a placeholder article
 
 The video title is "{{title}}".
 The video description is "{{description}}".
+
+{{#if writingRules}}
+Please follow these writing rules:
+{{writingRules}}
+{{/if}}
 
 ## Introduction
 
@@ -90,10 +97,8 @@ const generateArticleDraftFromYouTubeFlow = ai.defineFlow(
     outputSchema: GenerateArticleDraftFromYouTubeOutputSchema,
   },
   async (input) => {
-    // Step 1: Explicitly call the function to get video details.
     const videoDetails = await getYoutubeVideoDetails(input.youtubeVideoUrl);
 
-    // Step 2: Check if there was an error.
     if (videoDetails.error) {
       return { 
         articleDraft: `I am unable to generate an article draft. Reason: ${videoDetails.error}`,
@@ -109,11 +114,11 @@ const generateArticleDraftFromYouTubeFlow = ai.defineFlow(
         };
     }
     
-    // Step 3: If successful, call the prompt with the details.
     const {output} = await prompt({
         title: videoDetails.title || '',
         description: videoDetails.description || '',
         videoId: videoId,
+        writingRules: input.writingRules,
     });
     
     return { articleDraft: output!.articleDraft };

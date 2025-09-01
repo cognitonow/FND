@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Wand2, Youtube } from "lucide-react";
 import { Label } from "@/components/ui/label";
 
@@ -38,6 +39,7 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [isAiLoading, setAiLoading] = useState(false);
   const [youtubeUrl, setYoutubeUrl] = useState('');
+  const [writingRules, setWritingRules] = useState('');
   const { addLog } = useLogs();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -72,7 +74,7 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
     setAiLoading(true);
     addLog({ type: 'info', source: 'handleGenerateDraft', message: `Starting draft generation for: ${youtubeUrl}` });
     try {
-      const result = await generateDraftAction({ youtubeVideoUrl: youtubeUrl });
+      const result = await generateDraftAction({ youtubeVideoUrl: youtubeUrl, writingRules });
       
       if (result.error) {
         toast({ variant: 'destructive', title: "Draft Generation Failed", description: result.error });
@@ -225,24 +227,45 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
                     <CardDescription>Use AI to accelerate your writing process.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                    <div className="space-y-2">
-                        <Label>Generate Draft from YouTube</Label>
-                        <div className="flex gap-2">
-                            <Input placeholder="https://youtube.com/watch?v=..." value={youtubeUrl} onChange={(e) => setYoutubeUrl(e.target.value)} />
-                             <Button variant="outline" size="icon" onClick={handleGenerateDraft} disabled={isAiLoading}>
-                                <Youtube className="h-4 w-4" />
-                            </Button>
-                        </div>
-                         <p className="text-sm text-muted-foreground">Requires a YouTube Data API Key.</p>
-                    </div>
-                    <div className="space-y-2">
-                        <Label>Generate SEO Title & Keywords</Label>
-                        <p className="text-sm text-muted-foreground">Generates a title, slug, and keywords based on the article content.</p>
-                         <Button variant="outline" className="w-full" onClick={handleGenerateSeo} disabled={isAiLoading}>
-                            <Wand2 className="mr-2 h-4 w-4" />
-                            Generate SEO Meta
-                        </Button>
-                    </div>
+                  <Tabs defaultValue="youtube">
+                    <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="youtube">From YouTube</TabsTrigger>
+                        <TabsTrigger value="rules">Writing Rules</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="youtube" className="pt-4">
+                      <div className="space-y-2">
+                          <Label>Generate Draft from YouTube</Label>
+                          <div className="flex gap-2">
+                              <Input placeholder="https://youtube.com/watch?v=..." value={youtubeUrl} onChange={(e) => setYoutubeUrl(e.target.value)} />
+                              <Button variant="outline" size="icon" onClick={handleGenerateDraft} disabled={isAiLoading}>
+                                  <Youtube className="h-4 w-4" />
+                              </Button>
+                          </div>
+                          <p className="text-sm text-muted-foreground">Requires a YouTube Data API Key.</p>
+                      </div>
+                    </TabsContent>
+                    <TabsContent value="rules" className="pt-4">
+                      <div className="space-y-2">
+                          <Label>Writing Rules & Style Guide</Label>
+                          <Textarea 
+                            placeholder="e.g., Write in a friendly and approachable tone. Use short sentences. Avoid jargon." 
+                            value={writingRules} 
+                            onChange={(e) => setWritingRules(e.target.value)}
+                            rows={6}
+                          />
+                           <p className="text-sm text-muted-foreground">These rules will guide the AI's writing style.</p>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+
+                  <div className="border-t pt-6 space-y-2">
+                      <Label>Generate SEO Title & Keywords</Label>
+                      <p className="text-sm text-muted-foreground">Generates a title, slug, and keywords based on the article content.</p>
+                        <Button variant="outline" className="w-full" onClick={handleGenerateSeo} disabled={isAiLoading}>
+                          <Wand2 className="mr-2 h-4 w-4" />
+                          Generate SEO Meta
+                      </Button>
+                  </div>
                 </CardContent>
             </Card>
         </div>
