@@ -69,7 +69,10 @@ export async function updateArticle(id: string, data: Partial<Article>) {
       updatedAt: serverTimestamp(),
     });
     const updatedArticle = await getDoc(articleRef);
-    revalidatePath(`/articles/${updatedArticle.data()?.slug}`);
+    if (updatedArticle.exists()) {
+        revalidatePath(`/articles/${updatedArticle.data()?.slug}`);
+    }
+    revalidatePath('/articles');
     revalidatePath('/admin/articles');
     return { success: true };
   } catch (error)
