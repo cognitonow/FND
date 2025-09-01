@@ -32,8 +32,7 @@ export async function getVideoDetails(videoId: string) {
         };
     } catch (error: any) {
         console.error('Error fetching YouTube video details:', error.message);
-        return {
-            error: `Failed to fetch video details from YouTube API: ${error.message}`
-        }
+        // This will be caught by the tool's error handling and returned to the prompt.
+        throw new Error(`Failed to fetch video details from YouTube API: ${error.message}`);
     }
 }
