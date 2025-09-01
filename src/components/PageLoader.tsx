@@ -16,10 +16,31 @@ export function PageLoader() {
     const handleStart = () => NProgress.start();
     const handleStop = () => NProgress.done();
 
-    handleStop(); // Stop progress on initial load
+    // This is a simplified approach. For a more robust solution,
+    // you might need to wrap `next/link` or use a different strategy
+    // if you have navigations not triggered by standard links.
+    // For now, we'll listen to all clicks on `<a>` tags.
+    const handleAnchorClick = (event: MouseEvent) => {
+      const targetUrl = (event.currentTarget as HTMLAnchorElement).href;
+      const currentUrl = window.location.href;
+      if (targetUrl !== currentUrl) {
+        handleStart();
+      }
+    };
+
+    document.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement;
+        const anchor = target.closest('a');
+        if (anchor) {
+            handleAnchorClick(event as any);
+        }
+    });
+
+    // Initial stop in case it's stuck from a previous page
+    handleStop();
 
     return () => {
-      handleStop(); // Cleanup on unmount
+      // Cleanup logic if needed, though for nprogress it's minimal
     };
   }, []);
 
@@ -27,9 +48,6 @@ export function PageLoader() {
     NProgress.done();
   }, [pathname, searchParams]);
 
-  // We can also wrap the Link component to start progress on click
-  // This is a more advanced pattern but can feel more responsive.
-  // For now, relying on Next.js router events is sufficient.
   
   return null; // This component does not render anything itself
 }
