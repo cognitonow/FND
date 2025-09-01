@@ -58,7 +58,7 @@ export default function NewArticlePage({ addLog }: NewArticlePageProps) {
       const result = await generateDraftAction({ youtubeVideoUrl: youtubeUrl });
       form.setValue('content', result.articleDraft);
 
-      if (result.articleDraft.startsWith('I was unable to retrieve')) {
+      if (result.articleDraft.includes('I was unable to retrieve')) {
          toast({ variant: 'destructive', title: "Draft Generation Failed", description: "Could not retrieve video details. Check URL." });
          addLog?.({ type: 'warning', source: 'handleGenerateDraft', message: `Could not retrieve video details. It's likely the URL is invalid or the video is private.` });
       } else {
