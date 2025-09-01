@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import SiteLayout from '@/components/SiteLayout';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -20,11 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <body className={`${inter.variable} font-body antialiased`}>
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
+        <SiteLayout>{children}</SiteLayout>
         <Toaster />
       </body>
     </html>
