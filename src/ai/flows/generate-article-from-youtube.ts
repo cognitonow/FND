@@ -10,11 +10,11 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import { generateArticleDraftFromYouTube, GenerateArticleDraftFromYouTubeInput } from './generate-article-draft-from-youtube';
-import { generateSeoOptimizedMetadata } from './generate-seo-optimized-metadata';
+import { generateArticleDraftFromYouTube, type GenerateArticleDraftFromYouTubeInput, type GenerateArticleDraftFromYouTubeOutput } from './generate-article-draft-from-youtube';
+import { generateSeoOptimizedMetadata, type GenerateSeoOptimizedMetadataInput, type GenerateSeoOptimizedMetadataOutput } from './generate-seo-optimized-metadata';
 
 
-export const GenerateArticleFromYouTubeInputSchema = z.object({
+const GenerateArticleFromYouTubeInputSchema = z.object({
   youtubeVideoUrl: z
     .string()
     .describe('The URL of the YouTube video to generate an article from.'),
@@ -24,7 +24,7 @@ export type GenerateArticleFromYouTubeInput = z.infer<
   typeof GenerateArticleFromYouTubeInputSchema
 >;
 
-export const GenerateArticleFromYouTubeOutputSchema = z.object({
+const GenerateArticleFromYouTubeOutputSchema = z.object({
   articleDraft: z.string().describe('The generated article draft.'),
   title: z.string().describe('The SEO-friendly title for the article.'),
   keywords: z.string().describe('Comma-separated keywords for the article.'),
