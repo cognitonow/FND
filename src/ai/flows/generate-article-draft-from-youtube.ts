@@ -50,10 +50,15 @@ const getYoutubeVideoDetailsTool = ai.defineTool(
             title: z.string(),
             start_time: z.number(),
         })).optional(),
+        error: z.string().optional(),
       })
     },
     async (input) => {
-        return getYouTubeVideoDetails(input.url);
+        const details = await getYouTubeVideoDetails(input.url);
+        if (!details.title) {
+            return { error: 'Failed to retrieve video details. Please check the URL and ensure the video is public.' };
+        }
+        return details;
     }
 );
 
@@ -69,7 +74,7 @@ Use the 'getYoutubeVideoDetails' tool with the provided '{{{youtubeVideoUrl}}}' 
 {{#if (lookup tool_response 'getYoutubeVideoDetails' 'title')}}
 Write a complete article in markdown format. Start by embedding the video using the '<YoutubeVideo id="VIDEO_ID"></YoutubeVideo>' tag (extract the VIDEO_ID from the URL). Then, write an introduction based on the description, and use the chapters as H2 subheadings for the main sections of the article. Elaborate on each chapter's topic. Do not add a conclusion.
 {{else}}
-I was unable to retrieve the video details (title, description, and chapters) from the provided YouTube URL. Therefore, I cannot generate the article draft. Please ensure the URL is correct and the video is publicly accessible.
+I was unable to retrieve the video details from the provided YouTube URL. Therefore, I cannot generate the article draft. Please ensure the URL is correct and the video is publicly accessible.
 {{/if}}
 `,
 });
