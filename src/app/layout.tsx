@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="!scroll-smooth">
-      <body className={`${inter.variable} font-body antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased`}>
         <SiteLayout>{children}</SiteLayout>
         <Toaster />
       </body>
