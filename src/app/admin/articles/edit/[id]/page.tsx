@@ -74,9 +74,9 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
     try {
       const result = await generateDraftAction({ youtubeVideoUrl: youtubeUrl });
       
-      if (result.articleDraft.includes("I am unable to generate an article draft")) {
-        toast({ variant: 'destructive', title: "Draft Generation Failed", description: "Could not retrieve video details. Check URL and logs." });
-        addLog({ type: 'warning', source: 'handleGenerateDraft', message: result.articleDraft });
+      if (result.error) {
+        toast({ variant: 'destructive', title: "Draft Generation Failed", description: result.error });
+        addLog({ type: 'warning', source: 'handleGenerateDraft', message: `Draft generation failed: ${result.error}` });
       } else {
         form.setValue('content', result.articleDraft);
         toast({ description: "Article draft generated successfully." });

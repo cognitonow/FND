@@ -17,18 +17,8 @@ const YoutubeVideoDetailsSchema = z.object({
   description: z.string().describe('The description of the YouTube video.'),
 });
 
-const getYoutubeVideoDetailsTool = ai.defineTool(
-  {
-    name: 'getYoutubeVideoDetails',
-    description: 'Retrieves the title and description of a YouTube video from its URL.',
-    inputSchema: z.object({
-      url: z.string().describe('The URL of the YouTube video.'),
-    }),
-    outputSchema: YoutubeVideoDetailsSchema.extend({
-        error: z.string().optional().describe("An error message if the video details could not be retrieved."),
-    }),
-  },
-  async ({url}) => {
+// This tool is now for internal use within the flow, not for the LLM to decide to call.
+const getYoutubeVideoDetails = async (url: string): Promise<z.infer<typeof YoutubeVideoDetailsSchema> & { error?: string }> => {
     try {
         const videoId = new URL(url).searchParams.get('v');
         if (!videoId) {
@@ -42,8 +32,7 @@ const getYoutubeVideoDetailsTool = ai.defineTool(
     } catch (e: any) {
         return { error: `An unexpected error occurred: ${e.message}` };
     }
-  }
-);
+}
 
 
 const GenerateArticleDraftFromYouTubeInputSchema = z.object({
@@ -59,6 +48,7 @@ const GenerateArticleDraftFromYouTubeOutputSchema = z.object({
   articleDraft: z
     .string()
     .describe('The generated article draft based on the YouTube video.'),
+  error: z.string().optional().describe('An error message if the draft could not be generated.'),
 });
 export type GenerateArticleDraftFromYouTubeOutput = z.infer<
   typeof GenerateArticleDraftFromYouTubeOutputSchema
@@ -72,18 +62,16 @@ export async function generateArticleDraftFromYouTube(
 
 const prompt = ai.definePrompt({
   name: 'generateArticleDraftFromYouTubePrompt',
-  input: {schema: GenerateArticleDraftFromYouTubeInputSchema.extend({
-    videoId: z.string().optional(),
+  input: {schema: YoutubeVideoDetailsSchema.extend({
+    videoId: z.string(),
   })},
-  output: {schema: GenerateArticleDraftFromYouTubeOutputSchema},
-  tools: [getYoutubeVideoDetailsTool],
-  prompt: `You are an expert content writer. Your task is to generate a placeholder article draft based on the provided YouTube video.
+  output: {schema: z.object({ articleDraft: z.string() })},
+  prompt: `You are an expert content writer. Your task is to generate a placeholder article draft based on the provided YouTube video details.
 
-First, call the getYoutubeVideoDetails tool with the youtubeVideoUrl.
+  The video ID is {{videoId}}.
+  The video title is "{{title}}".
+  The video description is "{{description}}".
 
-{{#if tool_response.error}}
-  I am unable to generate an article draft. Reason: {{tool_response.error}}
-{{else}}
   <YoutubeVideo id="{{videoId}}"></YoutubeVideo>
 
   ## Introduction
@@ -92,8 +80,7 @@ First, call the getYoutubeVideoDetails tool with the youtubeVideoUrl.
 
   ## Key Takeaways
 
-  Based on the video's description: "{{tool_response.description}}", create a few H2 subheadings with a short paragraph under each. Do not add a conclusion.
-{{/if}}
+  Based on the video's description, create a few H2 subheadings with a short paragraph under each. Do not add a conclusion.
 `,
 });
 
@@ -103,9 +90,33 @@ const generateArticleDraftFromYouTubeFlow = ai.defineFlow(
     inputSchema: GenerateArticleDraftFromYouTubeInputSchema,
     outputSchema: GenerateArticleDraftFromYouTubeOutputSchema,
   },
-  async input => {
+  async (input) => {
+    // Step 1: Explicitly call the function to get video details.
+    const videoDetails = await getYoutubeVideoDetails(input.youtubeVideoUrl);
+
+    // Step 2: Check if there was an error.
+    if (videoDetails.error) {
+      return { 
+        articleDraft: `I am unable to generate an article draft. Reason: ${videoDetails.error}`,
+        error: videoDetails.error,
+      };
+    }
+
     const videoId = new URL(input.youtubeVideoUrl).searchParams.get('v');
-    const {output} = await prompt({...input, videoId: videoId || ''});
-    return output!;
+    if (!videoId) {
+         return { 
+            articleDraft: "I am unable to generate an article draft. Reason: Could not extract video ID from the URL.",
+            error: "Could not extract video ID from the URL.",
+        };
+    }
+    
+    // Step 3: If successful, call the prompt with the details.
+    const {output} = await prompt({
+        title: videoDetails.title || '',
+        description: videoDetails.description || '',
+        videoId: videoId,
+    });
+    
+    return { articleDraft: output!.articleDraft };
   }
 );

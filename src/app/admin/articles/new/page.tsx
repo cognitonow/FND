@@ -56,30 +56,30 @@ export default function NewArticlePage() {
       return;
     }
     setAiLoading(true);
-    addLog({ type: 'info', source: 'handleGenerateDraft', message: `Starting draft generation for: ${youtubeUrl}` });
+    addLog({ type: 'info', source: 'handleGenerateArticle', message: `Starting article generation for: ${youtubeUrl}` });
     
     try {
       // Step 1: Generate Draft
       const draftResult = await generateDraftAction({ youtubeVideoUrl: youtubeUrl });
       
-      if (draftResult.articleDraft.includes("I am unable to generate an article draft")) {
-        toast({ variant: 'destructive', title: "Draft Generation Failed", description: "Could not retrieve video details. Check URL and logs." });
-        addLog({ type: 'warning', source: 'handleGenerateDraft', message: draftResult.articleDraft });
+      if (draftResult.error) {
+        toast({ variant: 'destructive', title: "Draft Generation Failed", description: draftResult.error });
+        addLog({ type: 'error', source: 'handleGenerateArticle', message: `Draft generation failed: ${draftResult.error}` });
         setAiLoading(false);
         return;
       }
       
       form.setValue('content', draftResult.articleDraft);
-      addLog({ type: 'success', source: 'handleGenerateDraft', message: `Draft content generated.` });
+      addLog({ type: 'success', source: 'handleGenerateArticle', message: `Draft content generated.` });
 
       // Step 2: Generate SEO
-      addLog({ type: 'info', source: 'handleGenerateSeo', message: `Starting SEO generation.` });
+      addLog({ type: 'info', source: 'handleGenerateArticle', message: `Starting SEO generation.` });
       const seoResult = await generateSeoAction({ articleContent: draftResult.articleDraft });
       form.setValue('title', seoResult.title);
       form.setValue('keywords', seoResult.keywords);
       const slug = seoResult.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       form.setValue('slug', slug);
-      addLog({ type: 'success', source: 'handleGenerateSeo', message: `SEO metadata generated.` });
+      addLog({ type: 'success', source: 'handleGenerateArticle', message: `SEO metadata generated.` });
       
       toast({ description: "Article generated successfully. You can now edit and save." });
       setPageState(PageState.Editing);
