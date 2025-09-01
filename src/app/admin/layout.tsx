@@ -7,6 +7,7 @@ import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, S
 import Link from 'next/link';
 import { BugCatcher } from '@/components/BugCatcher';
 import { LogProvider, useLogs } from '@/context/LogContext';
+import { PageLoader } from '@/components/PageLoader';
 
 function BugCatcherWrapper() {
   const { logs, clearLogs } = useLogs();
@@ -16,6 +17,7 @@ function BugCatcherWrapper() {
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
+       <PageLoader />
       <Sidebar>
         <SidebarHeader>
           <h2 className="text-xl font-semibold tracking-tight">FND.ME Admin</h2>
