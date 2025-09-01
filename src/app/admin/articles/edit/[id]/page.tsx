@@ -73,9 +73,15 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
     addLog({ type: 'info', source: 'handleGenerateDraft', message: `Starting draft generation for: ${youtubeUrl}` });
     try {
       const result = await generateDraftAction({ youtubeVideoUrl: youtubeUrl });
-      form.setValue('content', result.articleDraft);
-      toast({ description: "Article draft generated successfully." });
-      addLog({ type: 'success', source: 'handleGenerateDraft', message: `Draft generated successfully.` });
+      
+      if (result.articleDraft.includes("I am unable to generate an article draft")) {
+        toast({ variant: 'destructive', title: "Draft Generation Failed", description: "Could not retrieve video details. Check URL and logs." });
+        addLog({ type: 'warning', source: 'handleGenerateDraft', message: result.articleDraft });
+      } else {
+        form.setValue('content', result.articleDraft);
+        toast({ description: "Article draft generated successfully." });
+        addLog({ type: 'success', source: 'handleGenerateDraft', message: `Draft generated successfully.` });
+      }
     } catch (error: any) {
       const errorMessage = error.message || "An unknown error occurred.";
       toast({ variant: 'destructive', title: "Draft Generation Failed", description: "See logs for details." });
@@ -227,6 +233,7 @@ export default function EditArticlePage({ params }: EditArticlePageProps) {
                                 <Youtube className="h-4 w-4" />
                             </Button>
                         </div>
+                         <p className="text-sm text-muted-foreground">Requires a YouTube Data API Key.</p>
                     </div>
                     <div className="space-y-2">
                         <Label>Generate SEO Title & Keywords</Label>

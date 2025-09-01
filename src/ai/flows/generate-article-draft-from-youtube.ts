@@ -10,6 +10,41 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import {getVideoDetails} from '@/services/youtube';
+
+const YoutubeVideoDetailsSchema = z.object({
+  title: z.string().describe('The title of the YouTube video.'),
+  description: z.string().describe('The description of the YouTube video.'),
+});
+
+const getYoutubeVideoDetailsTool = ai.defineTool(
+  {
+    name: 'getYoutubeVideoDetails',
+    description: 'Retrieves the title and description of a YouTube video from its URL.',
+    inputSchema: z.object({
+      url: z.string().describe('The URL of the YouTube video.'),
+    }),
+    outputSchema: YoutubeVideoDetailsSchema.extend({
+        error: z.string().optional().describe("An error message if the video details could not be retrieved."),
+    }),
+  },
+  async ({url}) => {
+    try {
+        const videoId = new URL(url).searchParams.get('v');
+        if (!videoId) {
+            return { error: "Could not extract video ID from the URL. Please ensure it's a valid YouTube watch URL."};
+        }
+        const details = await getVideoDetails(videoId);
+        if (!details) {
+            return { error: "Could not retrieve video details. Please check the URL and ensure the video is public."};
+        }
+        return details;
+    } catch (e: any) {
+        return { error: `An unexpected error occurred: ${e.message}` };
+    }
+  }
+);
+
 
 const GenerateArticleDraftFromYouTubeInputSchema = z.object({
   youtubeVideoUrl: z
@@ -39,12 +74,24 @@ const prompt = ai.definePrompt({
   name: 'generateArticleDraftFromYouTubePrompt',
   input: {schema: GenerateArticleDraftFromYouTubeInputSchema},
   output: {schema: GenerateArticleDraftFromYouTubeOutputSchema},
-  prompt: `You are an expert content writer. Your task is to generate a placeholder article draft based on the provided YouTube video URL.
+  tools: [getYoutubeVideoDetailsTool],
+  prompt: `You are an expert content writer. Your task is to generate a placeholder article draft based on the provided YouTube video.
 
-1.  Start by embedding the video. Use the format '<YoutubeVideo id="VIDEO_ID"></YoutubeVideo>'. You will need to extract the VIDEO_ID from the 'youtubeVideoUrl'.
-2.  Write a placeholder introduction for the article.
-3.  Add a few placeholder H2 subheadings (e.g., '## Topic 1') with a short paragraph under each.
-4.  Do not add a concluding paragraph.
+First, call the getYoutubeVideoDetails tool with the youtubeVideoUrl.
+
+{{#if tool_response.error}}
+  I am unable to generate an article draft. Reason: {{tool_response.error}}
+{{else}}
+  <YoutubeVideo id="{{youtubeVideoUrl.split('v=')[1]}}"></YoutubeVideo>
+
+  ## Introduction
+
+  Write a brief introduction based on the video's description.
+
+  ## Key Takeaways
+
+  Based on the video's description: "{{tool_response.description}}", create a few H2 subheadings with a short paragraph under each. Do not add a conclusion.
+{{/if}}
 `,
 });
 
