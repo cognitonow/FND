@@ -1,7 +1,7 @@
 'use server';
 
 /**
- * @fileOverview Generates an initial article draft from a YouTube video URL using AI.
+ * @fileOverview Generates an initial article draft from a YouTube video using AI.
  *
  * - generateArticleDraftFromYouTube - A function that generates an article draft from a YouTube video URL.
  * - GenerateArticleDraftFromYouTubeInput - The input type for the generateArticleDraftFromYouTube function.
@@ -64,9 +64,14 @@ const prompt = ai.definePrompt({
   tools: [getYoutubeVideoDetailsTool],
   prompt: `You are an expert content writer. Your task is to generate a comprehensive article draft based on a YouTube video.
 
-First, use the 'getYoutubeVideoDetails' tool with the provided '{{{youtubeVideoUrl}}}' to get the video's title, description, and chapters.
+Use the 'getYoutubeVideoDetails' tool with the provided '{{{youtubeVideoUrl}}}' to get the video's title, description, and chapters.
 
-Then, using that information, write a complete article in markdown format. The article should start by embedding the video using the '<YoutubeVideo id="VIDEO_ID"></YoutubeVideo>' tag, followed by an introduction based on the description, and then use the chapters as H2 subheadings for the main sections of the article. Elaborate on each chapter's topic. Do not add a conclusion.`,
+{{#if (lookup tool_response 'getYoutubeVideoDetails' 'title')}}
+Write a complete article in markdown format. Start by embedding the video using the '<YoutubeVideo id="VIDEO_ID"></YoutubeVideo>' tag (extract the VIDEO_ID from the URL). Then, write an introduction based on the description, and use the chapters as H2 subheadings for the main sections of the article. Elaborate on each chapter's topic. Do not add a conclusion.
+{{else}}
+I was unable to retrieve the video details (title, description, and chapters) from the provided YouTube URL. Therefore, I cannot generate the article draft. Please ensure the URL is correct and the video is publicly accessible.
+{{/if}}
+`,
 });
 
 const generateArticleDraftFromYouTubeFlow = ai.defineFlow(
