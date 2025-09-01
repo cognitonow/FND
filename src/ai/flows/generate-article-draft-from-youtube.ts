@@ -68,9 +68,14 @@ const prompt = ai.definePrompt({
     writingRules: z.string().optional(),
   })},
   output: {schema: z.object({ articleDraft: z.string() })},
-  prompt: `<YoutubeVideo id="{{videoId}}"></YoutubeVideo>
+  prompt: `You are an expert content writer. Your task is to generate a placeholder article draft based on the provided YouTube video details.
 
-You are an expert content writer. Your task is to generate a placeholder article draft based on the provided YouTube video details.
+Your entire response will be the article content.
+
+First, on its own line, include the YouTube video embed tag like this:
+<YoutubeVideo id="{{videoId}}"></YoutubeVideo>
+
+Then, write the rest of the article based on the video details.
 
 The video title is "{{title}}".
 The video description is "{{description}}".

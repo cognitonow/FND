@@ -18,8 +18,12 @@ const SimpleMarkdownParser = ({ text }: { text: string }) => {
              return <h1 key={index} className="text-4xl font-bold mt-8 mb-4 border-b pb-2">{line.substring(2)}</h1>;
         }
         
-        let processedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        processedLine = processedLine.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        // This regex now supports bold, italic, and strikethrough
+        let processedLine = line
+            .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>') // Bold and Italic
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')       // Bold
+            .replace(/\*(.*?)\*/g, '<em>$1</em>');                    // Italic
+
 
         return <p key={index} className="my-4 leading-relaxed" dangerouslySetInnerHTML={{ __html: processedLine }} />;
     });
@@ -29,15 +33,20 @@ const SimpleMarkdownParser = ({ text }: { text: string }) => {
 
 export function ArticleContent({ content }: ArticleContentProps) {
   const youtubeTagRegex = /<YoutubeVideo id="([^"]+)"><\/YoutubeVideo>/;
-  const match = content.match(youtubeTagRegex);
-
   let videoId = null;
-  let remainingContent = content;
+  const contentLines = content.split('\n');
+  const otherContent = [];
 
-  if (match) {
-    videoId = match[1];
-    remainingContent = content.replace(youtubeTagRegex, '').trim();
+  for (const line of contentLines) {
+    const match = line.match(youtubeTagRegex);
+    if (match) {
+      videoId = match[1];
+    } else {
+      otherContent.push(line);
+    }
   }
+
+  const remainingContent = otherContent.join('\n').trim();
 
   return (
     <div className="prose prose-lg max-w-none dark:prose-invert">
