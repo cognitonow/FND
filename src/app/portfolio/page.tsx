@@ -147,9 +147,9 @@ export default function PortfolioPage() {
                         data-ai-hint={project.dataAiHint}
                         />
                     </div>
-                    <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
+                    <div className="flex justify-between items-start text-sm text-muted-foreground mb-2">
                         <span>{project.name}</span>
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-col items-end gap-1">
                             <span>{project.year}</span>
                             <Image 
                                 src={`https://flagcdn.com/w20/${project.countryCode}.png`}
