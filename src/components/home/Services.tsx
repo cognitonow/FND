@@ -30,12 +30,12 @@ const services = [
 ];
 
 const logos = [
-    { name: 'Foster + Partners', src: 'https://logo.clearbit.com/fosterandpartners.com' },
-    { name: 'Accenture', src: 'https://logo.clearbit.com/accenture.com' },
-    { name: 'Goldman Sachs', src: 'https://logo.clearbit.com/gs.com' },
-    { name: 'Stanbic IBTC', src: 'https://logo.clearbit.com/stanbicibtc.com' },
-    { name: 'Minopex', src: 'https://logo.clearbit.com/minopex.com' },
-    { name: 'Paragon Group', src: 'https://logo.clearbit.com/paragongroup.co.za' },
+    { name: 'Foster + Partners', src: 'https://img.logo.dev/fosterandpartners.com?theme=dark' },
+    { name: 'Accenture', src: 'https://img.logo.dev/accenture.com?theme=dark' },
+    { name: 'Goldman Sachs', src: 'https://img.logo.dev/gs.com?theme=dark' },
+    { name: 'Stanbic IBTC', src: 'https://img.logo.dev/stanbicibtc.com?theme=dark' },
+    { name: 'Minopex', src: 'https://img.logo.dev/minopex.com?theme=dark' },
+    { name: 'Paragon Group', src: 'https://img.logo.dev/paragongroup.co.za?theme=dark' },
 ]
 
 export function Services() {
@@ -48,13 +48,13 @@ export function Services() {
                 </h2>
                 <div className="flex items-center gap-x-8 gap-y-8 flex-wrap">
                     {logos.map(logo => (
-                        <div key={logo.name} className="relative h-10 w-10 flex items-center justify-center">
+                        <div key={logo.name} className="relative h-10 w-auto flex items-center justify-center">
                             <Image 
                                 src={logo.src} 
                                 alt={logo.name} 
-                                className="object-contain h-full w-full brightness-0 invert"
-                                width={32}
-                                height={32}
+                                className="object-contain h-full w-full"
+                                width={100}
+                                height={40}
                             />
                         </div>
                     ))}
