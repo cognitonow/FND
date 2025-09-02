@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { useState, useMemo } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 
 const projects = [
@@ -13,6 +12,7 @@ const projects = [
         name: 'ZENPOINT',
         company: 'Zenith',
         country: 'Singapore',
+        countryCode: 'sg',
         sector: 'Wellness',
         projectType: ['UI DESIGN', 'WEB DEV'],
         year: '2024',
@@ -23,6 +23,7 @@ const projects = [
         name: 'PAYU',
         company: 'PayU',
         country: 'South Africa',
+        countryCode: 'za',
         sector: 'Fintech',
         projectType: ['UI DESIGN', 'WEB DEV'],
         year: '2024',
@@ -33,6 +34,7 @@ const projects = [
         name: 'COMPAI',
         company: 'CompAI',
         country: 'Ireland',
+        countryCode: 'ie',
         sector: 'AI',
         projectType: ['UI DESIGN', 'MOBILE DEV', 'WEB DEV'],
         year: '2024',
@@ -43,6 +45,7 @@ const projects = [
         name: 'CHATPIC.AI',
         company: 'ChatPic',
         country: 'Ghana',
+        countryCode: 'gh',
         sector: 'AI',
         projectType: ['UI DESIGN', 'MOBILE DEV'],
         year: '2024',
@@ -146,7 +149,17 @@ export default function PortfolioPage() {
                     </div>
                     <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
                         <span>{project.name}</span>
-                        <span>{project.year}</span>
+                        <div className="flex items-center gap-2">
+                            <span>{project.year}</span>
+                            <Image 
+                                src={`https://flagcdn.com/w20/${project.countryCode}.png`}
+                                alt={`${project.country} flag`}
+                                width={20}
+                                height={15}
+                                className="object-contain rounded-sm border border-muted"
+                                title={project.country}
+                            />
+                        </div>
                     </div>
                     <div className="flex gap-2 flex-wrap">
                         {project.projectType.map(tag => (
