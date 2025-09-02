@@ -10,7 +10,7 @@ body {
   :root {
     --background: 40 33% 98%;
     --foreground: 0 0% 15%;
-    --card: 0 0% 94%;
+    --card: 0 0% 100%;
     --card-foreground: 0 0% 15%;
     --popover: 0 0% 94%;
     --popover-foreground: 0 0% 15%;
@@ -84,8 +84,6 @@ body {
   }
   body {
     @apply bg-background text-foreground;
-    border-right: 2rem solid hsl(var(--background));
-    border-left: 2rem solid hsl(var(--background));
   }
 }
 
