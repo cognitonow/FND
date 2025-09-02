@@ -1,3 +1,4 @@
+
 "use client"
 
 import Image from 'next/image';
@@ -14,11 +15,6 @@ const collaborations: Collaboration[] = [
     { id: 'collab1', company: 'Foster + Partners / BWDC', project: 'Project: BWDC Residential Tower, Manila', imageUrl: 'https://picsum.photos/seed/collab1/400/400', dataAiHint: 'modern skyscraper architecture' },
     { id: 'collab2', company: 'Crown Forest / Crown Safari', project: 'Project: Crown Safari Lodge, Ghana', imageUrl: 'https://picsum.photos/seed/collab2/400/400', dataAiHint: 'luxury safari lodge' },
     { id: 'collab3', company: 'Cognito Solution', project: 'Project: UN Zambia office refurb', imageUrl: 'https://picsum.photos/seed/collab3/400/400', dataAiHint: 'modern office interior' },
-    { id: 'collab4', company: 'Accenture', project: 'Project: Commercial refurbishment, Johannesburg', imageUrl: 'https://picsum.photos/seed/collab4/400/400', dataAiHint: 'corporate building exterior' },
-    { id: 'collab5', company: 'Goldman Sachs', project: 'Project: Commercial fit-out at 140 West Street, Sandton', imageUrl: 'https://picsum.photos/seed/collab5/400/400', dataAiHint: 'financial district building' },
-    { id: 'collab6', company: 'Stanbic IBTC Pension Managers', project: 'Project: Commercial fit-out for the tallest building in West Africa', imageUrl: 'https://picsum.photos/seed/collab6/400/400', dataAiHint: 'tall skyscraper africa' },
-    { id: 'collab7', company: 'DRA / Minopex / Paragon Group', project: 'Project: Therapy Sanctuary / Meeting Suite', imageUrl: 'https://picsum.photos/seed/collab7/400/400', dataAiHint: 'calm sanctuary interior' },
-    { id: 'collab8', company: 'Intra Design', project: 'Project: Various office receptions during internship', imageUrl: 'https://picsum.photos/seed/collab8/400/400', dataAiHint: 'office reception design' },
 ];
 
 const toolsetLogos = [
@@ -49,7 +45,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                     {/* Project Card */}
                     <div className="w-3/5">
                         <Card className="w-full h-full p-4 shadow-lg hover:scale-105 transition-transform duration-300">
-                            <Carousel className="w-full h-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 60000 })]}>
+                            <Carousel className="w-full h-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 7000 })]}>
                                 <CarouselContent>
                                     {collaborations.map((collab) => (
                                         <CarouselItem key={collab.id}>
@@ -85,7 +81,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                                                         </div>
                                                     )}
                                                 </div>
-                                                <div className="p-4 flex-grow flex flex-col">
+                                                <div className="p-4 flex-grow">
                                                     <h3 className="font-bold text-lg group-hover:underline flex-grow">{article.title}</h3>
                                                     <p className="text-muted-foreground text-sm mt-2">Read Now &rarr;</p>
                                                 </div>
@@ -106,7 +102,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
 
                  {/* Row 2 */}
                 <div className="flex-[0.8] flex gap-4">
-                    {/* Toolset Card */}
+                     {/* Toolset Card */}
                      <div className="w-2/5 h-full">
                          <div className="w-full h-full flex flex-col justify-center">
                             <div className="grid grid-cols-3 gap-4 p-2">
@@ -133,3 +129,5 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
         </div>
     )
 }
+
+    
