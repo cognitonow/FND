@@ -19,13 +19,6 @@ const experiences = [
     },
     {
         icon: null,
-        company: 'Cognito Solution',
-        role: 'Freelance/Interior Architect',
-        details: '2023 | Dublin, Ireland',
-        logoUrl: 'https://img.logo.dev/cognito.ie?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png', // Assuming cognito.ie
-    },
-    {
-        icon: null,
         company: 'Foster + Partners',
         role: 'Interior Architect',
         details: '2022 | Hong Kong',
@@ -37,6 +30,13 @@ const experiences = [
         role: 'Interior Architect',
         details: '2021 | Johannesburg, South Africa',
         logoUrl: 'https://img.logo.dev/paragongroup.co.za?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
+    },
+    {
+        icon: null,
+        company: 'Cognito Solution',
+        role: 'Freelance/Interior Architect',
+        details: '2023 | Dublin, Ireland',
+        logoUrl: 'https://img.logo.dev/cognito.ie?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png', // Assuming cognito.ie
     },
 ];
 
