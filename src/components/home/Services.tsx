@@ -44,6 +44,14 @@ const experiences = [
         logoUrl: 'https://img.logo.dev/paragongroup.co.za?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
         countryCode: 'za'
     },
+     {
+        icon: null,
+        company: 'Atomic',
+        role: 'Head of Design',
+        details: '2020 | Johannesburg',
+        logoUrl: 'https://img.logo.dev/atomic.design?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
+        countryCode: 'za'
+    },
 ];
 
 export function Services() {
@@ -90,8 +98,6 @@ export function Services() {
                        </div>
                     </div>
                 ))}
-                 {/* Add empty div to fill the grid and push content up */}
-                {experiences.length % 2 !== 0 && <div />}
             </div>
         </div>
     </section>
