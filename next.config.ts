@@ -33,6 +33,12 @@ const nextConfig: NextConfig = {
         hostname: 'company-logos.firebaseapp.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.logo.dev',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

@@ -37,12 +37,12 @@ const collaborations = [
 ];
 
 const toolsetLogos = [
-    { id: 'tool1', imageUrl: 'https://company-logos.firebaseapp.com/archicad.svg', alt: 'ArchiCAD' },
-    { id: 'tool2', imageUrl: 'https://company-logos.firebaseapp.com/dynamo.svg', alt: 'Dynamo' },
-    { id: 'tool3', imageUrl: 'https://company-logos.firebaseapp.com/bim-360.svg', alt: 'BIM 360' },
-    { id: 'tool4', imageUrl: 'https://company-logos.firebaseapp.com/rhino.svg', alt: 'Rhino' },
-    { id: 'tool5', imageUrl: 'https://company-logos.firebaseapp.com/adobe.svg', alt: 'Adobe Suite' },
-    { id: 'tool6', imageUrl: 'https://company-logos.firebaseapp.com/rayon.svg', alt: 'Rayon' },
+    { id: 'tool1', imageUrl: 'https://img.logo.dev/graphisoft.com', alt: 'ArchiCAD' },
+    { id: 'tool2', imageUrl: 'https://img.logo.dev/autodesk.com', alt: 'Dynamo' },
+    { id: 'tool3', imageUrl: 'https://img.logo.dev/autodesk.com', alt: 'BIM 360' },
+    { id: 'tool4', imageUrl: 'https://img.logo.dev/rhino3d.com', alt: 'Rhino' },
+    { id: 'tool5', imageUrl: 'https://img.logo.dev/adobe.com', alt: 'Adobe Suite' },
+    { id: 'tool6', imageUrl: 'https://img.logo.dev/rayon.design', alt: 'Rayon' },
 ];
 
 
