@@ -80,8 +80,8 @@ export function Services() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <Card className="flex flex-col justify-center items-center text-center p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
-                    <h3 className="text-3xl font-bold tracking-tighter mb-4">Interested in my work?</h3>
+                <Card className="flex flex-col justify-center items-start text-left p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <h3 className="text-3xl font-bold tracking-tighter mb-4">Wanna see my experience?</h3>
                     <p className="text-muted-foreground mb-6">Download my full CV to see more details about my projects and skills.</p>
                     <Button>
                         <Download className="mr-2 h-4 w-4" />
@@ -91,18 +91,21 @@ export function Services() {
 
                 {experiences.map((exp) => (
                     <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
-                       <div className="flex items-center gap-4 mb-4">
-                         <div className="bg-white p-2 rounded-full">
+                       <div className="flex items-start gap-4 mb-4">
+                         <div className="bg-white p-2 rounded-full mt-1">
                             {exp.logoUrl ? (
                                 <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={24} height={24} className="object-contain" />
                             ) : (
                                 <Briefcase className="w-6 h-6 text-primary" />
                             )}
                          </div>
-                         <h4 className="text-xl font-bold">{exp.company}</h4>
+                         <div className="flex-grow">
+                             <h4 className="text-lg font-bold">{exp.role}</h4>
+                             <p className="text-muted-foreground text-sm">{exp.company}</p>
+                         </div>
                        </div>
                        
-                       <p className="text-muted-foreground flex-grow mb-4">{exp.role}</p>
+                       <div className="flex-grow"></div>
                        
                        <div className="border-t pt-4 flex justify-between items-center text-sm text-muted-foreground">
                          <span>{exp.details}</span>
