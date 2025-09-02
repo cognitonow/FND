@@ -2,7 +2,6 @@
 import { getArticles } from '@/lib/actions';
 import { HeroContent } from '@/components/home/HeroContent';
 import { HeroVisuals } from '@/components/home/HeroVisuals';
-import { QuoteSection } from '@/components/home/QuoteSection';
 import { Services } from '@/components/home/Services';
 import { PortfolioSection } from '@/components/home/PortfolioSection';
 import { ContactSection } from '@/components/home/ContactSection';
@@ -17,7 +16,6 @@ export default async function HomePage() {
           <HeroVisuals articles={latestArticles} />
         </section>
       </div>
-      <QuoteSection />
       <Services />
       <PortfolioSection />
       <ContactSection />
