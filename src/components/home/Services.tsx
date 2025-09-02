@@ -69,7 +69,7 @@ export function Services() {
             </div>
             <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
                 {experiences.map((exp) => (
-                    <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 h-full">
+                    <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
                        <div className="flex-grow">
                            <div className="flex items-start gap-4 mb-4">
                              <div className="bg-white p-2 rounded-full mt-1">
