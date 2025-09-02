@@ -56,7 +56,7 @@ export function HeroVisuals() {
                 {/* Row 1 */}
                 <div className="flex-1 flex gap-4">
                     {/* Project Carousel Card */}
-                    <div className="w-3/5">
+                    <div className="w-2/5">
                         <Card className="w-full h-full shadow-xl hover:scale-105 transition-transform duration-300">
                             <Carousel className="w-full h-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 3000 })]}>
                                 <CarouselContent>
@@ -70,7 +70,7 @@ export function HeroVisuals() {
                         </Card>
                     </div>
                      {/* BIM Specialist Badge */}
-                    <div className="w-2/5">
+                    <div className="w-3/5">
                         <Card className="w-full h-full p-4 shadow-lg hover:rotate-3 transition-transform duration-300 flex flex-col justify-center items-center">
                             <h3 className="text-2xl font-bold">BIM Specialist</h3>
                             <p className="text-lg text-muted-foreground">Revit, Archicad</p>
@@ -81,7 +81,7 @@ export function HeroVisuals() {
                  {/* Row 2 */}
                 <div className="flex-1 flex gap-4">
                     {/* Collaborations Card */}
-                    <div className="w-2/5">
+                    <div className="w-3/5">
                         <Card className="w-full h-full p-4 shadow-lg hover:scale-105 transition-transform duration-300 flex items-center justify-center">
                             <Carousel className="w-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 4000 })]}>
                                 <CarouselContent>
@@ -98,8 +98,8 @@ export function HeroVisuals() {
                         </Card>
                     </div>
                      {/* Toolset Card */}
-                    <div className="w-3/5">
-                        <Card className="w-full h-full p-4 shadow-lg hover:-rotate-3 transition-transform duration-300 flex flex-col justify-center">
+                    <div className="w-2/5">
+                        <div className="w-full h-full flex flex-col justify-center">
                             <div className="grid grid-cols-3 gap-4 p-2">
                                 {toolsetLogos.map((tool) => (
                                     <div key={tool.id} className="flex justify-center items-center">
@@ -107,7 +107,7 @@ export function HeroVisuals() {
                                     </div>
                                 ))}
                             </div>
-                        </Card>
+                        </div>
                     </div>
                 </div>
             </div>
