@@ -14,6 +14,7 @@ const sections = [
   { id: 'experience', name: 'Experience' },
   { id: 'services', name: 'Services' },
   { id: 'portfolio', name: 'Portfolio' },
+  { id: 'tutorials', name: 'Revit Tutorials' },
   { id: 'contact', name: 'Contact' },
 ];
 
@@ -53,6 +54,15 @@ export default function HomePage() {
           <PortfolioSection />
         </section>
         
+        <div className="border-t"></div>
+
+        <section id="tutorials" className="h-full w-full snap-start flex items-center justify-center">
+           <div className="text-center">
+            <h2 className="text-3xl font-bold">Revit Tutorials</h2>
+            <p className="text-muted-foreground">This is the tutorials section.</p>
+          </div>
+        </section>
+
         <div className="border-t"></div>
 
         <section id="contact" className="h-full w-full snap-start flex items-center justify-center">
