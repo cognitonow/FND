@@ -60,49 +60,41 @@ export function PageNavigation({ containerRef, sections }: PageNavigationProps) 
         <>
             {/* Side Dots */}
             <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center gap-3">
-                {sections.map((section, index) => {
-                     if (index === 0) {
-                        return (
-                             <button
-                                key={section.id}
-                                onClick={() => scrollToSectionByIndex(index)}
-                                className={cn(
-                                    "transition-colors duration-300 text-primary hover:text-primary/70",
-                                    currentSectionIndex !== index && "opacity-50"
-                                )}
-                                aria-label={`Go to ${section.name} section`}
-                            >
-                                <ChevronUp className="w-5 h-5" />
-                            </button>
-                        )
-                    }
-                    if (index === sections.length - 1) {
-                         return (
-                             <button
-                                key={section.id}
-                                onClick={() => scrollToSectionByIndex(index)}
-                                className={cn(
-                                    "transition-colors duration-300 text-primary hover:text-primary/70",
-                                    currentSectionIndex !== index && "opacity-50"
-                                )}
-                                aria-label={`Go to ${section.name} section`}
-                            >
-                                <ChevronDown className="w-5 h-5" />
-                            </button>
-                        )
-                    }
-                    return (
-                        <button
-                            key={section.id}
-                            onClick={() => scrollToSectionByIndex(index)}
-                            className={cn(
-                                "w-2.5 h-2.5 rounded-full transition-all duration-300 border-2 border-primary",
-                                currentSectionIndex === index ? "bg-primary scale-125" : "bg-transparent hover:bg-primary/50"
-                            )}
-                            aria-label={`Go to ${section.name} section`}
-                        />
-                    )
-                })}
+                 <button
+                    onClick={() => scrollToSectionByIndex(Math.max(0, currentSectionIndex - 1))}
+                    className={cn(
+                        "transition-colors duration-300 text-primary hover:text-primary/70",
+                        currentSectionIndex === 0 && "opacity-50 cursor-not-allowed"
+                    )}
+                    aria-label="Go to previous section"
+                    disabled={currentSectionIndex === 0}
+                >
+                    <ChevronUp className="w-5 h-5" />
+                </button>
+
+                {sections.map((section, index) => (
+                    <button
+                        key={section.id}
+                        onClick={() => scrollToSectionByIndex(index)}
+                        className={cn(
+                            "w-2.5 h-2.5 rounded-full transition-all duration-300 border-2 border-primary",
+                            currentSectionIndex === index ? "bg-primary scale-125" : "bg-transparent hover:bg-primary/50"
+                        )}
+                        aria-label={`Go to ${section.name} section`}
+                    />
+                ))}
+
+                 <button
+                    onClick={() => scrollToSectionByIndex(Math.min(sections.length - 1, currentSectionIndex + 1))}
+                    className={cn(
+                        "transition-colors duration-300 text-primary hover:text-primary/70",
+                         currentSectionIndex === sections.length - 1 && "opacity-50 cursor-not-allowed"
+                    )}
+                    aria-label="Go to next section"
+                    disabled={currentSectionIndex === sections.length - 1}
+                >
+                    <ChevronDown className="w-5 h-5" />
+                </button>
             </div>
 
             {/* Header Links Update (by proxy) */}
