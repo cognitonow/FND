@@ -156,14 +156,14 @@ export function PortfolioSection() {
              <p className="text-base text-muted-foreground">
               A selection of my best work. Use the filters below to navigate through the projects.
             </p>
-          </div>
-          <div className="lg:col-span-2">
-            <div className="flex flex-wrap justify-start gap-2 md:gap-4 mb-8">
+            <div className="flex flex-wrap justify-start gap-2 md:gap-4">
                 <FilterDropdown title="Company" category="company" options={filterOptions.company} />
                 <FilterDropdown title="Country" category="country" options={filterOptions.country} />
                 <FilterDropdown title="Sector" category="sector" options={filterOptions.sector} />
                 <FilterDropdown title="Project Type" category="projectType" options={filterOptions.projectType} />
             </div>
+          </div>
+          <div className="lg:col-span-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {filteredProjects.map((project) => (
                     <div key={project.name} className="bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl">
