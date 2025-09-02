@@ -4,18 +4,20 @@ import Image from 'next/image';
 
 const experiences = [
     {
-        icon: <Briefcase className="w-8 h-8 text-primary" />, // Placeholder
+        icon: <Briefcase className="w-8 h-8 text-primary" />,
         company: 'Studio NVS',
         role: 'Design Consultant/Interior Architect',
-        details: '2025 | Singapore (remote)',
-        logoUrl: null, // No clear public logo
+        details: '2025 | Singapore',
+        logoUrl: null,
+        countryCode: 'sg'
     },
     {
         icon: null,
         company: 'Reddy Architecture + Urbanism',
         role: 'Construction Project Manager – Interiors',
-        details: '2024 | Dublin, Ireland',
+        details: '2024 | Dublin',
         logoUrl: 'https://img.logo.dev/reddyarchitecture.com?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
+        countryCode: 'ie'
     },
     {
         icon: null,
@@ -23,20 +25,23 @@ const experiences = [
         role: 'Interior Architect',
         details: '2022 | Hong Kong',
         logoUrl: 'https://img.logo.dev/fosterandpartners.com?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
+        countryCode: 'hk'
     },
     {
         icon: null,
         company: 'Paragon Group',
         role: 'Interior Architect',
-        details: '2021 | Johannesburg, South Africa',
+        details: '2021 | Johannesburg',
         logoUrl: 'https://img.logo.dev/paragongroup.co.za?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
+        countryCode: 'za'
     },
     {
         icon: null,
         company: 'Cognito Solution',
         role: 'Freelance/Interior Architect',
-        details: '2023 | Dublin, Ireland',
-        logoUrl: 'https://img.logo.dev/cognito.ie?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png', // Assuming cognito.ie
+        details: '2023 | Dublin',
+        logoUrl: 'https://img.logo.dev/cognito.ie?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
+        countryCode: 'ie'
     },
 ];
 
@@ -76,22 +81,31 @@ export function Services() {
                 <div className="lg:col-span-1">
                     <h3 className="text-5xl font-bold tracking-tighter">Where have I worked?</h3>
                 </div>
-                <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
+                <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
                     {experiences.map((exp) => (
-                        <div key={exp.company} className="group relative bg-background p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
-                           <div className="flex items-start justify-between mb-4">
-                             <div className="bg-primary/10 p-3 rounded-full">
+                        <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                           <div className="flex items-center gap-4 mb-4">
+                             <div className="bg-muted p-2 rounded-full">
                                 {exp.logoUrl ? (
-                                    <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={32} height={32} className="object-contain" />
+                                    <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={24} height={24} className="object-contain" />
                                 ) : (
-                                    exp.icon
+                                    <Briefcase className="w-6 h-6 text-primary" />
                                 )}
                              </div>
+                             <h4 className="text-xl font-bold">{exp.company}</h4>
                            </div>
-                           <h4 className="text-2xl font-bold mb-2">{exp.company}</h4>
-                           <p className="text-muted-foreground mb-6 h-16">{exp.role}</p>
-                           <div className="flex justify-between items-end">
-                             <p className="text-sm font-medium text-primary">{exp.details}</p>
+                           
+                           <p className="text-muted-foreground flex-grow mb-4">{exp.role}</p>
+                           
+                           <div className="border-t pt-4 flex justify-between items-center text-sm text-muted-foreground">
+                             <span>{exp.details}</span>
+                             <Image 
+                                src={`https://flagcdn.com/w20/${exp.countryCode}.png`}
+                                alt={`${exp.countryCode} flag`}
+                                width={20}
+                                height={15}
+                                className="object-contain rounded-sm"
+                             />
                            </div>
                         </div>
                     ))}
