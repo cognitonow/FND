@@ -8,6 +8,7 @@ import Autoplay from "embla-carousel-autoplay"
 import type { Article } from '@/types';
 import type { Collaboration } from '@/types';
 import Link from 'next/link';
+import { Quote } from 'lucide-react';
 
 
 const collaborations: Collaboration[] = [
@@ -63,14 +64,17 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                                                         </div>
                                                     )}
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-lg"></div>
-                                                    <h3 className="absolute bottom-4 left-4 text-white font-bold text-lg group-hover:underline">{article.title}</h3>
+                                                    <div className="absolute bottom-0 left-0 p-4">
+                                                        <h3 className="text-white font-bold text-lg group-hover:underline">{article.title}</h3>
+                                                        <p className="text-white/80 text-sm mt-1">Read Now &rarr;</p>
+                                                    </div>
                                                 </div>
                                             </Link>
                                         </CarouselItem>
                                     )) : (
                                         <CarouselItem>
-                                            <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
-                                                <span className="text-muted-foreground">No articles yet.</span>
+                                            <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center p-4 text-center">
+                                                <span className="text-muted-foreground">No articles published yet.</span>
                                             </div>
                                         </CarouselItem>
                                     )}
@@ -80,9 +84,12 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                     </div>
                      {/* Top of Mind Quote */}
                     <div className="w-3/5">
-                        <Card className="w-full h-full p-6 shadow-lg hover:rotate-1 transition-transform duration-300 flex flex-col justify-center items-center text-center">
-                            <h3 className="text-2xl font-bold">Top of Mind</h3>
-                            <p className="text-lg text-muted-foreground mt-2">&quot;Design is not just what it looks like and feels like. Design is how it works.&quot; - Steve Jobs</p>
+                        <Card className="w-full h-full p-6 shadow-lg hover:rotate-1 transition-transform duration-300 flex flex-col justify-center items-center text-center relative overflow-hidden">
+                           <Quote className="absolute -top-4 -left-4 text-primary/10 w-24 h-24" />
+                           <h4 className="text-lg font-semibold mb-2">Quote of the Day</h4>
+                           <p className="text-lg text-muted-foreground mt-2">&quot;The home should be the treasure chest of living.&quot;</p>
+                           <p className="text-sm font-medium mt-4">- Le Corbusier</p>
+                           <Quote className="absolute -bottom-4 -right-4 text-primary/10 w-24 h-24" />
                         </Card>
                     </div>
                 </div>
@@ -91,16 +98,18 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                 <div className="flex-1 flex gap-4">
                     {/* Collaborations Card */}
                     <div className="w-3/5">
-                        <Card className="w-full h-full p-4 shadow-lg hover:scale-105 transition-transform duration-300 flex items-center justify-center">
-                            <Carousel className="w-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 4000 })]}>
+                        <Card className="w-full h-full p-4 shadow-lg hover:scale-105 transition-transform duration-300">
+                            <Carousel className="w-full h-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 4000 })]}>
                                 <CarouselContent>
                                     {collaborations.map((collab) => (
                                         <CarouselItem key={collab.id}>
-                                            <div className="flex items-center gap-4 text-left">
-                                                <Image src={collab.imageUrl} alt={collab.company} width={64} height={64} className="rounded-lg object-cover" data-ai-hint={collab.dataAiHint} />
-                                                <div>
-                                                    <p className="text-xs text-muted-foreground">{collab.project}</p>
+                                            <div className="flex flex-col h-full text-left">
+                                                <div className="w-full aspect-video relative mb-4">
+                                                     <Image src={collab.imageUrl} alt={collab.company} fill className="rounded-md object-cover" data-ai-hint={collab.dataAiHint} />
+                                                </div>
+                                                <div className="px-2">
                                                     <p className="font-semibold text-sm">{collab.company}</p>
+                                                    <p className="text-xs text-muted-foreground">{collab.project}</p>
                                                 </div>
                                             </div>
                                         </CarouselItem>
