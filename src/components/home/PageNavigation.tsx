@@ -59,7 +59,7 @@ export function PageNavigation({ containerRef, sections }: PageNavigationProps) 
     return (
         <>
             {/* Side Dots */}
-            <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center gap-3">
+            <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center gap-3 border-l-2 pl-3">
                  <button
                     onClick={() => scrollToSectionByIndex(Math.max(0, currentSectionIndex - 1))}
                     className={cn(
