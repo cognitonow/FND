@@ -96,7 +96,7 @@ export function Services() {
                             alt={`${exp.countryCode} flag`}
                             width={20}
                             height={15}
-                            className="object-contain rounded-sm"
+                            className="object-contain rounded-sm border border-muted"
                          />
                        </div>
                     </div>
