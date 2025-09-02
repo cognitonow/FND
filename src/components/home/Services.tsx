@@ -30,12 +30,12 @@ const services = [
 ];
 
 const logos = [
-    { name: 'Jeep', src: 'https://img.shields.io/badge/-Jeep-gray?logo=jeep&color=white&style=for-the-badge&logoColor=black' },
-    { name: 'Amazon', src: 'https://img.shields.io/badge/-Amazon-gray?logo=amazon&color=white&style=for-the-badge&logoColor=black' },
-    { name: 'Bitcoin', src: 'https://img.shields.io/badge/-Bitcoin-gray?logo=bitcoin&color=white&style=for-the-badge&logoColor=black' },
-    { name: 'Hubspot', src: 'https://img.shields.io/badge/-Hubspot-gray?logo=hubspot&color=white&style=for-the-badge&logoColor=black' },
-    { name: 'Stripe', src: 'https://img.shields.io/badge/-Stripe-gray?logo=stripe&color=white&style=for-the-badge&logoColor=black' },
-    { name: 'Google', src: 'https://img.shields.io/badge/-Google-gray?logo=google&color=white&style=for-the-badge&logoColor=black' },
+    { name: 'Foster + Partners', src: 'https://logo.clearbit.com/fosterandpartners.com' },
+    { name: 'Accenture', src: 'https://img.shields.io/badge/-Accenture-gray?logo=accenture&color=white&style=for-the-badge&logoColor=black' },
+    { name: 'Goldman Sachs', src: 'https://img.shields.io/badge/-Goldman%20Sachs-gray?logo=goldmansachs&color=white&style=for-the-badge&logoColor=black' },
+    { name: 'Stanbic IBTC', src: 'https://logo.clearbit.com/stanbicibtc.com' },
+    { name: 'Minopex', src: 'https://logo.clearbit.com/minopex.com' },
+    { name: 'Paragon Group', src: 'https://logo.clearbit.com/paragongroup.co.za' },
 ]
 
 export function Services() {
@@ -43,12 +43,12 @@ export function Services() {
     <section className="bg-muted/30 py-24 sm:py-32">
         <div className="container mx-auto px-4">
             <div className="bg-primary text-primary-foreground p-12 rounded-3xl mb-24">
-                <h2 className="text-4xl font-bold max-w-4xl mx-auto text-center mb-8">
+                <h2 className="text-4xl font-bold max-w-4xl mb-8">
                     My mission is to assist startups and enterprises in creating an emotional bond between their products and satisfied, engaged customers.
                 </h2>
-                <div className="flex justify-center items-center gap-8 flex-wrap">
+                <div className="flex items-center gap-x-8 gap-y-4 flex-wrap">
                     {logos.map(logo => (
-                        <Image key={logo.name} src={logo.src} alt={logo.name} width={100} height={40} className="h-6 w-auto object-contain" />
+                        <Image key={logo.name} src={logo.src} alt={logo.name} width={120} height={40} className="h-8 w-auto object-contain brightness-0 invert" />
                     ))}
                 </div>
             </div>

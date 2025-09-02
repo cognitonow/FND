@@ -46,6 +46,12 @@ const nextConfig: NextConfig = {
         hostname: 'img.shields.io',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'logo.clearbit.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
