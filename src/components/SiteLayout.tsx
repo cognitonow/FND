@@ -16,7 +16,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   const isHomePage = pathname === '/';
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex flex-col">
       <Header />
       <main className="flex-grow">{children}</main>
       {!isHomePage && <Footer />}
