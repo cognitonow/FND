@@ -92,7 +92,7 @@ export function Services() {
                 {experiences.map((exp) => (
                     <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
                        <div className="flex items-center gap-4 mb-4">
-                         <div className="bg-muted p-2 rounded-full">
+                         <div className="bg-white p-2 rounded-full">
                             {exp.logoUrl ? (
                                 <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={24} height={24} className="object-contain" />
                             ) : (
