@@ -46,9 +46,9 @@ export function Services() {
                 <h2 className="text-4xl font-bold max-w-4xl mb-8">
                     My mission is to assist startups and enterprises in creating an emotional bond between their products and satisfied, engaged customers.
                 </h2>
-                <div className="flex items-center gap-x-12 gap-y-8 flex-wrap">
+                <div className="flex items-center gap-x-8 gap-y-8 flex-wrap">
                     {logos.map(logo => (
-                        <div key={logo.name} className="relative h-12 w-12 bg-white rounded-full p-1 flex items-center justify-center">
+                        <div key={logo.name} className="relative h-10 w-10 bg-white rounded-full p-1 flex items-center justify-center">
                             <Image 
                                 src={logo.src} 
                                 alt={logo.name} 
