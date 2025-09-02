@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { useState, useMemo } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Card } from '@/components/ui/card';
 
 const projects = [
     {
@@ -168,7 +169,7 @@ export function PortfolioSection() {
             <ScrollArea className="h-full pr-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {filteredProjects.map((project) => (
-                        <div key={project.name} className="bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl flex flex-col">
+                        <Card key={project.name} className="p-6 transition-transform hover:scale-[1.02] hover:shadow-xl flex flex-col">
                             <div className="aspect-video relative mb-6">
                                 <Image
                                 src={project.imageUrl}
@@ -200,7 +201,7 @@ export function PortfolioSection() {
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        </Card>
                     ))}
                     {filteredProjects.length === 0 && (
                         <div className="md:col-span-2 text-center py-16 flex items-center justify-center">

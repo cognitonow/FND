@@ -2,6 +2,7 @@
 import { Briefcase, Download } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
 
 const experiences = [
     {
@@ -69,24 +70,22 @@ export function Services() {
             </div>
             <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
                 {experiences.map((exp) => (
-                    <div key={exp.company} className="group flex flex-col bg-background p-4 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
-                       <div>
-                           <div className="flex items-start gap-4 mb-4">
-                             <div className="bg-white p-2 rounded-full mt-1">
-                                {exp.logoUrl ? (
-                                    <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={24} height={24} className="object-contain" />
-                                ) : (
-                                    <Briefcase className="w-6 h-6 text-primary" />
-                                )}
-                             </div>
-                             <div className="flex-grow">
-                                 <p className="text-muted-foreground text-sm">{exp.company}</p>
-                                 <h4 className="text-lg font-bold">{exp.role}</h4>
-                             </div>
-                           </div>
-                       </div>
+                    <Card key={exp.company} className="group flex flex-col p-4 hover:shadow-xl">
+                       <CardHeader className="flex-row items-start gap-4 p-2">
+                         <div className="bg-white p-2 rounded-full mt-1">
+                            {exp.logoUrl ? (
+                                <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={24} height={24} className="object-contain" />
+                            ) : (
+                                <Briefcase className="w-6 h-6 text-primary" />
+                            )}
+                         </div>
+                         <div className="flex-grow">
+                             <p className="text-muted-foreground text-sm">{exp.company}</p>
+                             <h4 className="text-lg font-bold">{exp.role}</h4>
+                         </div>
+                       </CardHeader>
                        
-                       <div className="border-t pt-4 flex justify-between items-center text-sm text-muted-foreground">
+                       <CardContent className="p-2 border-t flex justify-between items-center text-sm text-muted-foreground">
                          <span>{exp.details}</span>
                          <Image 
                             src={`https://flagcdn.com/w20/${exp.countryCode}.png`}
@@ -95,8 +94,8 @@ export function Services() {
                             height={15}
                             className="object-contain rounded-sm border border-muted"
                          />
-                       </div>
-                    </div>
+                       </CardContent>
+                    </Card>
                 ))}
             </div>
         </div>
