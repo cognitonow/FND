@@ -9,50 +9,72 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 const projects = [
     {
-        name: 'ZENPOINT',
-        company: 'Zenith',
-        country: 'Singapore',
-        countryCode: 'sg',
-        sector: 'Wellness',
-        projectType: ['UI DESIGN', 'WEB DEV'],
-        year: '2024',
-        imageUrl: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop',
-        dataAiHint: 'serene beach landscape',
+        name: 'BWDC Residential Tower',
+        company: 'Foster + Partners / BWDC',
+        country: 'Philippines',
+        countryCode: 'ph',
+        sector: 'High End Residential',
+        projectType: ['New Build'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1618221195710-dd6b41fa1299?q=80&w=2187&auto=format&fit=crop',
+        dataAiHint: 'modern living room, kitchen',
     },
     {
-        name: 'PAYU',
-        company: 'PayU',
+        name: 'Crown Safari Lodge',
+        company: 'Crown Forest / Crown Safari',
+        country: 'Ghana',
+        countryCode: 'gh',
+        sector: 'Hospitality',
+        projectType: ['New Build'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1617850849332-ce8a77918177?q=80&w=2070&auto=format&fit=crop',
+        dataAiHint: 'luxury safari lodge, reception',
+    },
+    {
+        name: 'UN Zambia Office Refurb',
+        company: 'Cognito Solution',
+        country: 'Zambia',
+        countryCode: 'zm',
+        sector: 'Commercial',
+        projectType: ['Refurbishment'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop',
+        dataAiHint: 'modern office interior, collaboration space',
+    },
+    {
+        name: 'Accenture Office Refurbishment',
+        company: 'Accenture',
+        country: 'South Africa',
+        countryCode: 'za',
+        sector: 'Commercial',
+        projectType: ['Refurbishment'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1974&auto=format&fit=crop',
+        dataAiHint: 'corporate reception, office lobby',
+    },
+    {
+        name: '140 West Street Fit-Out',
+        company: 'Goldman Sachs',
         country: 'South Africa',
         countryCode: 'za',
         sector: 'Fintech',
-        projectType: ['UI DESIGN', 'WEB DEV'],
-        year: '2024',
-        imageUrl: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084&auto=format&fit=crop',
-        dataAiHint: 'modern office collaboration'
+        projectType: ['Fit-Out'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1978&auto=format&fit=crop',
+        dataAiHint: 'modern office building, teamwork',
     },
     {
-        name: 'COMPAI',
-        company: 'CompAI',
-        country: 'Ireland',
-        countryCode: 'ie',
-        sector: 'AI',
-        projectType: ['UI DESIGN', 'MOBILE DEV', 'WEB DEV'],
-        year: '2024',
-        imageUrl: 'https://images.unsplash.com/photo-1573496774221-9d69a58405a4?q=80&w=2069&auto=format&fit=crop',
-        dataAiHint: 'pocket companion device'
+        name: 'Stanbic IBTC Tower Fit-Out',
+        company: 'Stanbic IBTC Pension Managers',
+        country: 'Nigeria',
+        countryCode: 'ng',
+        sector: 'Fintech',
+        projectType: ['Fit-Out'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop',
+        dataAiHint: 'modern office atrium, collaborative workspace',
     },
-    {
-        name: 'CHATPIC.AI',
-        company: 'ChatPic',
-        country: 'Ghana',
-        countryCode: 'gh',
-        sector: 'AI',
-        projectType: ['UI DESIGN', 'MOBILE DEV'],
-        year: '2024',
-        imageUrl: 'https://images.unsplash.com/photo-1694663361546-936528987483?q=80&w=1974&auto=format&fit=crop',
-        dataAiHint: 'ai chat application'
-    },
-]
+];
 
 type FilterCategory = 'company' | 'country' | 'sector' | 'projectType';
 
@@ -178,3 +200,4 @@ export default function PortfolioPage() {
     </div>
   );
 }
+
