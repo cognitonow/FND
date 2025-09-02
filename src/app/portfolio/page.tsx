@@ -3,8 +3,10 @@
 
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { useState, useMemo } from 'react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 
 const projects = [
     {
@@ -66,7 +68,7 @@ export default function PortfolioPage() {
     } else {
         projects.forEach(p => values.add(p[category]));
     }
-    return ['All', ...Array.from(values)];
+    return ['All', ...Array.from(values).sort()];
   };
   
   const filterOptions = useMemo(() => ({
@@ -74,6 +76,7 @@ export default function PortfolioPage() {
     country: getUniqueValues('country'),
     sector: getUniqueValues('sector'),
     projectType: getUniqueValues('projectType'),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), []);
 
   const handleFilterChange = (category: FilterCategory, value: string) => {
@@ -92,22 +95,20 @@ export default function PortfolioPage() {
     });
   }, [filters]);
 
-  const FilterGroup = ({ title, category, options }: { title: string, category: FilterCategory, options: string[] }) => (
-    <div className="flex flex-col items-center gap-4">
-        <h3 className="text-lg font-semibold text-muted-foreground">{title}</h3>
-        <div className="flex justify-center flex-wrap gap-2">
-            {options.map(option => (
-                <Button 
-                    key={option} 
-                    variant={filters[category] === option ? 'default' : 'outline'}
-                    onClick={() => handleFilterChange(category, option)}
-                    className="rounded-full"
-                >
-                    {option}
-                </Button>
-            ))}
-        </div>
-    </div>
+  const FilterDropdown = ({ title, category, options }: { title: string, category: FilterCategory, options: string[] }) => (
+      <Select value={filters[category]} onValueChange={(value) => handleFilterChange(category, value)}>
+        <SelectTrigger className="w-full">
+            <div className="flex items-center gap-2">
+                 <span className="text-muted-foreground">{title}:</span>
+                 <SelectValue />
+            </div>
+        </SelectTrigger>
+        <SelectContent>
+          {options.map(option => (
+            <SelectItem key={option} value={option}>{option}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
   );
 
 
@@ -118,16 +119,22 @@ export default function PortfolioPage() {
           Portfolio
         </h1>
         <p className="text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground">
-          A selection of my best work.
+          A selection of my best work. Use the filters below to navigate through the projects.
         </p>
       </section>
 
-      <section className="mb-12 flex flex-col gap-8">
-        <FilterGroup title="Company" category="company" options={filterOptions.company} />
-        <FilterGroup title="Country" category="country" options={filterOptions.country} />
-        <FilterGroup title="Sector" category="sector" options={filterOptions.sector} />
-        <FilterGroup title="Project Type" category="projectType" options={filterOptions.projectType} />
-      </section>
+      <Card className="mb-12">
+        <CardHeader>
+            <CardTitle>Filters</CardTitle>
+        </CardHeader>
+        <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <FilterDropdown title="Company" category="company" options={filterOptions.company} />
+            <FilterDropdown title="Country" category="country" options={filterOptions.country} />
+            <FilterDropdown title="Sector" category="sector" options={filterOptions.sector} />
+            <FilterDropdown title="Project Type" category="projectType" options={filterOptions.projectType} />
+        </CardContent>
+      </Card>
+
 
       <section>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
