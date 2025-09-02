@@ -24,22 +24,22 @@ export default function HomePage() {
     <div ref={containerRef} className="h-[calc(100vh-4rem)] overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <PageNavigation containerRef={containerRef} sections={sections} />
       
-      <section id="hero" className="h-[calc(100vh-4rem)] snap-start flex items-center">
+      <section id="hero" className="h-full snap-start flex items-center">
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
           <HeroContent />
           <HeroVisuals articles={latestArticles} />
         </div>
       </section>
 
-      <section id="experience" className="h-[calc(100vh-4rem)] snap-start flex items-center">
+      <section id="experience" className="h-full snap-start flex items-center">
         <Services />
       </section>
 
-      <section id="portfolio" className="h-[calc(100vh-4rem)] snap-start flex items-center">
+      <section id="portfolio" className="h-full snap-start flex items-center">
         <PortfolioSection />
       </section>
       
-      <section id="contact" className="h-[calc(100vh-4rem)] snap-start flex items-center">
+      <section id="contact" className="h-full snap-start flex items-center">
         <ContactSection />
       </section>
     </div>
