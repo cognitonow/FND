@@ -8,8 +8,6 @@ import Autoplay from "embla-carousel-autoplay"
 import type { Article } from '@/types';
 import type { Collaboration } from '@/types';
 import Link from 'next/link';
-import { Quote } from 'lucide-react';
-
 
 const collaborations: Collaboration[] = [
     { id: 'collab1', company: 'Foster + Partners / BWDC', project: 'Project: BWDC Residential Tower, Manila', imageUrl: 'https://picsum.photos/seed/collab1/400/400', dataAiHint: 'modern skyscraper architecture' },
@@ -101,29 +99,24 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                 </div>
 
                  {/* Row 2 */}
-                <div className="flex-[0.8] flex gap-4">
+                <div className="flex-1 flex gap-4">
                     {/* Toolset Card */}
-                    <div className="w-2/5">
-                        <Card className="w-full h-full p-6 shadow-lg hover:-rotate-1 transition-transform duration-300 flex flex-col justify-center items-center">
-                            <div className="grid grid-cols-3 gap-6">
-                                {toolsetLogos.map((tool) => (
-                                    <div key={tool.id} className="flex justify-center items-center">
-                                        <Image src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain bg-white p-1" data-ai-hint="software logo" title={tool.alt} />
-                                    </div>
-                                ))}
-                            </div>
-                        </Card>
-                    </div>
-                    {/* Top of Mind Quote */}
-                    <div className="w-3/5">
-                        <Card className="w-full h-full p-6 shadow-lg hover:rotate-1 transition-transform duration-300 flex flex-col justify-center items-center text-center relative overflow-hidden">
-                           <Quote className="absolute -top-4 -left-4 text-primary/10 w-24 h-24" />
-                           <h4 className="text-lg font-semibold mb-2">Quote of the Day</h4>
-                           <p className="text-lg text-muted-foreground mt-2">&quot;The home should be the treasure chest of living.&quot;</p>
-                           <p className="text-sm font-medium mt-4">- Le Corbusier</p>
-                           <Quote className="absolute -bottom-4 -right-4 text-primary/10 w-24 h-24" />
-                        </Card>
-                    </div>
+                     <Card className="w-full h-full p-6 shadow-lg hover:-rotate-1 transition-transform duration-300 flex flex-col justify-center items-center">
+                        <div className="grid grid-cols-5 gap-6">
+                            {toolsetLogos.slice(0,5).map((tool) => (
+                                <div key={tool.id} className="flex justify-center items-center">
+                                    <Image src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain bg-white p-1" data-ai-hint="software logo" title={tool.alt} />
+                                </div>
+                            ))}
+                        </div>
+                         <div className="grid grid-cols-4 gap-6 mt-4">
+                            {toolsetLogos.slice(5).map((tool) => (
+                                <div key={tool.id} className="flex justify-center items-center">
+                                    <Image src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain bg-white p-1" data-ai-hint="software logo" title={tool.alt} />
+                                </div>
+                            ))}
+                        </div>
+                    </Card>
                 </div>
             </div>
         </div>
