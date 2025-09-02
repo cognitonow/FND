@@ -1,31 +1,42 @@
 
-import { Paintbrush, Code, Pencil, Type } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
 import Image from 'next/image';
 
-const services = [
+const experiences = [
     {
-        icon: <Paintbrush className="w-8 h-8 text-primary" />,
-        title: 'UI Design',
-        description: 'We create intuitive, visually appealing interfaces that enhance user experience and navigation, ensuring your app is both beautiful and functional across all devices.',
-        number: '01',
+        icon: <Briefcase className="w-8 h-8 text-primary" />, // Placeholder
+        company: 'Studio NVS',
+        role: 'Design Consultant/Interior Architect',
+        details: '2025 | Singapore (remote)',
+        logoUrl: null, // No clear public logo
     },
     {
-        icon: <Code className="w-8 h-8 text-primary" />,
-        title: 'Development',
-        description: 'Our team builds reliable, scalable solutions, delivering clean code that powers websites and mobile apps with top-notch performance and security.',
-        number: '02',
+        icon: null,
+        company: 'Reddy Architecture + Urbanism',
+        role: 'Construction Project Manager – Interiors',
+        details: '2024 | Dublin, Ireland',
+        logoUrl: 'https://img.logo.dev/reddyarchitecture.com?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
     },
     {
-        icon: <Pencil className="w-8 h-8 text-primary" />,
-        title: 'Graphic Design',
-        description: "We design responsive, user-friendly websites that blend aesthetics with functionality, providing a seamless experience across devices and reflecting your brand's identity.",
-        number: '03',
+        icon: null,
+        company: 'Cognito Solution',
+        role: 'Freelance/Interior Architect',
+        details: '2023 | Dublin, Ireland',
+        logoUrl: 'https://img.logo.dev/cognito.ie?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png', // Assuming cognito.ie
     },
     {
-        icon: <Type className="w-8 h-8 text-primary" />,
-        title: 'Branding',
-        description: 'We craft memorable brand identities, from logos to complete strategies, ensuring consistency and a strong connection with your audience across all platforms.',
-        number: '04',
+        icon: null,
+        company: 'Foster + Partners',
+        role: 'Interior Architect',
+        details: '2022 | Hong Kong',
+        logoUrl: 'https://img.logo.dev/fosterandpartners.com?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
+    },
+    {
+        icon: null,
+        company: 'Paragon Group',
+        role: 'Interior Architect',
+        details: '2021 | Johannesburg, South Africa',
+        logoUrl: 'https://img.logo.dev/paragongroup.co.za?token=pk_TAknTcNzR4eGaBiUIH2_ew&format=png',
     },
 ];
 
@@ -66,17 +77,21 @@ export function Services() {
                     <h3 className="text-5xl font-bold tracking-tighter">Where have I worked?</h3>
                 </div>
                 <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-                    {services.map((service) => (
-                        <div key={service.title} className="group relative bg-background p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    {experiences.map((exp) => (
+                        <div key={exp.company} className="group relative bg-background p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
                            <div className="flex items-start justify-between mb-4">
                              <div className="bg-primary/10 p-3 rounded-full">
-                                {service.icon}
+                                {exp.logoUrl ? (
+                                    <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={32} height={32} className="object-contain" />
+                                ) : (
+                                    exp.icon
+                                )}
                              </div>
                            </div>
-                           <p className="text-muted-foreground mb-6 h-24">{service.description}</p>
+                           <h4 className="text-2xl font-bold mb-2">{exp.company}</h4>
+                           <p className="text-muted-foreground mb-6 h-16">{exp.role}</p>
                            <div className="flex justify-between items-end">
-                             <h4 className="text-2xl font-bold">{service.title}</h4>
-                             <span className="text-5xl font-bold text-muted/20 group-hover:text-primary transition-colors duration-300">{service.number}</span>
+                             <p className="text-sm font-medium text-primary">{exp.details}</p>
                            </div>
                         </div>
                     ))}
