@@ -1,4 +1,3 @@
-
 "use client"
 
 import Image from 'next/image';
@@ -50,7 +49,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                     {/* Project Card */}
                     <div className="w-3/5">
                         <Card className="w-full h-full p-4 shadow-lg hover:scale-105 transition-transform duration-300">
-                            <Carousel className="w-full h-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 4000 })]}>
+                            <Carousel className="w-full h-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 60000 })]}>
                                 <CarouselContent>
                                     {collaborations.map((collab) => (
                                         <CarouselItem key={collab.id}>
@@ -71,13 +70,13 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                     </div>
                     {/* Latest Articles Card */}
                     <div className="w-2/5">
-                         <Card className="w-full h-full shadow-xl hover:scale-105 transition-transform duration-300">
-                            <Carousel className="w-full h-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 3000 })]}>
+                         <Card className="w-full h-full shadow-xl hover:scale-105 transition-transform duration-300 overflow-hidden">
+                            <Carousel className="w-full h-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 60000 })]}>
                                 <CarouselContent>
                                     {articles.length > 0 ? articles.map(article => (
-                                        <CarouselItem key={article.id}>
-                                            <Link href={`/articles/${article.slug}`} className="group h-full flex flex-col p-4">
-                                                <div className="w-full aspect-video relative rounded-lg overflow-hidden mb-4">
+                                         <CarouselItem key={article.id} className="h-full">
+                                            <Link href={`/articles/${article.slug}`} className="group h-full flex flex-col">
+                                                <div className="w-full aspect-video relative rounded-t-lg overflow-hidden">
                                                     {article.thumbnailUrl ? (
                                                         <Image src={article.thumbnailUrl} alt={article.title} fill className="object-cover" data-ai-hint="article thumbnail" />
                                                     ) : (
@@ -86,9 +85,9 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                                                         </div>
                                                     )}
                                                 </div>
-                                                <div className="flex-grow flex flex-col">
-                                                  <h3 className="font-bold text-lg group-hover:underline flex-grow">{article.title}</h3>
-                                                  <p className="text-muted-foreground text-sm mt-2">Read Now &rarr;</p>
+                                                <div className="p-4 flex-grow flex flex-col">
+                                                    <h3 className="font-bold text-lg group-hover:underline flex-grow">{article.title}</h3>
+                                                    <p className="text-muted-foreground text-sm mt-2">Read Now &rarr;</p>
                                                 </div>
                                             </Link>
                                         </CarouselItem>
@@ -107,8 +106,8 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
 
                  {/* Row 2 */}
                 <div className="flex-[0.8] flex gap-4">
-                     {/* Toolset Card */}
-                    <div className="w-2/5 h-full">
+                    {/* Toolset Card */}
+                     <div className="w-2/5 h-full">
                          <div className="w-full h-full flex flex-col justify-center">
                             <div className="grid grid-cols-3 gap-4 p-2">
                                 {toolsetLogos.map((tool) => (
