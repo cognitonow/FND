@@ -63,7 +63,7 @@ export function Services() {
 
             <div className="grid grid-cols-1 lg:grid-cols-4 items-start gap-16">
                 <div className="lg:col-span-1">
-                    <h3 className="text-5xl font-bold tracking-tighter">How Can I Assist You?</h3>
+                    <h3 className="text-5xl font-bold tracking-tighter">Where have I worked?</h3>
                 </div>
                 <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
                     {services.map((service) => (
