@@ -70,7 +70,7 @@ export function Services() {
             </div>
             <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
                 {experiences.map((exp) => (
-                    <Card key={exp.company} className="group flex flex-col p-4 hover:shadow-xl">
+                    <Card key={exp.company} className="group flex flex-col p-4 shadow-md hover:shadow-xl">
                        <CardHeader className="flex-row items-start gap-4 p-2">
                          <div className="bg-white p-2 rounded-full mt-1">
                             {exp.logoUrl ? (

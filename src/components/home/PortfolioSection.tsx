@@ -169,7 +169,7 @@ export function PortfolioSection() {
             <ScrollArea className="h-full pr-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {filteredProjects.map((project) => (
-                        <Card key={project.name} className="p-6 transition-transform hover:scale-[1.02] hover:shadow-xl flex flex-col">
+                        <Card key={project.name} className="p-6 transition-transform hover:scale-[1.02] shadow-md hover:shadow-xl flex flex-col">
                             <div className="aspect-video relative mb-6">
                                 <Image
                                 src={project.imageUrl}

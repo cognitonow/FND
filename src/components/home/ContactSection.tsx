@@ -16,7 +16,7 @@ export function ContactSection() {
                 </p>
             </div>
             <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-8">
-                <Card className="flex flex-col items-center text-center p-6 hover:shadow-xl transition-shadow">
+                <Card className="flex flex-col items-center text-center p-6 shadow-md hover:shadow-xl transition-shadow">
                     <CardHeader>
                         <div className="mx-auto bg-primary text-primary-foreground rounded-full p-3 w-fit mb-4">
                             <Mail />
@@ -27,7 +27,7 @@ export function ContactSection() {
                         <Link href="mailto:Fanisampofu@gmail.com" className="text-muted-foreground hover:text-primary transition-colors block">Fanisampofu@gmail.com</Link>
                     </CardContent>
                 </Card>
-                <Card className="flex flex-col items-center text-center p-6 hover:shadow-xl transition-shadow">
+                <Card className="flex flex-col items-center text-center p-6 shadow-md hover:shadow-xl transition-shadow">
                     <CardHeader>
                         <div className="mx-auto bg-primary text-primary-foreground rounded-full p-3 w-fit mb-4">
                             <Linkedin />
@@ -40,7 +40,7 @@ export function ContactSection() {
                         </Link>
                     </CardContent>
                 </Card>
-                <Card className="flex flex-col items-center text-center p-6 hover:shadow-xl transition-shadow">
+                <Card className="flex flex-col items-center text-center p-6 shadow-md hover:shadow-xl transition-shadow">
                     <CardHeader>
                         <div className="mx-auto bg-primary text-primary-foreground rounded-full p-3 w-fit mb-4">
                             <Youtube />
