@@ -46,7 +46,29 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
             
             <div className="w-full h-full flex flex-col gap-4">
                 {/* Row 1 */}
-                <div className="flex-1 flex gap-4">
+                <div className="flex-[1.2] flex gap-4">
+                    {/* Project Card */}
+                    <div className="w-3/5">
+                        <Card className="w-full h-full p-4 shadow-lg hover:scale-105 transition-transform duration-300">
+                            <Carousel className="w-full h-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 4000 })]}>
+                                <CarouselContent>
+                                    {collaborations.map((collab) => (
+                                        <CarouselItem key={collab.id}>
+                                            <div className="flex flex-col h-full text-left">
+                                                <div className="w-full aspect-video relative mb-4">
+                                                     <Image src={collab.imageUrl} alt={collab.company} fill className="rounded-md object-cover" data-ai-hint={collab.dataAiHint} />
+                                                </div>
+                                                <div className="px-2">
+                                                    <p className="font-semibold text-sm">{collab.company}</p>
+                                                    <p className="text-xs text-muted-foreground">{collab.project}</p>
+                                                </div>
+                                            </div>
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                            </Carousel>
+                        </Card>
+                    </div>
                     {/* Latest Articles Card */}
                     <div className="w-2/5">
                          <Card className="w-full h-full shadow-xl hover:scale-105 transition-transform duration-300">
@@ -82,8 +104,12 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                             </Carousel>
                         </Card>
                     </div>
-                     {/* Top of Mind Quote */}
-                    <div className="w-3/5">
+                </div>
+
+                 {/* Row 2 */}
+                <div className="flex-[0.8] flex gap-4">
+                    {/* Top of Mind Quote */}
+                    <div className="w-2/5">
                         <Card className="w-full h-full p-6 shadow-lg hover:rotate-1 transition-transform duration-300 flex flex-col justify-center items-center text-center relative overflow-hidden">
                            <Quote className="absolute -top-4 -left-4 text-primary/10 w-24 h-24" />
                            <h4 className="text-lg font-semibold mb-2">Quote of the Day</h4>
@@ -92,34 +118,8 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                            <Quote className="absolute -bottom-4 -right-4 text-primary/10 w-24 h-24" />
                         </Card>
                     </div>
-                </div>
-
-                 {/* Row 2 */}
-                <div className="flex-[0.8] flex gap-4">
-                    {/* Collaborations Card */}
+                    {/* Toolset Card */}
                     <div className="w-3/5">
-                        <Card className="w-full h-full p-4 shadow-lg hover:scale-105 transition-transform duration-300">
-                            <Carousel className="w-full h-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 4000 })]}>
-                                <CarouselContent>
-                                    {collaborations.map((collab) => (
-                                        <CarouselItem key={collab.id}>
-                                            <div className="flex flex-col h-full text-left">
-                                                <div className="w-full aspect-video relative mb-4">
-                                                     <Image src={collab.imageUrl} alt={collab.company} fill className="rounded-md object-cover" data-ai-hint={collab.dataAiHint} />
-                                                </div>
-                                                <div className="px-2">
-                                                    <p className="font-semibold text-sm">{collab.company}</p>
-                                                    <p className="text-xs text-muted-foreground">{collab.project}</p>
-                                                </div>
-                                            </div>
-                                        </CarouselItem>
-                                    ))}
-                                </CarouselContent>
-                            </Carousel>
-                        </Card>
-                    </div>
-                     {/* Toolset Card */}
-                    <div className="w-2/5">
                          <div className="w-full h-full flex flex-col justify-center">
                             <div className="grid grid-cols-3 gap-4 p-2">
                                 {toolsetLogos.map((tool) => (
