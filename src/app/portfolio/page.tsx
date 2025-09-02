@@ -97,7 +97,7 @@ export default function PortfolioPage() {
 
   const FilterDropdown = ({ title, category, options }: { title: string, category: FilterCategory, options: string[] }) => (
       <Select value={filters[category]} onValueChange={(value) => handleFilterChange(category, value)}>
-        <SelectTrigger className="w-full rounded-full">
+        <SelectTrigger className="w-full sm:w-auto h-8 rounded-full px-4 text-xs">
             <div className="flex items-center gap-2">
                  <span className="text-muted-foreground">{title}:</span>
                  <SelectValue />
@@ -123,7 +123,7 @@ export default function PortfolioPage() {
         </p>
       </section>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
           <FilterDropdown title="Company" category="company" options={filterOptions.company} />
           <FilterDropdown title="Country" category="country" options={filterOptions.country} />
           <FilterDropdown title="Sector" category="sector" options={filterOptions.sector} />
