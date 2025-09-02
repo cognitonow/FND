@@ -1,7 +1,10 @@
 
+"use client";
+
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { useState, useMemo } from 'react';
 
 const projects = [
     {
@@ -35,9 +38,24 @@ const projects = [
 ]
 
 export default function PortfolioPage() {
+  const [activeFilter, setActiveFilter] = useState('All');
+  
+  const allTags = useMemo(() => {
+    const tags = new Set<string>();
+    projects.forEach(p => p.tags.forEach(t => tags.add(t)));
+    return ['All', ...Array.from(tags)];
+  }, []);
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === 'All') {
+      return projects;
+    }
+    return projects.filter(p => p.tags.includes(activeFilter));
+  }, [activeFilter]);
+
   return (
     <div className="container mx-auto px-4 py-16 sm:py-24">
-      <section className="text-center mb-16">
+      <section className="text-center mb-12">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4">
           Portfolio
         </h1>
@@ -46,9 +64,24 @@ export default function PortfolioPage() {
         </p>
       </section>
 
+      <section className="mb-12">
+        <div className="flex justify-center flex-wrap gap-2">
+            {allTags.map(tag => (
+                <Button 
+                    key={tag} 
+                    variant={activeFilter === tag ? 'default' : 'outline'}
+                    onClick={() => setActiveFilter(tag)}
+                    className="rounded-full"
+                >
+                    {tag}
+                </Button>
+            ))}
+        </div>
+      </section>
+
       <section>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
                 <div key={project.name} className="bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl">
                     <div className="aspect-video relative mb-6">
                         <Image
