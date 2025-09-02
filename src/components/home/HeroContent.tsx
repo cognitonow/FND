@@ -6,13 +6,14 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 const locations = [
+    { countryCode: 'ph', name: 'Philippines' },
+    { countryCode: 'gh', name: 'Ghana' },
+    { countryCode: 'zm', name: 'Zambia' },
     { countryCode: 'za', name: 'South Africa' },
+    { countryCode: 'ng', name: 'Nigeria' },
     { countryCode: 'sg', name: 'Singapore' },
     { countryCode: 'ie', name: 'Ireland' },
     { countryCode: 'hk', name: 'Hong Kong' },
-    { countryCode: 'ae', name: 'United Arab Emirates' },
-    { countryCode: 'gh', name: 'Ghana' },
-    { countryCode: 'sc', name: 'Seychelles' },
 ];
 
 export function HeroContent() {
@@ -36,12 +37,12 @@ export function HeroContent() {
               <Link href="mailto:hello@example.com">Contact Me <Mail className="ml-2" /></Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="#">View Portfolio <ArrowUpRight className="ml-2" /></Link>
+              <Link href="/portfolio">View Portfolio <ArrowUpRight className="ml-2" /></Link>
             </Button>
           </div>
            <div className='flex gap-4 items-center text-muted-foreground'>
             <span className="text-sm">Projects all over the world:</span>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
                 {locations.map(loc => (
                     <Image 
                         key={loc.countryCode}

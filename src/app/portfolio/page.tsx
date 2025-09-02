@@ -195,6 +195,7 @@ export default function PortfolioPage() {
                         </div>
                     </div>
                     <div className="flex gap-2 flex-wrap">
+                         <Badge variant="outline" className="font-light bg-accent/10">{project.sector}</Badge>
                         {project.projectType.map(tag => (
                              <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
                         ))}
