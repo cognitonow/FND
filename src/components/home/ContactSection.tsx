@@ -12,7 +12,7 @@ export function ContactSection() {
                 <h2 className="text-5xl font-bold tracking-tighter">
                 Get In Touch
                 </h2>
-                <p className="text-lg md:text-xl max-w-3xl text-muted-foreground">
+                <p className="text-base max-w-3xl text-muted-foreground">
                 Have a project in mind? I&apos;d love to hear from you.
                 </p>
             </div>
