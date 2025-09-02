@@ -57,14 +57,10 @@ export function Services() {
                 <h2 className="text-5xl font-bold tracking-tighter">
                   Work Experience
                 </h2>
-                <Card className="flex flex-col justify-center items-start text-left p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 w-full">
-                    <h3 className="text-3xl font-bold tracking-tighter mb-4">Wanna see my experience?</h3>
-                    <p className="text-muted-foreground mb-6">Download my full CV to see my full jouney.</p>
-                    <Button>
-                        <Download className="mr-2 h-4 w-4" />
-                        Download my CV
-                    </Button>
-                </Card>
+                <Button>
+                    <Download className="mr-2 h-4 w-4" />
+                    Download my CV
+                </Button>
             </div>
             <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
                 {experiences.map((exp) => (
