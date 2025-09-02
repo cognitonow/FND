@@ -43,14 +43,12 @@ const toolsetLogos = [
     { id: 'tool4', imageUrl: 'https://picsum.photos/seed/rhino/100/100', alt: 'Rhino', dataAiHint: 'software logo' },
     { id: 'tool5', imageUrl: 'https://picsum.photos/seed/adobesuite/100/100', alt: 'Adobe Suite', dataAiHint: 'software logo' },
     { id: 'tool6', imageUrl: 'https://picsum.photos/seed/rayon/100/100', alt: 'Rayon', dataAiHint: 'software logo' },
-    { id: 'tool7', imageUrl: 'https://picsum.photos/seed/revit/100/100', alt: 'Revit', dataAiHint: 'software logo' },
-    { id: 'tool8', imageUrl: 'https://picsum.photos/seed/pyrevit/100/100', alt: 'Pyrevit', dataAiHint: 'software logo' },
 ];
 
 
 export function HeroVisuals() {
     return (
-        <div className="relative h-[500px] flex items-center justify-center">
+        <div className="relative h-[550px] flex items-center justify-center">
             {/* Background Shape */}
             <div className="absolute inset-0 bg-gradient-to-tr from-accent/50 to-primary/20 rounded-full blur-3xl -z-10"></div>
             
@@ -59,38 +57,40 @@ export function HeroVisuals() {
                 <Image src="https://picsum.photos/seed/profile/400/400" alt="Profile Picture" width={200} height={200} className="object-cover" data-ai-hint="professional headshot" />
             </Card>
 
-            {/* Project Carousel Card */}
-            <Card className="absolute top-0 left-0 w-80 h-52 shadow-xl hover:scale-105 transition-transform duration-300">
-                <Carousel className="w-full h-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 3000 })]}>
-                    <CarouselContent>
-                        {projects.map(p => (
-                            <CarouselItem key={p.id}>
-                                <Image src={p.imageUrl} alt="Project Snippet" width={320} height={208} className="object-cover rounded-lg" data-ai-hint={p.dataAiHint} />
-                            </CarouselItem>
+            <div className="absolute top-0 flex gap-4">
+                {/* Project Carousel Card */}
+                <Card className="w-80 h-52 shadow-xl hover:scale-105 transition-transform duration-300">
+                    <Carousel className="w-full h-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 3000 })]}>
+                        <CarouselContent>
+                            {projects.map(p => (
+                                <CarouselItem key={p.id}>
+                                    <Image src={p.imageUrl} alt="Project Snippet" width={320} height={208} className="object-cover rounded-lg" data-ai-hint={p.dataAiHint} />
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                    </Carousel>
+                </Card>
+
+                {/* Toolset Card */}
+                <Card className="w-64 h-52 p-4 shadow-lg hover:-rotate-3 transition-transform duration-300 flex flex-col justify-center">
+                    <div className="grid grid-cols-3 gap-4 p-2">
+                        {toolsetLogos.map((tool) => (
+                            <Image key={tool.id} src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain bg-white" data-ai-hint={tool.dataAiHint} title={tool.alt} />
                         ))}
-                    </CarouselContent>
-                </Carousel>
-            </Card>
+                    </div>
+                </Card>
+            </div>
+
 
             {/* BIM Specialist Badge */}
-            <Card className="absolute top-16 right-0 w-48 p-4 shadow-lg hover:rotate-3 transition-transform duration-300">
+            <Card className="absolute top-60 right-0 w-48 p-4 shadow-lg hover:rotate-3 transition-transform duration-300">
                 <h3 className="font-bold">BIM Specialist</h3>
                 <p className="text-sm text-muted-foreground">Revit, Archicad</p>
-            </Card>
-
-            {/* Toolset Card */}
-             <Card className="absolute bottom-16 right-0 w-64 p-4 shadow-lg hover:-rotate-3 transition-transform duration-300">
-                <h3 className="font-bold mb-2 text-center">My Toolset</h3>
-                <div className="grid grid-cols-4 gap-4 p-2">
-                    {toolsetLogos.map((tool) => (
-                        <Image key={tool.id} src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain bg-white" data-ai-hint={tool.dataAiHint} title={tool.alt} />
-                    ))}
-                </div>
             </Card>
             
             {/* Collaborations Card */}
             <Card className="absolute bottom-0 left-0 w-72 h-28 p-4 shadow-lg hover:scale-105 transition-transform duration-300 flex items-center justify-center">
-                 <Carousel className="w-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 3000 })]}>
+                 <Carousel className="w-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 4000 })]}>
                     <CarouselContent>
                         {collaborations.map((collab) => (
                             <CarouselItem key={collab.id}>
