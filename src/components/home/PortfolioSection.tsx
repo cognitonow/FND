@@ -46,9 +46,8 @@ export function PortfolioSection() {
   const otherProjects = projects.filter(p => !p.featured).slice(0,2);
 
   return (
-    <section id="portfolio" className="bg-muted/30 py-24 sm:py-32">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+    <section className="container mx-auto px-4 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
           <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24">
             <h2 className="text-5xl font-bold tracking-tighter">
               Selected work
@@ -106,7 +105,6 @@ export function PortfolioSection() {
             ))}
           </div>
         </div>
-      </div>
     </section>
   );
 }

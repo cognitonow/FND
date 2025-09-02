@@ -1,3 +1,4 @@
+
 "use client"
 
 import { usePathname } from 'next/navigation'
@@ -11,12 +12,14 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   if (isAdminPage) {
     return <>{children}</>;
   }
+  
+  const isHomePage = pathname === '/';
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-grow">{children}</main>
-      <Footer />
+      {!isHomePage && <Footer />}
     </div>
   );
 }

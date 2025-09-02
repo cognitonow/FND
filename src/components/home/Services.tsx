@@ -2,7 +2,6 @@
 import { Briefcase, Download } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 
 const experiences = [
     {
@@ -49,10 +48,8 @@ const experiences = [
 
 export function Services() {
   return (
-    <>
-    <section className="bg-muted/30 py-24 sm:py-32">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+    <section className="container mx-auto px-4 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
             <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24">
                 <h2 className="text-5xl font-bold tracking-tighter">
                   Work Experience
@@ -94,9 +91,7 @@ export function Services() {
                     </div>
                 ))}
             </div>
-          </div>
         </div>
     </section>
-    </>
   )
 }

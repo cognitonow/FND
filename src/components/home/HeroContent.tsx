@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -35,9 +35,6 @@ export function HeroContent() {
           <div className="flex gap-4">
             <Button size="lg" asChild>
               <Link href="mailto:hello@example.com">Contact Me <Mail className="ml-2" /></Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/portfolio">View Portfolio <ArrowUpRight className="ml-2" /></Link>
             </Button>
           </div>
            <div className='flex gap-4 items-center text-muted-foreground'>

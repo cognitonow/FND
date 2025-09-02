@@ -5,8 +5,7 @@ import Link from 'next/link';
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-24 sm:py-32 bg-background/50">
-      <div className="container mx-auto px-4">
+    <section className="container mx-auto px-4 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
             <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24">
                 <h2 className="text-5xl font-bold tracking-tighter">
@@ -56,7 +55,6 @@ export function ContactSection() {
                 </Card>
             </div>
         </div>
-      </div>
     </section>
   );
 }
