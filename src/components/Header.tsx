@@ -9,9 +9,10 @@ import { usePathname } from 'next/navigation';
 
 const sections = [
   { id: 'hero', name: 'Home' },
-  { id: 'experience', name: 'Experience' },
-  { id: 'portfolio', name: 'Portfolio' },
-  { id: 'contact', name: 'Contact' },
+  { id: 'experience', name: 'Work Experience' },
+  { id: 'portfolio', name: 'Selected work' },
+  { id: 'tutorials', name: 'Revit Tutorials' },
+  { id: 'contact', name: 'Get In Touch' },
 ];
 
 
