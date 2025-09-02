@@ -11,11 +11,10 @@ import { PageNavigation } from '@/components/home/PageNavigation';
 
 const sections = [
   { id: 'hero', name: 'Home' },
-  { id: 'experience', name: 'Experience' },
-  { id: 'services', name: 'Services' },
-  { id: 'portfolio', name: 'Portfolio' },
+  { id: 'experience', name: 'Work Experience' },
+  { id: 'portfolio', name: 'Selected work' },
   { id: 'tutorials', name: 'Revit Tutorials' },
-  { id: 'contact', name: 'Contact' },
+  { id: 'contact', name: 'Get In Touch' },
 ];
 
 export default function HomePage() {
@@ -39,15 +38,6 @@ export default function HomePage() {
           <Services />
         </section>
         
-        <div className="border-t"></div>
-        
-        <section id="services" className="h-full w-full snap-start flex items-center justify-center">
-           <div className="text-center">
-            <h2 className="text-3xl font-bold">Services</h2>
-            <p className="text-muted-foreground">This is the services section.</p>
-          </div>
-        </section>
-
         <div className="border-t"></div>
 
         <section id="portfolio" className="h-full w-full snap-start flex items-center justify-center">
