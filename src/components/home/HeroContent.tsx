@@ -14,7 +14,7 @@ export function HeroContent() {
             Available for Work
           </Badge>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter">
-            Interior Architect
+            Hi Im Fanisa Mpofu
           </h1>
           <p className="text-lg md:text-xl max-w-xl text-muted-foreground">
             I build and manage beautiful, functional spaces from concept to completion. My unique background in design, BIM technology, and construction project management ensures a seamless process and visionary results.
