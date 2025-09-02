@@ -6,8 +6,11 @@ import { HeroContent } from '@/components/home/HeroContent';
 import { HeroVisuals } from '@/components/home/HeroVisuals';
 import { Services } from '@/components/home/Services';
 import { PortfolioSection } from '@/components/home/PortfolioSection';
+import { RevitTutorialsSection } from '@/components/home/RevitTutorialsSection';
 import { ContactSection } from '@/components/home/ContactSection';
 import { PageNavigation } from '@/components/home/PageNavigation';
+import { getArticles } from '@/lib/actions';
+import type { Article } from '@/types';
 
 const sections = [
   { id: 'hero', name: 'Home' },
@@ -18,9 +21,17 @@ const sections = [
 ];
 
 export default function HomePage() {
-  const latestArticles = []; // Assuming this will be populated later
+  const [latestArticles, setLatestArticles] = useState<Article[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+
+  useEffect(() => {
+    async function fetchArticles() {
+        const articles = await getArticles(3);
+        setLatestArticles(articles);
+    }
+    fetchArticles();
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -45,7 +56,7 @@ export default function HomePage() {
     handleScroll(); // Initial check
     
     return () => container.removeEventListener('scroll', handleScroll);
-  }, [sections]);
+  }, []);
 
   const scrollToSectionByIndex = (index: number) => {
     const sectionId = sections[index]?.id;
@@ -85,10 +96,7 @@ export default function HomePage() {
           <div className="border-t"></div>
 
           <section id="tutorials" className="h-full w-full snap-start flex items-center justify-center">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold">Revit Tutorials</h2>
-              <p className="text-muted-foreground">This is the tutorials section.</p>
-            </div>
+            <RevitTutorialsSection articles={latestArticles} />
           </section>
 
           <div className="border-t"></div>
@@ -97,11 +105,13 @@ export default function HomePage() {
             <ContactSection />
           </section>
         </div>
-        <PageNavigation 
-            sections={sections} 
-            currentSectionIndex={currentSectionIndex} 
-            scrollToSectionByIndex={scrollToSectionByIndex} 
-        />
+        <div className="relative h-full hidden md:flex items-center">
+            <PageNavigation 
+                sections={sections} 
+                currentSectionIndex={currentSectionIndex} 
+                scrollToSectionByIndex={scrollToSectionByIndex} 
+            />
+        </div>
       </div>
     </>
   );
