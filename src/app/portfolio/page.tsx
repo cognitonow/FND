@@ -9,49 +9,107 @@ import { useState, useMemo } from 'react';
 const projects = [
     {
         name: 'ZENPOINT',
+        company: 'Zenith',
+        country: 'Singapore',
+        sector: 'Wellness',
+        projectType: ['UI DESIGN', 'WEB DEV'],
         year: '2024',
-        tags: ['UI DESIGN', 'WEB DEV'],
         imageUrl: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop',
         dataAiHint: 'serene beach landscape',
     },
     {
         name: 'PAYU',
+        company: 'PayU',
+        country: 'South Africa',
+        sector: 'Fintech',
+        projectType: ['UI DESIGN', 'WEB DEV'],
         year: '2024',
-        tags: ['UI DESIGN', 'WEB DEV'],
         imageUrl: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084&auto=format&fit=crop',
         dataAiHint: 'modern office collaboration'
     },
     {
         name: 'COMPAI',
+        company: 'CompAI',
+        country: 'Ireland',
+        sector: 'AI',
+        projectType: ['UI DESIGN', 'MOBILE DEV', 'WEB DEV'],
         year: '2024',
-        tags: ['UI DESIGN', 'MOBILE DEV', 'WEB DEV'],
         imageUrl: 'https://images.unsplash.com/photo-1573496774221-9d69a58405a4?q=80&w=2069&auto=format&fit=crop',
         dataAiHint: 'pocket companion device'
     },
     {
         name: 'CHATPIC.AI',
+        company: 'ChatPic',
+        country: 'Ghana',
+        sector: 'AI',
+        projectType: ['UI DESIGN', 'MOBILE DEV'],
         year: '2024',
-        tags: ['UI DESIGN', 'MOBILE DEV'],
         imageUrl: 'https://images.unsplash.com/photo-1694663361546-936528987483?q=80&w=1974&auto=format&fit=crop',
         dataAiHint: 'ai chat application'
     },
 ]
 
+type FilterCategory = 'company' | 'country' | 'sector' | 'projectType';
+
 export default function PortfolioPage() {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [filters, setFilters] = useState<Record<FilterCategory, string>>({
+    company: 'All',
+    country: 'All',
+    sector: 'All',
+    projectType: 'All'
+  });
+
+  const getUniqueValues = (category: FilterCategory) => {
+    const values = new Set<string>();
+    if (category === 'projectType') {
+        projects.forEach(p => p.projectType.forEach(t => values.add(t)));
+    } else {
+        projects.forEach(p => values.add(p[category]));
+    }
+    return ['All', ...Array.from(values)];
+  };
   
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    projects.forEach(p => p.tags.forEach(t => tags.add(t)));
-    return ['All', ...Array.from(tags)];
-  }, []);
+  const filterOptions = useMemo(() => ({
+    company: getUniqueValues('company'),
+    country: getUniqueValues('country'),
+    sector: getUniqueValues('sector'),
+    projectType: getUniqueValues('projectType'),
+  }), []);
+
+  const handleFilterChange = (category: FilterCategory, value: string) => {
+    setFilters(prev => ({ ...prev, [category]: value }));
+  };
 
   const filteredProjects = useMemo(() => {
-    if (activeFilter === 'All') {
-      return projects;
-    }
-    return projects.filter(p => p.tags.includes(activeFilter));
-  }, [activeFilter]);
+    return projects.filter(p => {
+      return (Object.keys(filters) as FilterCategory[]).every(key => {
+        if (filters[key] === 'All') return true;
+        if (key === 'projectType') {
+            return p.projectType.includes(filters[key]);
+        }
+        return p[key] === filters[key];
+      });
+    });
+  }, [filters]);
+
+  const FilterGroup = ({ title, category, options }: { title: string, category: FilterCategory, options: string[] }) => (
+    <div className="flex flex-col items-center gap-4">
+        <h3 className="text-lg font-semibold text-muted-foreground">{title}</h3>
+        <div className="flex justify-center flex-wrap gap-2">
+            {options.map(option => (
+                <Button 
+                    key={option} 
+                    variant={filters[category] === option ? 'default' : 'outline'}
+                    onClick={() => handleFilterChange(category, option)}
+                    className="rounded-full"
+                >
+                    {option}
+                </Button>
+            ))}
+        </div>
+    </div>
+  );
+
 
   return (
     <div className="container mx-auto px-4 py-16 sm:py-24">
@@ -64,19 +122,11 @@ export default function PortfolioPage() {
         </p>
       </section>
 
-      <section className="mb-12">
-        <div className="flex justify-center flex-wrap gap-2">
-            {allTags.map(tag => (
-                <Button 
-                    key={tag} 
-                    variant={activeFilter === tag ? 'default' : 'outline'}
-                    onClick={() => setActiveFilter(tag)}
-                    className="rounded-full"
-                >
-                    {tag}
-                </Button>
-            ))}
-        </div>
+      <section className="mb-12 flex flex-col gap-8">
+        <FilterGroup title="Company" category="company" options={filterOptions.company} />
+        <FilterGroup title="Country" category="country" options={filterOptions.country} />
+        <FilterGroup title="Sector" category="sector" options={filterOptions.sector} />
+        <FilterGroup title="Project Type" category="projectType" options={filterOptions.projectType} />
       </section>
 
       <section>
@@ -97,12 +147,17 @@ export default function PortfolioPage() {
                         <span>{project.year}</span>
                     </div>
                     <div className="flex gap-2 flex-wrap">
-                        {project.tags.map(tag => (
+                        {project.projectType.map(tag => (
                              <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
                         ))}
                     </div>
                 </div>
             ))}
+             {filteredProjects.length === 0 && (
+                <div className="md:col-span-2 text-center py-16">
+                    <p className="text-muted-foreground">No projects match the current filters.</p>
+                </div>
+             )}
         </div>
       </section>
     </div>
