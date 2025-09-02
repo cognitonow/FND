@@ -15,44 +15,46 @@ export function ContactSection() {
                 Have a project in mind? I&apos;d love to hear from you.
                 </p>
             </div>
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-8">
-                <Card className="flex flex-col items-center text-center p-6 shadow-md hover:shadow-xl transition-shadow">
-                    <CardHeader>
-                        <div className="mx-auto bg-primary text-primary-foreground rounded-full p-3 w-fit mb-4">
-                            <Mail />
-                        </div>
-                        <CardTitle>Email</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                        <Link href="mailto:Fanisampofu@gmail.com" className="text-muted-foreground hover:text-primary transition-colors block">Fanisampofu@gmail.com</Link>
-                    </CardContent>
-                </Card>
-                <Card className="flex flex-col items-center text-center p-6 shadow-md hover:shadow-xl transition-shadow">
-                    <CardHeader>
-                        <div className="mx-auto bg-primary text-primary-foreground rounded-full p-3 w-fit mb-4">
-                            <Linkedin />
-                        </div>
-                        <CardTitle>LinkedIn</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                        <Link href="https://linkedin.com/in/fanisa-mpofu-/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors block">
-                            linkedin.com/in/fanisa-mpofu-/
-                        </Link>
-                    </CardContent>
-                </Card>
-                <Card className="flex flex-col items-center text-center p-6 shadow-md hover:shadow-xl transition-shadow">
-                    <CardHeader>
-                        <div className="mx-auto bg-primary text-primary-foreground rounded-full p-3 w-fit mb-4">
-                            <Youtube />
-                        </div>
-                        <CardTitle>YouTube</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                        <Link href="https://www.youtube.com/@RevitInteriors" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors block">
-                            @RevitInteriors
-                        </Link>
-                    </CardContent>
-                </Card>
+            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <Link href="mailto:Fanisampofu@gmail.com" className="group">
+                    <Card className="p-6 shadow-md hover:shadow-xl transition-shadow h-full">
+                        <CardHeader className="flex-row items-center gap-4 p-0">
+                            <div className="bg-primary text-primary-foreground rounded-lg p-3 w-fit">
+                                <Mail />
+                            </div>
+                            <CardTitle className="text-xl">Email</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-0 pt-4">
+                            <p className="text-muted-foreground group-hover:text-primary transition-colors">Fanisampofu@gmail.com</p>
+                        </CardContent>
+                    </Card>
+                </Link>
+                <Link href="https://linkedin.com/in/fanisa-mpofu-/" target="_blank" rel="noopener noreferrer" className="group">
+                    <Card className="p-6 shadow-md hover:shadow-xl transition-shadow h-full">
+                        <CardHeader className="flex-row items-center gap-4 p-0">
+                            <div className="bg-primary text-primary-foreground rounded-lg p-3 w-fit">
+                                <Linkedin />
+                            </div>
+                             <CardTitle className="text-xl">LinkedIn</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-0 pt-4">
+                            <p className="text-muted-foreground group-hover:text-primary transition-colors">linkedin.com/in/fanisa-mpofu-/</p>
+                        </CardContent>
+                    </Card>
+                </Link>
+                 <Link href="https://www.youtube.com/@RevitInteriors" target="_blank" rel="noopener noreferrer" className="group">
+                    <Card className="p-6 shadow-md hover:shadow-xl transition-shadow h-full">
+                        <CardHeader className="flex-row items-center gap-4 p-0">
+                           <div className="bg-primary text-primary-foreground rounded-lg p-3 w-fit">
+                                <Youtube />
+                            </div>
+                            <CardTitle className="text-xl">YouTube</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-0 pt-4">
+                            <p className="text-muted-foreground group-hover:text-primary transition-colors">@RevitInteriors</p>
+                        </CardContent>
+                    </Card>
+                </Link>
             </div>
         </div>
     </section>
