@@ -30,12 +30,12 @@ const services = [
 ];
 
 const logos = [
-    { name: 'Foster + Partners', src: 'https://img.logo.dev/fosterandpartners.com?theme=dark&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Accenture', src: 'https://img.logo.dev/accenture.com?theme=dark&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Goldman Sachs', src: 'https://img.logo.dev/gs.com?theme=dark&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Stanbic IBTC', src: 'https://img.logo.dev/stanbicibtc.com?theme=dark&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Minopex', src: 'https://img.logo.dev/minopex.com?theme=dark&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Paragon Group', src: 'https://img.logo.dev/paragongroup.co.za?theme=dark&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
+    { name: 'Foster + Partners', src: 'https://img.logo.dev/fosterandpartners.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
+    { name: 'Accenture', src: 'https://img.logo.dev/accenture.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
+    { name: 'Goldman Sachs', src: 'https://img.logo.dev/gs.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
+    { name: 'Stanbic IBTC', src: 'https://img.logo.dev/stanbicibtc.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
+    { name: 'Minopex', src: 'https://img.logo.dev/minopex.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
+    { name: 'Paragon Group', src: 'https://img.logo.dev/paragongroup.co.za?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
 ]
 
 export function Services() {
