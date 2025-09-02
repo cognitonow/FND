@@ -94,9 +94,9 @@ export function HeroVisuals() {
                     <CarouselContent>
                         {collaborations.map((collab) => (
                             <CarouselItem key={collab.id}>
-                                <div className="text-center">
-                                    <p className="font-semibold text-sm">{collab.company}</p>
+                                <div className="text-left">
                                     <p className="text-xs text-muted-foreground">{collab.project}</p>
+                                    <p className="font-semibold text-sm">{collab.company}</p>
                                 </div>
                             </CarouselItem>
                         ))}
