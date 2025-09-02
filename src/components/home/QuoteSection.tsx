@@ -11,13 +11,13 @@ export function QuoteSection() {
         className="object-cover grayscale"
         data-ai-hint="architecture abstract"
       />
-      <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-        <div className="text-center text-white p-8 max-w-4xl">
-          <Quote className="mx-auto mb-4 w-12 h-12 text-white/50" />
-          <blockquote className="text-3xl md:text-4xl font-semibold mb-4">
+      <div className="absolute inset-0 bg-black/50 flex items-center justify-end">
+        <div className="text-right text-white p-8 md:p-16 max-w-2xl">
+          <Quote className="ml-auto mr-0 mb-4 w-10 h-10 text-white/30" />
+          <blockquote className="text-2xl md:text-3xl font-semibold mb-4 text-white/90">
             &quot;The home should be the treasure chest of living.&quot;
           </blockquote>
-          <cite className="text-lg text-white/80">- Le Corbusier</cite>
+          <cite className="text-md text-white/60">- Le Corbusier</cite>
         </div>
       </div>
     </section>
