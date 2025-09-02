@@ -1,11 +1,17 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Linkedin, Mail, Youtube } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ArrowUp, Linkedin, Mail, Youtube } from 'lucide-react';
 import Link from 'next/link';
 
-export function ContactSection() {
+type ContactSectionProps = {
+    onScrollToTop: () => void;
+};
+
+export function ContactSection({ onScrollToTop }: ContactSectionProps) {
+    const year = new Date().getFullYear();
   return (
-    <section className="container mx-auto px-4 w-full">
+    <section className="container mx-auto px-4 w-full h-full flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
             <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24">
                 <h2 className="text-5xl font-bold tracking-tighter">
@@ -22,11 +28,11 @@ export function ContactSection() {
                             <div className="bg-primary text-primary-foreground rounded-lg p-3 w-fit">
                                 <Mail />
                             </div>
-                            <CardTitle className="text-xl">Email</CardTitle>
+                            <div>
+                                <CardTitle className="text-xl">Email</CardTitle>
+                                <p className="text-muted-foreground group-hover:text-primary transition-colors">Fanisampofu@gmail.com</p>
+                            </div>
                         </CardHeader>
-                        <CardContent className="p-0 pt-4">
-                            <p className="text-muted-foreground group-hover:text-primary transition-colors">Fanisampofu@gmail.com</p>
-                        </CardContent>
                     </Card>
                 </Link>
                 <Link href="https://linkedin.com/in/fanisa-mpofu-/" target="_blank" rel="noopener noreferrer" className="group">
@@ -35,11 +41,11 @@ export function ContactSection() {
                             <div className="bg-primary text-primary-foreground rounded-lg p-3 w-fit">
                                 <Linkedin />
                             </div>
-                             <CardTitle className="text-xl">LinkedIn</CardTitle>
+                            <div>
+                                <CardTitle className="text-xl">LinkedIn</CardTitle>
+                                <p className="text-muted-foreground group-hover:text-primary transition-colors">/in/fanisa-mpofu-/</p>
+                            </div>
                         </CardHeader>
-                        <CardContent className="p-0 pt-4">
-                            <p className="text-muted-foreground group-hover:text-primary transition-colors">linkedin.com/in/fanisa-mpofu-/</p>
-                        </CardContent>
                     </Card>
                 </Link>
                  <Link href="https://www.youtube.com/@RevitInteriors" target="_blank" rel="noopener noreferrer" className="group">
@@ -48,15 +54,40 @@ export function ContactSection() {
                            <div className="bg-primary text-primary-foreground rounded-lg p-3 w-fit">
                                 <Youtube />
                             </div>
-                            <CardTitle className="text-xl">YouTube</CardTitle>
+                            <div>
+                                <CardTitle className="text-xl">YouTube</CardTitle>
+                                <p className="text-muted-foreground group-hover:text-primary transition-colors">@RevitInteriors</p>
+                            </div>
                         </CardHeader>
-                        <CardContent className="p-0 pt-4">
-                            <p className="text-muted-foreground group-hover:text-primary transition-colors">@RevitInteriors</p>
-                        </CardContent>
                     </Card>
                 </Link>
             </div>
         </div>
+
+        <footer className="w-full mt-24 pb-8">
+            <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+                <p className="text-sm text-muted-foreground">
+                &copy; {year} FND.ME. All rights reserved.
+                </p>
+                <div className="flex items-center gap-4">
+                    <a href="mailto:Fanisampofu@gmail.com" className="text-muted-foreground hover:text-foreground">
+                        <Mail size={20} />
+                        <span className="sr-only">Email</span>
+                    </a>
+                    <a href="https://linkedin.com/in/fanisa-mpofu-/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                        <Linkedin size={20} />
+                        <span className="sr-only">LinkedIn</span>
+                    </a>
+                    <a href="https://www.youtube.com/@RevitInteriors" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                        <Youtube size={20} />
+                        <span className="sr-only">YouTube</span>
+                    </a>
+                </div>
+                <Button variant="outline" onClick={onScrollToTop}>
+                   <ArrowUp className="mr-2 h-4 w-4" /> Back to Top
+                </Button>
+            </div>
+        </footer>
     </section>
   );
 }

@@ -69,6 +69,12 @@ export default function HomePage() {
     }
   }
 
+  const scrollToTop = () => {
+    if (containerRef.current) {
+        containerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
 
   return (
     <>
@@ -102,7 +108,7 @@ export default function HomePage() {
           <div className="border-t"></div>
 
           <section id="contact" className="h-full w-full snap-start flex items-center justify-center">
-            <ContactSection />
+            <ContactSection onScrollToTop={scrollToTop} />
           </section>
         </div>
         <div className="relative h-full hidden md:flex items-center">
