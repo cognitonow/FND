@@ -90,7 +90,7 @@ export function Services() {
                        </div>
                     </div>
                 ))}
-                 {/* Add empty divs to fill the grid and push content up */}
+                 {/* Add empty div to fill the grid and push content up */}
                 {experiences.length % 2 !== 0 && <div />}
             </div>
         </div>
