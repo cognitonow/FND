@@ -40,13 +40,13 @@ type HeroVisualsProps = {
 
 export function HeroVisuals({ articles }: HeroVisualsProps) {
     return (
-        <div className="relative h-[550px] flex items-center justify-center">
+        <div className="relative h-[500px] flex items-center justify-center">
             {/* Background Shape */}
             <div className="absolute inset-0 bg-gradient-to-tr from-accent/50 to-primary/20 rounded-full blur-3xl -z-10"></div>
             
             <div className="w-full h-full flex flex-col gap-4">
                 {/* Row 1 */}
-                <div className="flex-1 flex gap-4">
+                <div className="flex-[0.9] flex gap-4">
                     {/* Latest Articles Card */}
                     <div className="w-2/5">
                          <Card className="w-full h-full shadow-xl hover:scale-105 transition-transform duration-300">
@@ -95,7 +95,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                 </div>
 
                  {/* Row 2 */}
-                <div className="flex-[0.8] flex gap-4">
+                <div className="flex-1 flex gap-4">
                     {/* Collaborations Card */}
                     <div className="w-3/5">
                         <Card className="w-full h-full p-4 shadow-lg hover:scale-105 transition-transform duration-300">
@@ -124,7 +124,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                             <div className="grid grid-cols-3 gap-4 p-2">
                                 {toolsetLogos.map((tool) => (
                                     <div key={tool.id} className="flex justify-center items-center">
-                                      <Image src={tool.imageUrl} alt={tool.alt} width={48} height={48} className="rounded-full object-contain bg-white p-1" data-ai-hint="software logo" title={tool.alt} />
+                                      <Image src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain bg-white p-1" data-ai-hint="software logo" title={tool.alt} />
                                     </div>
                                 ))}
                             </div>
