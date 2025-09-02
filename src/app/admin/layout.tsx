@@ -34,7 +34,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/admin/portfolio"><Brush />Portfolio</Link>
+                <Link href="/portfolio"><Brush />Portfolio</Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

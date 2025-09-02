@@ -49,7 +49,7 @@ export function PortfolioSection() {
               Selected work
             </h2>
             <Button size="lg" variant="secondary" asChild>
-                <Link href="#">See All</Link>
+                <Link href="/portfolio">See All</Link>
             </Button>
           </div>
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
