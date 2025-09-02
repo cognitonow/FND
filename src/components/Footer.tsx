@@ -1,4 +1,4 @@
-import { Github, Twitter } from 'lucide-react';
+import { Linkedin, Mail, Youtube } from 'lucide-react';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -9,13 +9,17 @@ export default function Footer() {
           &copy; {year} FND.ME. All rights reserved.
         </p>
         <div className="flex items-center gap-4">
-          <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
-            <Twitter size={20} />
-            <span className="sr-only">Twitter</span>
+           <a href="mailto:Fanisampofu@gmail.com" className="text-muted-foreground hover:text-foreground">
+            <Mail size={20} />
+            <span className="sr-only">Email</span>
           </a>
-          <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
-            <Github size={20} />
-            <span className="sr-only">GitHub</span>
+          <a href="https://linkedin.com/in/fanisa-mpofu-/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+            <Linkedin size={20} />
+            <span className="sr-only">LinkedIn</span>
+          </a>
+           <a href="https://www.youtube.com/@RevitInteriors" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+            <Youtube size={20} />
+            <span className="sr-only">YouTube</span>
           </a>
         </div>
       </div>
