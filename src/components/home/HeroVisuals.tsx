@@ -45,7 +45,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                     {/* Project Card */}
                     <div className="w-3/5">
                         <Card className="w-full h-full p-4 shadow-lg hover:scale-105 transition-transform duration-300">
-                            <Carousel className="w-full h-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 7000 })]}>
+                            <Carousel className="w-full h-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 4000 })]}>
                                 <CarouselContent>
                                     {collaborations.map((collab) => (
                                         <CarouselItem key={collab.id}>
@@ -70,7 +70,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                             <Carousel className="w-full h-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 60000 })]}>
                                 <CarouselContent>
                                     {articles.length > 0 ? articles.map(article => (
-                                         <CarouselItem key={article.id} className="h-full">
+                                        <CarouselItem key={article.id} className="h-full">
                                             <Link href={`/articles/${article.slug}`} className="group h-full flex flex-col">
                                                 <div className="w-full aspect-video relative rounded-t-lg overflow-hidden">
                                                     {article.thumbnailUrl ? (
@@ -81,7 +81,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                                                         </div>
                                                     )}
                                                 </div>
-                                                <div className="p-4 flex-grow">
+                                                <div className="p-4 flex-grow flex flex-col">
                                                     <h3 className="font-bold text-lg group-hover:underline flex-grow">{article.title}</h3>
                                                     <p className="text-muted-foreground text-sm mt-2">Read Now &rarr;</p>
                                                 </div>
@@ -129,5 +129,3 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
         </div>
     )
 }
-
-    
