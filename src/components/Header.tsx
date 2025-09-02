@@ -27,7 +27,7 @@ export default function Header() {
           FND.ME
         </Link>
         <nav className="flex items-center gap-4">
-          {isHomePage ? <NavLinks sections={sections} /> : (
+          {!isHomePage && (
             <>
               <Button variant="ghost" asChild>
                 <Link href="/portfolio">Portfolio</Link>
