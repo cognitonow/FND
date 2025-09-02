@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay"
 
 
 const projects = [
@@ -27,6 +28,11 @@ const companyLogos = [
     { id: 'logo3', imageUrl: 'https://picsum.photos/seed/logo3/200/100?grayscale', alt: 'Company 3', dataAiHint: 'company logo' },
 ];
 
+const toolset = [
+    "ArchiCAD", "Dynamo", "BIM 360", "Rhino + Grasshopper", "Adobe Suite", 
+    "Rayon", "Revit", "Pyrevit", "Di-roots", "Navisworks", "AutoCAD", "Sketch Up"
+];
+
 
 export function HeroVisuals() {
     return (
@@ -36,12 +42,12 @@ export function HeroVisuals() {
             
             {/* Profile Picture */}
              <Card className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-hidden shadow-2xl z-10 border-4 border-background">
-                <Image src="https://picsum.photos/seed/profile/400/400" alt="Profile Picture" width={200} height={200} className="object-cover" data-ai-hint="professional headshot" />
+                <Image src="httpshttps://picsum.photos/seed/profile/400/400" alt="Profile Picture" width={200} height={200} className="object-cover" data-ai-hint="professional headshot" />
             </Card>
 
             {/* Project Carousel Card */}
             <Card className="absolute top-0 left-0 w-80 h-52 shadow-xl hover:scale-105 transition-transform duration-300">
-                <Carousel className="w-full h-full" opts={{ loop: true }}>
+                <Carousel className="w-full h-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 3000 })]}>
                     <CarouselContent>
                         {projects.map(p => (
                             <CarouselItem key={p.id}>
@@ -58,10 +64,18 @@ export function HeroVisuals() {
                 <p className="text-sm text-muted-foreground">Revit, Archicad</p>
             </Card>
 
-            {/* Construction PM Badge */}
-             <Card className="absolute bottom-24 right-0 w-52 p-4 shadow-lg hover:-rotate-3 transition-transform duration-300">
-                <h3 className="font-bold">Construction PM</h3>
-                <p className="text-sm text-muted-foreground">Execution & Strategy</p>
+            {/* Toolset Card */}
+             <Card className="absolute bottom-20 right-0 w-52 p-4 shadow-lg hover:-rotate-3 transition-transform duration-300">
+                <h3 className="font-bold mb-2">My Toolset</h3>
+                 <Carousel className="w-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 2000 })]}>
+                    <CarouselContent>
+                        {toolset.map((tool, index) => (
+                            <CarouselItem key={index}>
+                               <p className="text-sm text-muted-foreground text-center">{tool}</p>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                </Carousel>
             </Card>
             
             {/* Company Logos Card */}
