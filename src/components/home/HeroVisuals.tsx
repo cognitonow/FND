@@ -75,7 +75,7 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                             <Carousel className="w-full h-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 3000 })]}>
                                 <CarouselContent>
                                     {articles.length > 0 ? articles.map(article => (
-                                        <CarouselItem key={article.id}>
+                                        <CarouselItem key={article.id} className="h-full relative">
                                             <Link href={`/articles/${article.slug}`} className="group h-full flex flex-col">
                                                 <div className="relative w-full h-full">
                                                     {article.thumbnailUrl ? (
