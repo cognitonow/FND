@@ -16,7 +16,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   const isHomePage = pathname === '/';
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col min-h-screen">
       <Header />
       <main className={`flex-grow ${isHomePage ? 'h-[calc(100vh-4rem)] overflow-hidden' : ''}`}>
         {children}
