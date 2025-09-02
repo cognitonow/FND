@@ -73,21 +73,21 @@ export function Services() {
 
                 {experiences.map((exp) => (
                     <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
-                       <div className="flex items-start gap-4 mb-4">
-                         <div className="bg-white p-2 rounded-full mt-1">
-                            {exp.logoUrl ? (
-                                <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={24} height={24} className="object-contain" />
-                            ) : (
-                                <Briefcase className="w-6 h-6 text-primary" />
-                            )}
-                         </div>
-                         <div className="flex-grow">
-                             <p className="text-muted-foreground text-sm">{exp.company}</p>
-                             <h4 className="text-lg font-bold">{exp.role}</h4>
-                         </div>
+                       <div className="flex-grow">
+                           <div className="flex items-start gap-4 mb-4">
+                             <div className="bg-white p-2 rounded-full mt-1">
+                                {exp.logoUrl ? (
+                                    <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={24} height={24} className="object-contain" />
+                                ) : (
+                                    <Briefcase className="w-6 h-6 text-primary" />
+                                )}
+                             </div>
+                             <div className="flex-grow">
+                                 <p className="text-muted-foreground text-sm">{exp.company}</p>
+                                 <h4 className="text-lg font-bold">{exp.role}</h4>
+                             </div>
+                           </div>
                        </div>
-                       
-                       <div className="flex-grow"></div>
                        
                        <div className="border-t pt-4 flex justify-between items-center text-sm text-muted-foreground">
                          <span>{exp.details}</span>
