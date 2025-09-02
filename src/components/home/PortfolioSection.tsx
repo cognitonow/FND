@@ -147,7 +147,7 @@ export function PortfolioSection() {
   );
 
   return (
-    <section className="container mx-auto px-4 w-full h-full flex items-center">
+    <div className="container mx-auto px-4 w-full h-full flex items-center">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start w-full">
           <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24">
             <h2 className="text-5xl font-bold tracking-tighter">
@@ -208,6 +208,6 @@ export function PortfolioSection() {
             </div>
           </div>
         </div>
-    </section>
+    </div>
   );
 }
