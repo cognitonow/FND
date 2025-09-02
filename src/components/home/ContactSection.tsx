@@ -5,13 +5,13 @@ import Link from 'next/link';
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-24 sm:py-32 bg-background">
+    <section id="contact" className="py-24 sm:py-32 bg-background/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="max-w-4xl mx-auto mb-12">
             <h2 className="text-5xl font-bold tracking-tighter">
               Get In Touch
             </h2>
-            <p className="text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground mt-4">
+            <p className="text-lg md:text-xl max-w-3xl text-muted-foreground mt-4">
               Have a project in mind? I&apos;d love to hear from you.
             </p>
         </div>
@@ -35,7 +35,7 @@ export function ContactSection() {
                     <CardTitle>LinkedIn</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                     <Link href="https://linkedin.com/in/fanisa-mpofu-/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                     <Link href="https://linkedin.com/in/fanisa-mpofu-/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors block">
                         linkedin.com/in/fanisa-mpofu-/
                      </Link>
                 </CardContent>
@@ -48,7 +48,7 @@ export function ContactSection() {
                     <CardTitle>YouTube</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                     <Link href="https://www.youtube.com/@RevitInteriors" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                     <Link href="https://www.youtube.com/@RevitInteriors" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors block">
                         @RevitInteriors
                      </Link>
                 </CardContent>
