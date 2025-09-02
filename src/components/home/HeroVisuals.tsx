@@ -75,21 +75,20 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                             <Carousel className="w-full h-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 3000 })]}>
                                 <CarouselContent>
                                     {articles.length > 0 ? articles.map(article => (
-                                        <CarouselItem key={article.id} className="h-full relative">
-                                            <Link href={`/articles/${article.slug}`} className="group h-full flex flex-col">
-                                                <div className="relative w-full h-full">
+                                        <CarouselItem key={article.id}>
+                                            <Link href={`/articles/${article.slug}`} className="group h-full flex flex-col p-4">
+                                                <div className="w-full aspect-video relative rounded-lg overflow-hidden mb-4">
                                                     {article.thumbnailUrl ? (
-                                                        <Image src={article.thumbnailUrl} alt={article.title} fill className="object-cover rounded-lg" data-ai-hint="article thumbnail" />
+                                                        <Image src={article.thumbnailUrl} alt={article.title} fill className="object-cover" data-ai-hint="article thumbnail" />
                                                     ) : (
-                                                        <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
-                                                            <span className="text-muted-foreground">No Image</span>
+                                                        <div className="w-full h-full bg-muted flex items-center justify-center">
+                                                            <span className="text-muted-foreground text-sm">No Image</span>
                                                         </div>
                                                     )}
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-lg"></div>
-                                                    <div className="absolute bottom-0 left-0 p-4">
-                                                        <h3 className="text-white font-bold text-lg group-hover:underline">{article.title}</h3>
-                                                        <p className="text-white/80 text-sm mt-1">Read Now &rarr;</p>
-                                                    </div>
+                                                </div>
+                                                <div className="flex-grow flex flex-col">
+                                                  <h3 className="font-bold text-lg group-hover:underline flex-grow">{article.title}</h3>
+                                                  <p className="text-muted-foreground text-sm mt-2">Read Now &rarr;</p>
                                                 </div>
                                             </Link>
                                         </CarouselItem>
@@ -108,8 +107,8 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
 
                  {/* Row 2 */}
                 <div className="flex-[0.8] flex gap-4">
-                    {/* Toolset Card */}
-                    <div className="w-2/5">
+                     {/* Toolset Card */}
+                    <div className="w-2/5 h-full">
                          <div className="w-full h-full flex flex-col justify-center">
                             <div className="grid grid-cols-3 gap-4 p-2">
                                 {toolsetLogos.map((tool) => (
