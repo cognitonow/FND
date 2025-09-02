@@ -53,7 +53,7 @@ export function Services() {
                                 src={logo.src} 
                                 alt={logo.name} 
                                 fill
-                                className="object-contain p-1" 
+                                className="object-contain" 
                             />
                         </div>
                     ))}
