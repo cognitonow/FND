@@ -31,8 +31,8 @@ const services = [
 
 const logos = [
     { name: 'Foster + Partners', src: 'https://logo.clearbit.com/fosterandpartners.com' },
-    { name: 'Accenture', src: 'https://img.shields.io/badge/-Accenture-gray?logo=accenture&color=white&style=for-the-badge&logoColor=black' },
-    { name: 'Goldman Sachs', src: 'https://img.shields.io/badge/-Goldman%20Sachs-gray?logo=goldmansachs&color=white&style=for-the-badge&logoColor=black' },
+    { name: 'Accenture', src: 'https://logo.clearbit.com/accenture.com' },
+    { name: 'Goldman Sachs', src: 'https://logo.clearbit.com/gs.com' },
     { name: 'Stanbic IBTC', src: 'https://logo.clearbit.com/stanbicibtc.com' },
     { name: 'Minopex', src: 'https://logo.clearbit.com/minopex.com' },
     { name: 'Paragon Group', src: 'https://logo.clearbit.com/paragongroup.co.za' },
@@ -46,9 +46,16 @@ export function Services() {
                 <h2 className="text-4xl font-bold max-w-4xl mb-8">
                     My mission is to assist startups and enterprises in creating an emotional bond between their products and satisfied, engaged customers.
                 </h2>
-                <div className="flex items-center gap-x-8 gap-y-4 flex-wrap">
+                <div className="flex items-center gap-x-12 gap-y-8 flex-wrap">
                     {logos.map(logo => (
-                        <Image key={logo.name} src={logo.src} alt={logo.name} width={120} height={40} className="h-8 w-auto object-contain brightness-0 invert" />
+                        <div key={logo.name} className="relative h-8 w-32">
+                            <Image 
+                                src={logo.src} 
+                                alt={logo.name} 
+                                fill
+                                className="object-contain brightness-0 invert" 
+                            />
+                        </div>
                     ))}
                 </div>
             </div>
