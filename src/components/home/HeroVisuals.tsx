@@ -25,10 +25,15 @@ const projects = [
   },
 ];
 
-const companyLogos = [
-    { id: 'logo1', imageUrl: 'https://picsum.photos/seed/logo1/200/100?grayscale', alt: 'Company 1', dataAiHint: 'company logo' },
-    { id: 'logo2', imageUrl: 'https://picsum.photos/seed/logo2/200/100?grayscale', alt: 'Company 2', dataAiHint: 'company logo' },
-    { id: 'logo3', imageUrl: 'https://picsum.photos/seed/logo3/200/100?grayscale', alt: 'Company 3', dataAiHint: 'company logo' },
+const collaborations = [
+    { id: 'collab1', company: 'Foster + Partners / BWDC', project: 'Project: BWDC Residential Tower, Manila' },
+    { id: 'collab2', company: 'Crown Forest / Crown Safari', project: 'Project: Crown Safari Lodge, Ghana' },
+    { id: 'collab3', company: 'Cognito Solution', project: 'Project: UN Zambia office refurb' },
+    { id: 'collab4', company: 'Accenture', project: 'Project: Commercial refurbishment, Johannesburg' },
+    { id: 'collab5', company: 'Goldman Sachs', project: 'Project: Commercial fit-out at 140 West Street, Sandton' },
+    { id: 'collab6', company: 'Stanbic IBTC Pension Managers', project: 'Project: Commercial fit-out for the tallest building in West Africa' },
+    { id: 'collab7', company: 'DRA / Minopex / Paragon Group', project: 'Project: Therapy Sanctuary / Meeting Suite' },
+    { id: 'collab8', company: 'Intra Design', project: 'Project: Various office receptions during internship' },
 ];
 
 const toolsetLogos = [
@@ -78,19 +83,25 @@ export function HeroVisuals() {
                 <h3 className="font-bold mb-2 text-center">My Toolset</h3>
                 <div className="grid grid-cols-4 gap-4 p-2">
                     {toolsetLogos.map((tool) => (
-                        <Image key={tool.id} src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain" data-ai-hint={tool.dataAiHint} title={tool.alt} />
+                        <Image key={tool.id} src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain bg-white" data-ai-hint={tool.dataAiHint} title={tool.alt} />
                     ))}
                 </div>
             </Card>
             
-            {/* Company Logos Card */}
-            <Card className="absolute bottom-0 left-0 w-60 h-24 p-4 shadow-lg hover:scale-105 transition-transform duration-300">
-                <p className="text-xs text-muted-foreground mb-2">Collaborated with</p>
-                 <div className="flex gap-4 items-center">
-                    {companyLogos.map(logo => (
-                        <Image key={logo.id} src={logo.imageUrl} alt={logo.alt} width={40} height={40} className="object-contain" data-ai-hint={logo.dataAiHint} />
-                    ))}
-                </div>
+            {/* Collaborations Card */}
+            <Card className="absolute bottom-0 left-0 w-72 h-28 p-4 shadow-lg hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+                 <Carousel className="w-full" opts={{ loop: true, align: "start" }} plugins={[Autoplay({ delay: 3000 })]}>
+                    <CarouselContent>
+                        {collaborations.map((collab) => (
+                            <CarouselItem key={collab.id}>
+                                <div className="text-center">
+                                    <p className="font-semibold text-sm">{collab.company}</p>
+                                    <p className="text-xs text-muted-foreground">{collab.project}</p>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                </Carousel>
             </Card>
         </div>
     )
