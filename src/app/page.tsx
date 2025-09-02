@@ -12,6 +12,7 @@ import { PageNavigation } from '@/components/home/PageNavigation';
 const sections = [
   { id: 'hero', name: 'Home' },
   { id: 'experience', name: 'Experience' },
+  { id: 'services', name: 'Services' },
   { id: 'portfolio', name: 'Portfolio' },
   { id: 'contact', name: 'Contact' },
 ];
@@ -19,13 +20,6 @@ const sections = [
 export default function HomePage() {
   const latestArticles = []; // Assuming this will be populated later
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const scrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <>
@@ -42,6 +36,15 @@ export default function HomePage() {
 
         <section id="experience" className="h-full w-full snap-start flex items-center justify-center">
           <Services />
+        </section>
+        
+        <div className="border-t"></div>
+        
+        <section id="services" className="h-full w-full snap-start flex items-center justify-center">
+           <div className="text-center">
+            <h2 className="text-3xl font-bold">Services</h2>
+            <p className="text-muted-foreground">This is the services section.</p>
+          </div>
         </section>
 
         <div className="border-t"></div>
