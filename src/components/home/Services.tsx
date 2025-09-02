@@ -82,8 +82,8 @@ export function Services() {
                             )}
                          </div>
                          <div className="flex-grow">
-                             <h4 className="text-lg font-bold">{exp.role}</h4>
                              <p className="text-muted-foreground text-sm">{exp.company}</p>
+                             <h4 className="text-lg font-bold">{exp.role}</h4>
                          </div>
                        </div>
                        
