@@ -1,3 +1,4 @@
+
 "use client"
 
 import Image from 'next/image';
@@ -30,9 +31,15 @@ const companyLogos = [
     { id: 'logo3', imageUrl: 'https://picsum.photos/seed/logo3/200/100?grayscale', alt: 'Company 3', dataAiHint: 'company logo' },
 ];
 
-const toolset = [
-    "ArchiCAD", "Dynamo", "BIM 360", "Rhino + Grasshopper", "Adobe Suite", 
-    "Rayon", "Revit", "Pyrevit", "Di-roots", "Navisworks", "AutoCAD", "Sketch Up"
+const toolsetLogos = [
+    { id: 'tool1', imageUrl: 'https://picsum.photos/seed/archicad/100/100', alt: 'ArchiCAD', dataAiHint: 'software logo' },
+    { id: 'tool2', imageUrl: 'https://picsum.photos/seed/dynamo/100/100', alt: 'Dynamo', dataAiHint: 'software logo' },
+    { id: 'tool3', imageUrl: 'https://picsum.photos/seed/bim360/100/100', alt: 'BIM 360', dataAiHint: 'software logo' },
+    { id: 'tool4', imageUrl: 'https://picsum.photos/seed/rhino/100/100', alt: 'Rhino', dataAiHint: 'software logo' },
+    { id: 'tool5', imageUrl: 'https://picsum.photos/seed/adobesuite/100/100', alt: 'Adobe Suite', dataAiHint: 'software logo' },
+    { id: 'tool6', imageUrl: 'https://picsum.photos/seed/rayon/100/100', alt: 'Rayon', dataAiHint: 'software logo' },
+    { id: 'tool7', imageUrl: 'https://picsum.photos/seed/revit/100/100', alt: 'Revit', dataAiHint: 'software logo' },
+    { id: 'tool8', imageUrl: 'https://picsum.photos/seed/pyrevit/100/100', alt: 'Pyrevit', dataAiHint: 'software logo' },
 ];
 
 
@@ -67,17 +74,13 @@ export function HeroVisuals() {
             </Card>
 
             {/* Toolset Card */}
-             <Card className="absolute bottom-20 right-0 w-52 p-4 shadow-lg hover:-rotate-3 transition-transform duration-300">
-                <h3 className="font-bold mb-2">My Toolset</h3>
-                 <Carousel className="w-full" opts={{ loop: true }} plugins={[Autoplay({ delay: 2000 })]}>
-                    <CarouselContent>
-                        {toolset.map((tool, index) => (
-                            <CarouselItem key={index}>
-                               <p className="text-sm text-muted-foreground text-center">{tool}</p>
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                </Carousel>
+             <Card className="absolute bottom-16 right-0 w-64 p-4 shadow-lg hover:-rotate-3 transition-transform duration-300">
+                <h3 className="font-bold mb-2 text-center">My Toolset</h3>
+                <div className="grid grid-cols-4 gap-4 p-2">
+                    {toolsetLogos.map((tool) => (
+                        <Image key={tool.id} src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain" data-ai-hint={tool.dataAiHint} title={tool.alt} />
+                    ))}
+                </div>
             </Card>
             
             {/* Company Logos Card */}
