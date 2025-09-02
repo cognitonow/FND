@@ -41,7 +41,7 @@ const toolsetLogos = [
     { id: 'tool2', imageUrl: 'https://img.logo.dev/autodesk.com?token=pk_TAknTcNzR4eGaBiUIH2_ew', alt: 'Dynamo' },
     { id: 'tool3', imageUrl: 'https://img.logo.dev/autodesk.com?token=pk_TAknTcNzR4eGaBiUIH2_ew', alt: 'BIM 360' },
     { id: 'tool4', imageUrl: 'https://img.logo.dev/rhino3d.com?token=pk_TAknTcNzR4eGaBiUIH2_ew', alt: 'Rhino' },
-    { id_tool5: 'tool5', imageUrl: 'https://img.logo.dev/adobe.com?token=pk_TAknTcNzR4eGaBiUIH2_ew', alt: 'Adobe Suite' },
+    { id: 'tool5', imageUrl: 'https://img.logo.dev/adobe.com?token=pk_TAknTcNzR4eGaBiUIH2_ew', alt: 'Adobe Suite' },
     { id: 'tool6', imageUrl: 'https://img.logo.dev/rayon.design?token=pk_TAknTcNzR4eGaBiUIH2_ew', alt: 'Rayon' },
 ];
 
