@@ -108,7 +108,7 @@ export function PageNavigation({ containerRef, sections }: PageNavigationProps) 
             {/* Header Links Update (by proxy) */}
             <div className="fixed top-0 left-0 w-full z-50 pointer-events-none">
                 <div className="container mx-auto flex h-16 items-center justify-center px-4">
-                    <div className="hidden md:flex pointer-events-auto">
+                    <div className="hidden md:flex pointer-events-auto bg-background/80 backdrop-blur-sm px-4 py-2 rounded-full">
                         <NavLinks sections={sections} activeSection={sections[currentSectionIndex]?.id} onLinkClick={scrollToSectionById} />
                     </div>
                 </div>
