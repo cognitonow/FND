@@ -1,3 +1,4 @@
+
 import type { Timestamp } from 'firebase/firestore';
 
 export interface Project {
@@ -19,4 +20,12 @@ export interface Article {
   thumbnailUrl?: string;
   createdAt?: string | Timestamp;
   updatedAt?: string | Timestamp;
+}
+
+export interface Collaboration {
+    id: string;
+    company: string;
+    project: string;
+    imageUrl: string;
+    dataAiHint?: string;
 }
