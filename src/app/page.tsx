@@ -35,35 +35,35 @@ export default function HomePage() {
     <div ref={containerRef} className="h-[calc(100vh-4rem)] overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <PageNavigation containerRef={containerRef} sections={sections} />
       
-      <section id="hero" data-section-id="hero" className="h-full snap-start flex items-center relative">
+      <section id="hero" data-section-id="hero" className="h-full snap-start flex items-center">
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
           <HeroContent />
           <HeroVisuals articles={latestArticles} />
         </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-            <SectionNav onUp={() => {}} onDown={() => scrollToSection(1)} upDisabled={true} />
-        </div>
       </section>
 
-      <section id="experience" data-section-id="experience" className="h-full snap-start flex items-center relative">
+      <div className="py-8 flex justify-center">
+        <SectionNav onUp={() => scrollToSection(0)} onDown={() => scrollToSection(1)} />
+      </div>
+
+      <section id="experience" data-section-id="experience" className="h-full snap-start flex items-center">
         <Services />
-         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-            <SectionNav onUp={() => scrollToSection(0)} onDown={() => scrollToSection(2)} />
-        </div>
       </section>
 
-      <section id="portfolio" data-section-id="portfolio" className="h-full snap-start flex items-center relative">
+      <div className="py-8 flex justify-center">
+        <SectionNav onUp={() => scrollToSection(1)} onDown={() => scrollToSection(2)} />
+      </div>
+
+      <section id="portfolio" data-section-id="portfolio" className="h-full snap-start flex items-center">
         <PortfolioSection />
-         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-            <SectionNav onUp={() => scrollToSection(1)} onDown={() => scrollToSection(3)} />
-        </div>
       </section>
       
-      <section id="contact" data-section-id="contact" className="h-full snap-start flex items-center relative">
+      <div className="py-8 flex justify-center">
+        <SectionNav onUp={() => scrollToSection(2)} onDown={() => scrollToSection(3)} />
+      </div>
+
+      <section id="contact" data-section-id="contact" className="h-full snap-start flex items-center">
         <ContactSection />
-         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-            <SectionNav onUp={() => scrollToSection(2)} onDown={() => {}} downDisabled={true} />
-        </div>
       </section>
     </div>
   );
