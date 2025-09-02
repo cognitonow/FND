@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { useState, useMemo } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const projects = [
     {
@@ -148,7 +149,7 @@ export function PortfolioSection() {
 
   return (
     <div className="container mx-auto px-4 w-full h-full flex items-center">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start w-full h-full max-h-[80vh]">
           <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24">
             <h2 className="text-5xl font-bold tracking-tighter">
               Selected work
@@ -163,51 +164,55 @@ export function PortfolioSection() {
                 <FilterDropdown title="Project Type" category="projectType" options={filterOptions.projectType} />
             </div>
           </div>
-          <div className="lg:col-span-2 h-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
-                {filteredProjects.map((project) => (
-                    <div key={project.name} className="bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl flex flex-col">
-                        <div className="aspect-video relative mb-6">
-                            <Image
-                            src={project.imageUrl}
-                            alt={project.name}
-                            fill
-                            className="rounded-2xl object-cover"
-                            data-ai-hint={project.dataAiHint}
-                            />
-                        </div>
-                        <div className="flex-grow flex flex-col justify-end">
-                            <div className="flex justify-between items-start text-sm text-muted-foreground mb-2">
-                                <span>{project.name}</span>
-                                <div className="flex flex-col items-end gap-1">
-                                    <span>{project.year}</span>
-                                    <Image 
-                                        src={`https://flagcdn.com/w20/${project.countryCode}.png`}
-                                        alt={`${project.country} flag`}
-                                        width={20}
-                                        height={15}
-                                        className="object-contain rounded-sm border border-muted"
-                                        title={project.country}
-                                    />
+          <div className="lg:col-span-2 h-full overflow-hidden">
+            <ScrollArea className="h-full pr-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {filteredProjects.map((project) => (
+                        <div key={project.name} className="bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl flex flex-col">
+                            <div className="aspect-video relative mb-6">
+                                <Image
+                                src={project.imageUrl}
+                                alt={project.name}
+                                fill
+                                className="rounded-2xl object-cover"
+                                data-ai-hint={project.dataAiHint}
+                                />
+                            </div>
+                            <div className="flex-grow flex flex-col justify-end">
+                                <div className="flex justify-between items-start text-sm text-muted-foreground mb-2">
+                                    <span>{project.name}</span>
+                                    <div className="flex flex-col items-end gap-1">
+                                        <span>{project.year}</span>
+                                        <Image 
+                                            src={`https://flagcdn.com/w20/${project.countryCode}.png`}
+                                            alt={`${project.country} flag`}
+                                            width={20}
+                                            height={15}
+                                            className="object-contain rounded-sm border border-muted"
+                                            title={project.country}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex gap-2 flex-wrap">
+                                    <Badge variant="outline" className="font-light bg-accent/10">{project.sector}</Badge>
+                                    {project.projectType.map(tag => (
+                                        <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
+                                    ))}
                                 </div>
                             </div>
-                            <div className="flex gap-2 flex-wrap">
-                                <Badge variant="outline" className="font-light bg-accent/10">{project.sector}</Badge>
-                                {project.projectType.map(tag => (
-                                    <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
-                                ))}
-                            </div>
                         </div>
-                    </div>
-                ))}
-                {filteredProjects.length === 0 && (
-                    <div className="md:col-span-2 text-center py-16 flex items-center justify-center">
-                        <p className="text-muted-foreground">No projects match the current filters.</p>
-                    </div>
-                )}
-            </div>
+                    ))}
+                    {filteredProjects.length === 0 && (
+                        <div className="md:col-span-2 text-center py-16 flex items-center justify-center">
+                            <p className="text-muted-foreground">No projects match the current filters.</p>
+                        </div>
+                    )}
+                </div>
+            </ScrollArea>
           </div>
         </div>
     </div>
   );
 }
+
+    
