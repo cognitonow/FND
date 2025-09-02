@@ -49,7 +49,7 @@ const experiences = [
 export function Services() {
   return (
     <section className="container mx-auto px-4 w-full h-full flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start w-full h-full">
             <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24">
                 <h2 className="text-5xl font-bold tracking-tighter">
                   Work Experience
@@ -59,9 +59,9 @@ export function Services() {
                     Download my CV
                 </Button>
             </div>
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
                 {experiences.map((exp) => (
-                    <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 h-full min-h-[10rem]">
+                    <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 h-full">
                        <div className="flex-grow">
                            <div className="flex items-start gap-4 mb-4">
                              <div className="bg-white p-2 rounded-full mt-1">
