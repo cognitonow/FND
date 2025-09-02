@@ -36,16 +36,16 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https',"
-        hostname": "img.logo.dev",
-        "port": "",
-        "pathname": "/**"
+        protocol: "https",
+        hostname: "img.logo.dev",
+        port: "",
+        pathname: "/**"
       },
       {
-        "protocol": "https",
-        "hostname": "flagcdn.com",
-        "port": "",
-        "pathname": "/**"
+        protocol: "https",
+        hostname: "flagcdn.com",
+        port: "",
+        pathname: "/**"
       }
     ],
   },
