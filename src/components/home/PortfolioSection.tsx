@@ -1,8 +1,10 @@
 
+"use client";
+
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import Link from 'next/link';
+import { useState, useMemo } from 'react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const projects = [
     {
@@ -15,7 +17,6 @@ const projects = [
         year: '2022',
         imageUrl: 'https://images.unsplash.com/photo-1618221195710-dd6b41fa1299?q=80&w=2187&auto=format&fit=crop',
         dataAiHint: 'modern living room, kitchen',
-        featured: true,
     },
     {
         name: 'Crown Safari Lodge',
@@ -39,11 +40,111 @@ const projects = [
         imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop',
         dataAiHint: 'modern office interior, collaboration space',
     },
+    {
+        name: 'Accenture Office Refurbishment',
+        company: 'Accenture',
+        country: 'South Africa',
+        countryCode: 'za',
+        sector: 'Commercial',
+        projectType: ['Refurbishment'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1974&auto=format&fit=crop',
+        dataAiHint: 'corporate reception, office lobby',
+    },
+    {
+        name: '140 West Street Fit-Out',
+        company: 'Goldman Sachs',
+        country: 'South Africa',
+        countryCode: 'za',
+        sector: 'Fintech',
+        projectType: ['Fit-Out'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1978&auto=format&fit=crop',
+        dataAiHint: 'modern office building, teamwork',
+    },
+    {
+        name: 'Stanbic IBTC Tower Fit-Out',
+        company: 'Stanbic IBTC Pension Managers',
+        country: 'Nigeria',
+        countryCode: 'ng',
+        sector: 'Fintech',
+        projectType: ['Fit-Out'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop',
+        dataAiHint: 'modern office atrium, collaborative workspace',
+    },
+    {
+        name: "Therapy Sanctuary",
+        company: "DRA / Minopex / Paragon Group",
+        country: "South Africa",
+        countryCode: "za",
+        sector: "Wellness",
+        projectType: ["Fit-Out"],
+        year: "2022",
+        imageUrl: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop",
+        dataAiHint: "modern office cafe, atrium"
+    }
 ];
 
+type FilterCategory = 'company' | 'country' | 'sector' | 'projectType';
+
 export function PortfolioSection() {
-  const featuredProject = projects.find(p => p.featured);
-  const otherProjects = projects.filter(p => !p.featured).slice(0,2);
+  const [filters, setFilters] = useState<Record<FilterCategory, string>>({
+    company: 'All',
+    country: 'All',
+    sector: 'All',
+    projectType: 'All'
+  });
+
+  const getUniqueValues = (category: FilterCategory) => {
+    const values = new Set<string>();
+    if (category === 'projectType') {
+        projects.forEach(p => p.projectType.forEach(t => values.add(t)));
+    } else {
+        projects.forEach(p => values.add(p[category]));
+    }
+    return ['All', ...Array.from(values).sort()];
+  };
+  
+  const filterOptions = useMemo(() => ({
+    company: getUniqueValues('company'),
+    country: getUniqueValues('country'),
+    sector: getUniqueValues('sector'),
+    projectType: getUniqueValues('projectType'),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), []);
+
+  const handleFilterChange = (category: FilterCategory, value: string) => {
+    setFilters(prev => ({ ...prev, [category]: value }));
+  };
+
+  const filteredProjects = useMemo(() => {
+    return projects.filter(p => {
+      return (Object.keys(filters) as FilterCategory[]).every(key => {
+        if (filters[key] === 'All') return true;
+        if (key === 'projectType') {
+            return p.projectType.includes(filters[key]);
+        }
+        return p[key] === filters[key];
+      });
+    });
+  }, [filters]);
+
+  const FilterDropdown = ({ title, category, options }: { title: string, category: FilterCategory, options: string[] }) => (
+      <Select value={filters[category]} onValueChange={(value) => handleFilterChange(category, value)}>
+        <SelectTrigger className="w-full sm:w-auto h-8 rounded-full px-4 text-xs">
+            <div className="flex items-center gap-2">
+                 <span className="text-muted-foreground">{title}:</span>
+                 <SelectValue />
+            </div>
+        </SelectTrigger>
+        <SelectContent>
+          {options.map(option => (
+            <SelectItem key={option} value={option}>{option}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+  );
 
   return (
     <section className="container mx-auto px-4 w-full">
@@ -52,57 +153,57 @@ export function PortfolioSection() {
             <h2 className="text-5xl font-bold tracking-tighter">
               Selected work
             </h2>
-            <Button size="lg" variant="secondary" asChild>
-                <Link href="/portfolio">See All</Link>
-            </Button>
+             <p className="text-base text-muted-foreground">
+              A selection of my best work. Use the filters below to navigate through the projects.
+            </p>
           </div>
-          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-            {featuredProject && (
-                <div key={featuredProject.name} className="md:col-span-2 bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl">
-                    <div className="aspect-video relative mb-6">
-                        <Image
-                        src={featuredProject.imageUrl}
-                        alt={featuredProject.name}
-                        fill
-                        className="rounded-2xl object-cover"
-                        data-ai-hint={featuredProject.dataAiHint}
-                        />
+          <div className="lg:col-span-2">
+            <div className="flex flex-wrap justify-start gap-2 md:gap-4 mb-8">
+                <FilterDropdown title="Company" category="company" options={filterOptions.company} />
+                <FilterDropdown title="Country" category="country" options={filterOptions.country} />
+                <FilterDropdown title="Sector" category="sector" options={filterOptions.sector} />
+                <FilterDropdown title="Project Type" category="projectType" options={filterOptions.projectType} />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {filteredProjects.map((project) => (
+                    <div key={project.name} className="bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl">
+                        <div className="aspect-video relative mb-6">
+                            <Image
+                            src={project.imageUrl}
+                            alt={project.name}
+                            fill
+                            className="rounded-2xl object-cover"
+                            data-ai-hint={project.dataAiHint}
+                            />
+                        </div>
+                        <div className="flex justify-between items-start text-sm text-muted-foreground mb-2">
+                            <span>{project.name}</span>
+                            <div className="flex flex-col items-end gap-1">
+                                <span>{project.year}</span>
+                                <Image 
+                                    src={`https://flagcdn.com/w20/${project.countryCode}.png`}
+                                    alt={`${project.country} flag`}
+                                    width={20}
+                                    height={15}
+                                    className="object-contain rounded-sm border border-muted"
+                                    title={project.country}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex gap-2 flex-wrap">
+                            <Badge variant="outline" className="font-light bg-accent/10">{project.sector}</Badge>
+                            {project.projectType.map(tag => (
+                                <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
+                            ))}
+                        </div>
                     </div>
-                    <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
-                        <span>{featuredProject.name}</span>
-                        <span>{featuredProject.year}</span>
+                ))}
+                {filteredProjects.length === 0 && (
+                    <div className="md:col-span-2 text-center py-16">
+                        <p className="text-muted-foreground">No projects match the current filters.</p>
                     </div>
-                    <div className="flex gap-2 flex-wrap">
-                         <Badge variant="outline" className="font-light bg-accent/10">{featuredProject.sector}</Badge>
-                        {featuredProject.projectType.map(tag => (
-                             <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
-                        ))}
-                    </div>
-                </div>
-            )}
-            {otherProjects.map((project) => (
-                <div key={project.name} className="bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl">
-                    <div className="aspect-[4/3] relative mb-6">
-                        <Image
-                        src={project.imageUrl}
-                        alt={project.name}
-                        fill
-                        className="rounded-2xl object-cover"
-                        data-ai-hint={project.dataAiHint}
-                        />
-                    </div>
-                    <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
-                        <span>{project.name}</span>
-                        <span>{project.year}</span>
-                    </div>
-                    <div className="flex gap-2 flex-wrap">
-                        <Badge variant="outline" className="font-light bg-accent/10">{project.sector}</Badge>
-                        {project.projectType.map(tag => (
-                             <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
-                        ))}
-                    </div>
-                </div>
-            ))}
+                )}
+            </div>
           </div>
         </div>
     </section>
