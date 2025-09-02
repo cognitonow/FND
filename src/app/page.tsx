@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { HeroContent } from '@/components/home/HeroContent';
 import { HeroVisuals } from '@/components/home/HeroVisuals';
 import { Services } from '@/components/home/Services';
@@ -20,44 +20,88 @@ const sections = [
 export default function HomePage() {
   const latestArticles = []; // Assuming this will be populated later
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+        const scrollPosition = container.scrollTop;
+        const sectionElements = sections.map(s => document.getElementById(s.id));
+        
+        let activeIndex = 0;
+        for (let i = sectionElements.length - 1; i >= 0; i--) {
+            const section = sectionElements[i];
+            if (section && scrollPosition >= section.offsetTop - window.innerHeight / 2) {
+                activeIndex = i;
+                break;
+            }
+        }
+        setCurrentSectionIndex(activeIndex);
+    };
+
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [sections]);
+
+  const scrollToSectionByIndex = (index: number) => {
+    const sectionId = sections[index]?.id;
+    if (sectionId) {
+       if (!containerRef.current) return;
+        const sectionElement = document.getElementById(sectionId);
+        if (sectionElement) {
+             sectionElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+  }
+
 
   return (
     <>
-      <PageNavigation containerRef={containerRef} sections={sections} />
-      <div ref={containerRef} className="h-[calc(100vh-4rem)] overflow-y-scroll snap-y snap-mandatory scroll-smooth">
-        <section id="hero" className="h-full w-full snap-start flex items-center justify-center">
-          <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
-            <HeroContent />
-            <HeroVisuals articles={latestArticles} />
-          </div>
-        </section>
+      <div className="flex h-[calc(100vh-4rem)]">
+        <div ref={containerRef} className="flex-grow h-full overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+          <section id="hero" className="h-full w-full snap-start flex items-center justify-center">
+            <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+              <HeroContent />
+              <HeroVisuals articles={latestArticles} />
+            </div>
+          </section>
 
-        <div className="border-t"></div>
+          <div className="border-t"></div>
 
-        <section id="experience" className="h-full w-full snap-start flex items-center justify-center">
-          <Services />
-        </section>
-        
-        <div className="border-t"></div>
+          <section id="experience" className="h-full w-full snap-start flex items-center justify-center">
+            <Services />
+          </section>
+          
+          <div className="border-t"></div>
 
-        <section id="portfolio" className="h-full w-full snap-start flex items-center justify-center">
-          <PortfolioSection />
-        </section>
-        
-        <div className="border-t"></div>
+          <section id="portfolio" className="h-full w-full snap-start flex items-center justify-center">
+            <PortfolioSection />
+          </section>
+          
+          <div className="border-t"></div>
 
-        <section id="tutorials" className="h-full w-full snap-start flex items-center justify-center">
-           <div className="text-center">
-            <h2 className="text-3xl font-bold">Revit Tutorials</h2>
-            <p className="text-muted-foreground">This is the tutorials section.</p>
-          </div>
-        </section>
+          <section id="tutorials" className="h-full w-full snap-start flex items-center justify-center">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold">Revit Tutorials</h2>
+              <p className="text-muted-foreground">This is the tutorials section.</p>
+            </div>
+          </section>
 
-        <div className="border-t"></div>
+          <div className="border-t"></div>
 
-        <section id="contact" className="h-full w-full snap-start flex items-center justify-center">
-          <ContactSection />
-        </section>
+          <section id="contact" className="h-full w-full snap-start flex items-center justify-center">
+            <ContactSection />
+          </section>
+        </div>
+        <PageNavigation 
+            sections={sections} 
+            currentSectionIndex={currentSectionIndex} 
+            scrollToSectionByIndex={scrollToSectionByIndex} 
+        />
       </div>
     </>
   );
