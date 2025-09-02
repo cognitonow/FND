@@ -52,8 +52,9 @@ export function Services() {
                             <Image 
                                 src={logo.src} 
                                 alt={logo.name} 
-                                fill
-                                className="object-contain" 
+                                width={32}
+                                height={32}
+                                className="object-contain h-full w-full"
                             />
                         </div>
                     ))}
