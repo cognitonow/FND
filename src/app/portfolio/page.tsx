@@ -74,6 +74,17 @@ const projects = [
         imageUrl: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop',
         dataAiHint: 'modern office atrium, collaborative workspace',
     },
+    {
+        name: "Therapy Sanctuary",
+        company: "DRA / Minopex / Paragon Group",
+        country: "South Africa",
+        countryCode: "za",
+        sector: "Wellness",
+        projectType: ["Fit-Out"],
+        year: "2022",
+        imageUrl: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop",
+        dataAiHint: "modern office cafe, atrium"
+    }
 ];
 
 type FilterCategory = 'company' | 'country' | 'sector' | 'projectType';
@@ -200,4 +211,3 @@ export default function PortfolioPage() {
     </div>
   );
 }
-
