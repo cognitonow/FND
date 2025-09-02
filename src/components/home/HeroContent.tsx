@@ -10,6 +10,9 @@ const locations = [
     { countryCode: 'sg', name: 'Singapore' },
     { countryCode: 'ie', name: 'Ireland' },
     { countryCode: 'hk', name: 'Hong Kong' },
+    { countryCode: 'ae', name: 'United Arab Emirates' },
+    { countryCode: 'gh', name: 'Ghana' },
+    { countryCode: 'sc', name: 'Seychelles' },
 ];
 
 export function HeroContent() {
@@ -37,6 +40,7 @@ export function HeroContent() {
             </Button>
           </div>
            <div className='flex gap-4 items-center text-muted-foreground'>
+            <span className="text-sm">Projects all over the world:</span>
             <div className="flex items-center gap-2">
                 {locations.map(loc => (
                     <Image 
