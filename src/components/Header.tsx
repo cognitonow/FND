@@ -10,7 +10,7 @@ export default function Header() {
         </Link>
         <nav className="flex items-center gap-4">
           <Button variant="ghost" asChild>
-            <Link href="/">Portfolio</Link>
+            <Link href="/#portfolio">Portfolio</Link>
           </Button>
           <Button variant="ghost" asChild>
             <Link href="/articles">Articles</Link>

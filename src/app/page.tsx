@@ -4,6 +4,7 @@ import { HeroContent } from '@/components/home/HeroContent';
 import { HeroVisuals } from '@/components/home/HeroVisuals';
 import { QuoteSection } from '@/components/home/QuoteSection';
 import { Services } from '@/components/home/Services';
+import { PortfolioSection } from '@/components/home/PortfolioSection';
 
 export default async function HomePage() {
   const latestArticles = await getArticles(3);
@@ -17,6 +18,7 @@ export default async function HomePage() {
       </div>
       <QuoteSection />
       <Services />
+      <PortfolioSection />
     </>
   );
 }
