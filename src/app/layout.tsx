@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import SiteLayout from '@/components/SiteLayout';
-import { PageLoader } from '@/components/PageLoader';
+import RootLayoutClient from '@/components/RootLayoutClient';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -17,12 +16,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en" className={`${inter.variable} !scroll-smooth`}>
-      <body className={`font-sans antialiased`}>
-        <PageLoader />
-        <SiteLayout>{children}</SiteLayout>
-        <Toaster />
+      <body>
+          <RootLayoutClient>{children}</RootLayoutClient>
+          <Toaster />
       </body>
     </html>
   );
