@@ -48,13 +48,13 @@ export function Services() {
                 </h2>
                 <div className="flex items-center gap-x-8 gap-y-8 flex-wrap">
                     {logos.map(logo => (
-                        <div key={logo.name} className="relative h-10 w-10 bg-white rounded-full p-1 flex items-center justify-center">
+                        <div key={logo.name} className="relative h-10 w-10 bg-white rounded-full p-2 flex items-center justify-center">
                             <Image 
                                 src={logo.src} 
                                 alt={logo.name} 
+                                className="object-contain h-full w-full"
                                 width={32}
                                 height={32}
-                                className="object-contain h-full w-full"
                             />
                         </div>
                     ))}
