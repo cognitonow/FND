@@ -108,18 +108,8 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
 
                  {/* Row 2 */}
                 <div className="flex-[0.8] flex gap-4">
-                    {/* Top of Mind Quote */}
-                    <div className="w-2/5">
-                        <Card className="w-full h-full p-6 shadow-lg hover:rotate-1 transition-transform duration-300 flex flex-col justify-center items-center text-center relative overflow-hidden">
-                           <Quote className="absolute -top-4 -left-4 text-primary/10 w-24 h-24" />
-                           <h4 className="text-lg font-semibold mb-2">Quote of the Day</h4>
-                           <p className="text-lg text-muted-foreground mt-2">&quot;The home should be the treasure chest of living.&quot;</p>
-                           <p className="text-sm font-medium mt-4">- Le Corbusier</p>
-                           <Quote className="absolute -bottom-4 -right-4 text-primary/10 w-24 h-24" />
-                        </Card>
-                    </div>
                     {/* Toolset Card */}
-                    <div className="w-3/5">
+                    <div className="w-2/5">
                          <div className="w-full h-full flex flex-col justify-center">
                             <div className="grid grid-cols-3 gap-4 p-2">
                                 {toolsetLogos.map((tool) => (
@@ -129,6 +119,16 @@ export function HeroVisuals({ articles }: HeroVisualsProps) {
                                 ))}
                             </div>
                         </div>
+                    </div>
+                    {/* Top of Mind Quote */}
+                    <div className="w-3/5">
+                        <Card className="w-full h-full p-6 shadow-lg hover:rotate-1 transition-transform duration-300 flex flex-col justify-center items-center text-center relative overflow-hidden">
+                           <Quote className="absolute -top-4 -left-4 text-primary/10 w-24 h-24" />
+                           <h4 className="text-lg font-semibold mb-2">Quote of the Day</h4>
+                           <p className="text-lg text-muted-foreground mt-2">&quot;The home should be the treasure chest of living.&quot;</p>
+                           <p className="text-sm font-medium mt-4">- Le Corbusier</p>
+                           <Quote className="absolute -bottom-4 -right-4 text-primary/10 w-24 h-24" />
+                        </Card>
                     </div>
                 </div>
             </div>
