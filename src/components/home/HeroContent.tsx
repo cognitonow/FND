@@ -1,7 +1,16 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+
+const locations = [
+    { countryCode: 'gb', name: 'London, UK' },
+    { countryCode: 'sg', name: 'Singapore' },
+    { countryCode: 'ie', name: 'Ireland' },
+    { countryCode: 'hk', name: 'Hong Kong' },
+    { countryCode: 'za', name: 'South Africa' },
+]
 
 export function HeroContent() {
     return (
@@ -27,9 +36,25 @@ export function HeroContent() {
               <Link href="#">View Portfolio <ArrowUpRight className="ml-2" /></Link>
             </Button>
           </div>
-           <div className='flex gap-2 items-center text-muted-foreground'>
-            <MapPin size={18}/>
-            <span>London, UK</span>
+           <div className='flex gap-4 items-center text-muted-foreground'>
+            <div className="flex items-center gap-2">
+                <MapPin size={18}/>
+                <span>London, UK</span>
+            </div>
+            <div className="h-4 w-px bg-border"></div>
+            <div className="flex items-center gap-2">
+                {locations.map(loc => (
+                    <Image 
+                        key={loc.countryCode}
+                        src={`https://flagcdn.com/w20/${loc.countryCode}.png`}
+                        alt={`${loc.name} flag`}
+                        width={20}
+                        height={15}
+                        className="object-contain rounded-sm"
+                        title={loc.name}
+                     />
+                ))}
+            </div>
           </div>
         </div>
     )
