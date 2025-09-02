@@ -6,35 +6,40 @@ import Link from 'next/link';
 
 const projects = [
     {
-        name: 'ZENPOINT',
-        year: '2024',
-        tags: ['UI DESIGN', 'WEB DEV'],
-        imageUrl: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop',
-        dataAiHint: 'serene beach landscape',
+        name: 'BWDC Residential Tower',
+        company: 'Foster + Partners / BWDC',
+        country: 'Philippines',
+        countryCode: 'ph',
+        sector: 'High End Residential',
+        projectType: ['New Build'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1618221195710-dd6b41fa1299?q=80&w=2187&auto=format&fit=crop',
+        dataAiHint: 'modern living room, kitchen',
         featured: true,
     },
     {
-        name: 'PAYU',
-        year: '2024',
-        tags: ['UI DESIGN', 'WEB DEV'],
-        imageUrl: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084&auto=format&fit=crop',
-        dataAiHint: 'modern office collaboration'
+        name: 'Crown Safari Lodge',
+        company: 'Crown Forest / Crown Safari',
+        country: 'Ghana',
+        countryCode: 'gh',
+        sector: 'Hospitality',
+        projectType: ['New Build'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1617850849332-ce8a77918177?q=80&w=2070&auto=format&fit=crop',
+        dataAiHint: 'luxury safari lodge, reception',
     },
     {
-        name: 'COMPAI',
-        year: '2024',
-        tags: ['UI DESIGN', 'MOBILE DEV', 'WEB DEV'],
-        imageUrl: 'https://images.unsplash.com/photo-1573496774221-9d69a58405a4?q=80&w=2069&auto=format&fit=crop',
-        dataAiHint: 'pocket companion device'
+        name: 'UN Zambia Office Refurb',
+        company: 'Cognito Solution',
+        country: 'Zambia',
+        countryCode: 'zm',
+        sector: 'Commercial',
+        projectType: ['Refurbishment'],
+        year: '2022',
+        imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop',
+        dataAiHint: 'modern office interior, collaboration space',
     },
-    {
-        name: 'CHATPIC.AI',
-        year: '2024',
-        tags: ['UI DESIGN', 'MOBILE DEV'],
-        imageUrl: 'https://images.unsplash.com/photo-1694663361546-936528987483?q=80&w=1974&auto=format&fit=crop',
-        dataAiHint: 'ai chat application'
-    },
-]
+];
 
 export function PortfolioSection() {
   const featuredProject = projects.find(p => p.featured);
@@ -69,7 +74,8 @@ export function PortfolioSection() {
                         <span>{featuredProject.year}</span>
                     </div>
                     <div className="flex gap-2 flex-wrap">
-                        {featuredProject.tags.map(tag => (
+                         <Badge variant="outline" className="font-light bg-accent/10">{featuredProject.sector}</Badge>
+                        {featuredProject.projectType.map(tag => (
                              <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
                         ))}
                     </div>
@@ -91,7 +97,8 @@ export function PortfolioSection() {
                         <span>{project.year}</span>
                     </div>
                     <div className="flex gap-2 flex-wrap">
-                        {project.tags.map(tag => (
+                        <Badge variant="outline" className="font-light bg-accent/10">{project.sector}</Badge>
+                        {project.projectType.map(tag => (
                              <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
                         ))}
                     </div>
