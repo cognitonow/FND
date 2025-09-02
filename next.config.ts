@@ -27,6 +27,12 @@ const nextConfig: NextConfig = {
         hostname: 'i.ytimg.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'company-logos.firebaseapp.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

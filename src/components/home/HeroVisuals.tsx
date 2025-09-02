@@ -37,12 +37,12 @@ const collaborations = [
 ];
 
 const toolsetLogos = [
-    { id: 'tool1', imageUrl: 'https://picsum.photos/seed/archicad/100/100', alt: 'ArchiCAD', dataAiHint: 'software logo' },
-    { id: 'tool2', imageUrl: 'https://picsum.photos/seed/dynamo/100/100', alt: 'Dynamo', dataAiHint: 'software logo' },
-    { id: 'tool3', imageUrl: 'https://picsum.photos/seed/bim360/100/100', alt: 'BIM 360', dataAiHint: 'software logo' },
-    { id: 'tool4', imageUrl: 'https://picsum.photos/seed/rhino/100/100', alt: 'Rhino', dataAiHint: 'software logo' },
-    { id: 'tool5', imageUrl: 'https://picsum.photos/seed/adobesuite/100/100', alt: 'Adobe Suite', dataAiHint: 'software logo' },
-    { id: 'tool6', imageUrl: 'https://picsum.photos/seed/rayon/100/100', alt: 'Rayon', dataAiHint: 'software logo' },
+    { id: 'tool1', imageUrl: 'https://company-logos.firebaseapp.com/archicad.svg', alt: 'ArchiCAD' },
+    { id: 'tool2', imageUrl: 'https://company-logos.firebaseapp.com/dynamo.svg', alt: 'Dynamo' },
+    { id: 'tool3', imageUrl: 'https://company-logos.firebaseapp.com/bim-360.svg', alt: 'BIM 360' },
+    { id: 'tool4', imageUrl: 'https://company-logos.firebaseapp.com/rhino.svg', alt: 'Rhino' },
+    { id: 'tool5', imageUrl: 'https://company-logos.firebaseapp.com/adobe.svg', alt: 'Adobe Suite' },
+    { id: 'tool6', imageUrl: 'https://company-logos.firebaseapp.com/rayon.svg', alt: 'Rayon' },
 ];
 
 
@@ -75,7 +75,7 @@ export function HeroVisuals() {
                 <Card className="w-64 h-52 p-4 shadow-lg hover:-rotate-3 transition-transform duration-300 flex flex-col justify-center">
                     <div className="grid grid-cols-3 gap-4 p-2">
                         {toolsetLogos.map((tool) => (
-                            <Image key={tool.id} src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain bg-white" data-ai-hint={tool.dataAiHint} title={tool.alt} />
+                            <Image key={tool.id} src={tool.imageUrl} alt={tool.alt} width={40} height={40} className="rounded-full object-contain bg-white p-1" data-ai-hint="software logo" title={tool.alt} />
                         ))}
                     </div>
                 </Card>
