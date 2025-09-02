@@ -47,22 +47,17 @@ const experiences = [
     },
 ];
 
-const logos = [
-    { name: 'Foster + Partners', src: 'https://img.logo.dev/fosterandpartners.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Accenture', src: 'https://img.logo.dev/accenture.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Goldman Sachs', src: 'https://img.logo.dev/gs.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Stanbic IBTC', src: 'https://img.logo.dev/stanbicibtc.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Minopex', src: 'https://img.logo.dev/minopex.com?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-    { name: 'Paragon Group', src: 'https://img.logo.dev/paragongroup.co.za?theme=dark&format=png&token=pk_TAknTcNzR4eGaBiUIH2_ew' },
-]
-
 export function Services() {
   return (
     <>
     <section className="bg-muted/30 py-24 sm:py-32">
         <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <Card className="flex flex-col justify-center items-start text-left p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+            <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24">
+                <h2 className="text-5xl font-bold tracking-tighter">
+                  Work Experience
+                </h2>
+                <Card className="flex flex-col justify-center items-start text-left p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 w-full">
                     <h3 className="text-3xl font-bold tracking-tighter mb-4">Wanna see my experience?</h3>
                     <p className="text-muted-foreground mb-6">Download my full CV to see my full jouney.</p>
                     <Button>
@@ -70,9 +65,10 @@ export function Services() {
                         Download my CV
                     </Button>
                 </Card>
-
+            </div>
+            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
                 {experiences.map((exp) => (
-                    <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 h-full">
                        <div className="flex-grow">
                            <div className="flex items-start gap-4 mb-4">
                              <div className="bg-white p-2 rounded-full mt-1">
@@ -102,6 +98,7 @@ export function Services() {
                     </div>
                 ))}
             </div>
+          </div>
         </div>
     </section>
     </>
