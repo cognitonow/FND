@@ -1,3 +1,5 @@
+"use client"
+
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
@@ -42,7 +44,7 @@ export function HeroVisuals() {
             
             {/* Profile Picture */}
              <Card className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-hidden shadow-2xl z-10 border-4 border-background">
-                <Image src="httpshttps://picsum.photos/seed/profile/400/400" alt="Profile Picture" width={200} height={200} className="object-cover" data-ai-hint="professional headshot" />
+                <Image src="https://picsum.photos/seed/profile/400/400" alt="Profile Picture" width={200} height={200} className="object-cover" data-ai-hint="professional headshot" />
             </Card>
 
             {/* Project Carousel Card */}
