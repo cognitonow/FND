@@ -10,7 +10,8 @@ const projects = [
         year: '2024',
         tags: ['UI DESIGN', 'WEB DEV'],
         imageUrl: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop',
-        dataAiHint: 'serene beach landscape'
+        dataAiHint: 'serene beach landscape',
+        featured: true,
     },
     {
         name: 'PAYU',
@@ -36,6 +37,9 @@ const projects = [
 ]
 
 export function PortfolioSection() {
+  const featuredProject = projects.find(p => p.featured);
+  const otherProjects = projects.filter(p => !p.featured).slice(0,2);
+
   return (
     <section id="portfolio" className="bg-muted/30 py-24 sm:py-32">
       <div className="container mx-auto px-4">
@@ -49,7 +53,29 @@ export function PortfolioSection() {
             </Button>
           </div>
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project) => (
+            {featuredProject && (
+                <div key={featuredProject.name} className="md:col-span-2 bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl">
+                    <div className="aspect-video relative mb-6">
+                        <Image
+                        src={featuredProject.imageUrl}
+                        alt={featuredProject.name}
+                        fill
+                        className="rounded-2xl object-cover"
+                        data-ai-hint={featuredProject.dataAiHint}
+                        />
+                    </div>
+                    <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
+                        <span>{featuredProject.name}</span>
+                        <span>{featuredProject.year}</span>
+                    </div>
+                    <div className="flex gap-2 flex-wrap">
+                        {featuredProject.tags.map(tag => (
+                             <Badge key={tag} variant="outline" className="font-light bg-accent/10">{tag}</Badge>
+                        ))}
+                    </div>
+                </div>
+            )}
+            {otherProjects.map((project) => (
                 <div key={project.name} className="bg-background/50 rounded-3xl p-6 transition-transform hover:scale-[1.02] hover:shadow-xl">
                     <div className="aspect-[4/3] relative mb-6">
                         <Image
