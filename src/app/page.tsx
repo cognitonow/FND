@@ -24,8 +24,8 @@ export default function HomePage() {
     <div ref={containerRef} className="h-[calc(100vh-4rem)] overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <PageNavigation containerRef={containerRef} sections={sections} />
       
-      <section id="hero" className="container mx-auto px-4 h-[calc(100vh-4rem)] snap-start flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+      <section id="hero" className="h-[calc(100vh-4rem)] snap-start flex items-center">
+        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
           <HeroContent />
           <HeroVisuals articles={latestArticles} />
         </div>
