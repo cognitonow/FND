@@ -6,41 +6,27 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { usePathname, useSearchParams } from 'next/navigation';
 
+// This is a workaround to correctly trigger nprogress on route changes.
+// Next.js App Router doesn't have a clean way to hook into the start of a route change yet.
+// See: https://github.com/vercel/next.js/discussions/41934
+import { useRouter } from 'next/navigation';
+
 export function PageLoader() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     NProgress.configure({ showSpinner: false });
 
-    const handleStart = () => NProgress.start();
-    const handleStop = () => NProgress.done();
-
-    // This is a simplified approach. For a more robust solution,
-    // you might need to wrap `next/link` or use a different strategy
-    // if you have navigations not triggered by standard links.
-    // For now, we'll listen to all clicks on `<a>` tags.
-    const handleAnchorClick = (event: MouseEvent) => {
-      const targetUrl = (event.currentTarget as HTMLAnchorElement).href;
-      const currentUrl = window.location.href;
-      if (targetUrl !== currentUrl) {
-        handleStart();
-      }
+    const handleStop = () => {
+      NProgress.done();
     };
 
-    document.addEventListener('click', (event) => {
-        const target = event.target as HTMLElement;
-        const anchor = target.closest('a');
-        if (anchor) {
-            handleAnchorClick(event as any);
-        }
-    });
-
-    // Initial stop in case it's stuck from a previous page
-    handleStop();
+    handleStop(); // Stop on initial load
 
     return () => {
-      // Cleanup logic if needed, though for nprogress it's minimal
+      handleStop(); // Stop on unmount
     };
   }, []);
 
@@ -48,6 +34,41 @@ export function PageLoader() {
     NProgress.done();
   }, [pathname, searchParams]);
 
-  
-  return null; // This component does not render anything itself
+  useEffect(() => {
+    const originalPush = router.push;
+    const originalReplace = router.replace;
+
+    router.push = (...args) => {
+      NProgress.start();
+      originalPush(...args);
+    };
+
+    router.replace = (...args) => {
+      NProgress.start();
+      originalReplace(...args);
+    };
+
+    // Also handle Link clicks
+    const handleLinkClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const anchor = target.closest('a');
+      if (anchor && anchor.href && anchor.target !== '_blank') {
+        const targetUrl = new URL(anchor.href);
+        const currentUrl = new URL(window.location.href);
+        if (targetUrl.origin === currentUrl.origin && targetUrl.pathname !== currentUrl.pathname) {
+          NProgress.start();
+        }
+      }
+    };
+    
+    document.addEventListener('click', handleLinkClick);
+
+    return () => {
+      router.push = originalPush;
+      router.replace = originalReplace;
+      document.removeEventListener('click', handleLinkClick);
+    };
+  }, [router]);
+
+  return null;
 }
