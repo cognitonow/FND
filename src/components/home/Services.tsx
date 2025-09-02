@@ -1,6 +1,8 @@
 
-import { Briefcase } from 'lucide-react';
+import { Briefcase, Download } from 'lucide-react';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 
 const experiences = [
     {
@@ -77,39 +79,43 @@ export function Services() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 items-start gap-16">
-                <div className="lg:col-span-1">
-                    <h3 className="text-5xl font-bold tracking-tighter">Where have I worked?</h3>
-                </div>
-                <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
-                    {experiences.map((exp) => (
-                        <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
-                           <div className="flex items-center gap-4 mb-4">
-                             <div className="bg-muted p-2 rounded-full">
-                                {exp.logoUrl ? (
-                                    <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={24} height={24} className="object-contain" />
-                                ) : (
-                                    <Briefcase className="w-6 h-6 text-primary" />
-                                )}
-                             </div>
-                             <h4 className="text-xl font-bold">{exp.company}</h4>
-                           </div>
-                           
-                           <p className="text-muted-foreground flex-grow mb-4">{exp.role}</p>
-                           
-                           <div className="border-t pt-4 flex justify-between items-center text-sm text-muted-foreground">
-                             <span>{exp.details}</span>
-                             <Image 
-                                src={`https://flagcdn.com/w20/${exp.countryCode}.png`}
-                                alt={`${exp.countryCode} flag`}
-                                width={20}
-                                height={15}
-                                className="object-contain rounded-sm"
-                             />
-                           </div>
-                        </div>
-                    ))}
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <Card className="flex flex-col justify-center items-center text-center p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <h3 className="text-3xl font-bold tracking-tighter mb-4">Interested in my work?</h3>
+                    <p className="text-muted-foreground mb-6">Download my full CV to see more details about my projects and skills.</p>
+                    <Button>
+                        <Download className="mr-2 h-4 w-4" />
+                        Download my CV
+                    </Button>
+                </Card>
+
+                {experiences.map((exp) => (
+                    <div key={exp.company} className="group flex flex-col bg-background p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                       <div className="flex items-center gap-4 mb-4">
+                         <div className="bg-muted p-2 rounded-full">
+                            {exp.logoUrl ? (
+                                <Image src={exp.logoUrl} alt={`${exp.company} logo`} width={24} height={24} className="object-contain" />
+                            ) : (
+                                <Briefcase className="w-6 h-6 text-primary" />
+                            )}
+                         </div>
+                         <h4 className="text-xl font-bold">{exp.company}</h4>
+                       </div>
+                       
+                       <p className="text-muted-foreground flex-grow mb-4">{exp.role}</p>
+                       
+                       <div className="border-t pt-4 flex justify-between items-center text-sm text-muted-foreground">
+                         <span>{exp.details}</span>
+                         <Image 
+                            src={`https://flagcdn.com/w20/${exp.countryCode}.png`}
+                            alt={`${exp.countryCode} flag`}
+                            width={20}
+                            height={15}
+                            className="object-contain rounded-sm"
+                         />
+                       </div>
+                    </div>
+                ))}
             </div>
         </div>
     </section>
