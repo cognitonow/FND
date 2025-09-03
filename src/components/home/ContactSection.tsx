@@ -61,34 +61,7 @@ export function ContactSection({ onScrollToTop }: ContactSectionProps) {
                         </CardHeader>
                     </Card>
                 </Link>
-                 <Card className="md:col-span-2 p-6 shadow-md hover:shadow-xl transition-shadow h-full">
-                     <div className="flex flex-col h-full justify-between gap-4">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <p className="text-sm text-muted-foreground">
-                                    &copy; {year} FND.ME. All rights reserved.
-                                </p>
-                            </div>
-                             <Button variant="outline" onClick={onScrollToTop}>
-                               <ArrowUp className="mr-2 h-4 w-4" /> Back to Top
-                            </Button>
-                        </div>
-                         <div className="flex items-center gap-4 border-t pt-4">
-                            <a href="mailto:Fanisampofu@gmail.com" className="text-muted-foreground hover:text-foreground">
-                                <Mail size={20} />
-                                <span className="sr-only">Email</span>
-                            </a>
-                            <a href="https://linkedin.com/in/fanisa-mpofu-/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
-                                <Linkedin size={20} />
-                                <span className="sr-only">LinkedIn</span>
-                            </a>
-                            <a href="https://www.youtube.com/@RevitInteriors" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
-                                <Youtube size={20} />
-                                <span className="sr-only">YouTube</span>
-                            </a>
-                        </div>
-                     </div>
-                </Card>
+                 
             </div>
         </div>
     </section>
