@@ -59,14 +59,16 @@ export function Services() {
   return (
     <section className="container mx-auto px-4 w-full h-full flex items-center">
         <div className="w-full lg:grid lg:grid-cols-3 lg:gap-12 items-start">
-            <div className="flex flex-col gap-6 items-start h-fit lg:sticky lg:top-24 mb-12 lg:mb-0">
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
-                  Work Experience
-                </h2>
-                <Button>
-                    <Download className="mr-2 h-4 w-4" />
-                    Download my CV
-                </Button>
+            <div className="lg:sticky lg:top-24 h-fit mb-12 lg:mb-0">
+                <div className="flex flex-col gap-6 items-start">
+                    <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
+                      Work Experience
+                    </h2>
+                    <Button>
+                        <Download className="mr-2 h-4 w-4" />
+                        Download my CV
+                    </Button>
+                </div>
             </div>
             <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
                 {experiences.map((exp) => (

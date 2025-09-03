@@ -14,18 +14,20 @@ export function RevitTutorialsSection({ articles }: RevitTutorialsSectionProps) 
     return (
         <section className="container mx-auto px-4 w-full h-full flex items-center">
             <div className="w-full lg:grid lg:grid-cols-3 lg:gap-12 items-start">
-                <div className="flex flex-col gap-6 items-start h-fit lg:sticky lg:top-24 mb-12 lg:mb-0">
-                    <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
-                        Revit Tutorials
-                    </h2>
-                    <p className="text-base text-muted-foreground">
-                        Explore tutorials and articles on BIM, Revit, and architectural design.
-                    </p>
-                    <Button asChild>
-                        <Link href="/articles">
-                            View All Articles <ArrowRight className="ml-2" />
-                        </Link>
-                    </Button>
+                <div className="lg:sticky lg:top-24 h-fit mb-12 lg:mb-0">
+                    <div className="flex flex-col gap-6 items-start">
+                        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
+                            Revit Tutorials
+                        </h2>
+                        <p className="text-base text-muted-foreground">
+                            Explore tutorials and articles on BIM, Revit, and architectural design.
+                        </p>
+                        <Button asChild>
+                            <Link href="/articles">
+                                View All Articles <ArrowRight className="ml-2" />
+                            </Link>
+                        </Button>
+                    </div>
                 </div>
                 <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
                     {articles.map((article) => (
