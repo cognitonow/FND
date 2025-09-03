@@ -3,7 +3,7 @@ import { Linkedin, Mail, Youtube } from 'lucide-react';
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t flex-shrink-0">
+    <footer className="border-t flex-shrink-0 bg-background">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         <p className="text-sm text-muted-foreground">
           &copy; {year} FND.ME. All rights reserved.
