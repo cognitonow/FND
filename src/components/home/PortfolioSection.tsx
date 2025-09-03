@@ -94,8 +94,8 @@ export function PortfolioSection() {
 
   return (
     <div className="container mx-auto px-4 w-full h-full flex items-center">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 w-full">
-          <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24 h-fit">
+      <div className="w-full lg:grid lg:grid-cols-3 lg:gap-12 items-start">
+          <div className="flex flex-col gap-6 items-start h-fit lg:sticky lg:top-24 mb-12 lg:mb-0">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
               Selected work
             </h2>
