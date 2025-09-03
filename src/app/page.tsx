@@ -20,7 +20,6 @@ const sections = [
   { id: 'portfolio', name: 'Selected work' },
   { id: 'tutorials', 'name': 'Revit Tutorials' },
   { id: 'contact', name: 'Get In Touch' },
-  { id: 'footer', name: 'Footer' },
 ];
 
 export default function HomePage() {
@@ -40,15 +39,23 @@ export default function HomePage() {
     const container = containerRef.current;
     if (!container) return;
 
+    // We need to add the footer to our section list for scroll calculations
+    const sectionsForScroll = [...sections, { id: 'footer', name: 'Footer' }];
+    
     const handleScroll = () => {
         const scrollPosition = container.scrollTop;
-        const sectionElements = sections.map(s => document.getElementById(s.id));
+        const sectionElements = sectionsForScroll.map(s => document.getElementById(s.id));
         
         let activeIndex = 0;
         for (let i = sectionElements.length - 1; i >= 0; i--) {
             const section = sectionElements[i];
             if (section && scrollPosition >= section.offsetTop - window.innerHeight / 2) {
-                activeIndex = i;
+                // If the footer is the active section, we want to show the 'contact' nav item as active.
+                if (sectionsForScroll[i].id === 'footer') {
+                    activeIndex = sections.findIndex(s => s.id === 'contact');
+                } else {
+                     activeIndex = i;
+                }
                 break;
             }
         }
