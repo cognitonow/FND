@@ -2,6 +2,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from 'react';
+import Header from '@/components/Header';
 import { HeroContent } from '@/components/home/HeroContent';
 import { HeroVisuals } from '@/components/home/HeroVisuals';
 import { Services } from '@/components/home/Services';
@@ -78,7 +79,8 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="flex h-full">
+      <Header />
+      <div className="flex h-[calc(100vh-4rem)]">
         <div ref={containerRef} className="flex-grow h-full overflow-y-auto snap-y snap-mandatory scroll-smooth">
           <section id="hero" className="h-full w-full snap-start flex items-center justify-center">
             <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">

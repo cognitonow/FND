@@ -12,9 +12,10 @@ export default function RootLayoutClient({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const isAdminPage = pathname.startsWith('/admin');
   const isHomePage = pathname === '/';
 
-  // This logic is now in a useEffect hook to prevent hydration errors.
+  // This logic is in a useEffect hook to prevent hydration errors.
   // It runs only on the client, after the initial render.
   useEffect(() => {
     if (isHomePage) {
@@ -33,7 +34,11 @@ export default function RootLayoutClient({
   return (
     <>
       <PageLoader />
-      <SiteLayout>{children}</SiteLayout>
+      {isAdminPage || isHomePage ? (
+        children
+      ) : (
+        <SiteLayout>{children}</SiteLayout>
+      )}
     </>
   );
 }
