@@ -2,8 +2,11 @@
 "use client";
 
 import Image from 'next/image';
+import { useState, useMemo } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 
 const projects = [
@@ -88,6 +91,24 @@ const projects = [
 
 
 export default function PortfolioPage() {
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const categories = useMemo(() => {
+    const allCategories = new Set<string>();
+    projects.forEach(p => {
+        allCategories.add(p.sector);
+        p.projectType.forEach(t => allCategories.add(t));
+    });
+    return ['All', ...Array.from(allCategories)];
+  }, []);
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === 'All') {
+        return projects;
+    }
+    return projects.filter(p => p.sector === activeFilter || p.projectType.includes(activeFilter));
+  }, [activeFilter]);
+
 
   return (
     <div className="container mx-auto px-4 py-16 sm:py-24">
@@ -100,9 +121,21 @@ export default function PortfolioPage() {
         </p>
       </section>
 
+       <section className="flex justify-center flex-wrap gap-2 mb-12">
+            {categories.map(category => (
+                <Button 
+                    key={category} 
+                    variant={activeFilter === category ? 'default' : 'outline'}
+                    onClick={() => setActiveFilter(category)}
+                >
+                    {category}
+                </Button>
+            ))}
+        </section>
+
       <section>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
                 <Card key={project.name} className="bg-background p-6 transition-transform hover:scale-[1.02] shadow-md hover:shadow-xl">
                     <div className="aspect-video relative mb-6">
                         <Image
@@ -136,6 +169,11 @@ export default function PortfolioPage() {
                 </Card>
             ))}
         </div>
+        {filteredProjects.length === 0 && (
+            <div className="text-center py-16 text-muted-foreground">
+                <p>No projects match the selected filter.</p>
+            </div>
+        )}
       </section>
     </div>
   );
