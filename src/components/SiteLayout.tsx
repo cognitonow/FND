@@ -21,7 +21,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <main className={`flex-grow ${isHomePage ? 'h-screen overflow-hidden' : ''}`}>
         {children}
       </main>
-      {!isHomePage && <Footer />}
+      <Footer />
     </div>
   );
 }
