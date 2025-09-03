@@ -93,8 +93,8 @@ export function PortfolioSection() {
   const featuredProjects = projects.slice(0, 4);
 
   return (
-    <div className="container mx-auto px-4 w-full h-full flex items-center">
-      <div className="w-full lg:grid lg:grid-cols-3 lg:gap-12 items-start">
+    <section className="container mx-auto px-4 w-full h-full flex flex-col justify-center py-16 lg:py-0">
+      <div className="w-full lg:grid lg:grid-cols-3 lg:gap-12 lg:items-start">
           <div className="lg:sticky lg:top-24 h-fit mb-12 lg:mb-0">
             <div className="flex flex-col gap-6 items-start">
                 <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
@@ -150,6 +150,6 @@ export function PortfolioSection() {
             </div>
           </div>
         </div>
-    </div>
+    </section>
   );
 }

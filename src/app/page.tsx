@@ -91,25 +91,25 @@ export default function HomePage() {
 
           <div className="border-t"></div>
 
-          <section id="experience" className="h-full w-full snap-start flex items-center justify-center">
+          <section id="experience" className="h-auto md:h-full w-full snap-start flex items-center justify-center">
             <Services />
           </section>
           
           <div className="border-t"></div>
 
-          <section id="portfolio" className="h-full w-full snap-start flex items-center justify-center">
+          <section id="portfolio" className="h-auto md:h-full w-full snap-start flex items-center justify-center">
             <PortfolioSection />
           </section>
           
           <div className="border-t"></div>
 
-          <section id="tutorials" className="h-full w-full snap-start flex items-center justify-center">
+          <section id="tutorials" className="h-auto md:h-full w-full snap-start flex items-center justify-center">
             <RevitTutorialsSection articles={latestArticles} />
           </section>
 
           <div className="border-t"></div>
 
-          <section id="contact" className="h-full w-full snap-start flex items-center justify-center">
+          <section id="contact" className="h-auto md:h-full w-full snap-start flex items-center justify-center">
             <ContactSection onScrollToTop={scrollToTop} />
           </section>
         </div>
