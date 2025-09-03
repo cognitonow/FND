@@ -33,7 +33,7 @@ type HeroVisualsProps = {
 
 export function HeroVisuals({ articles }: HeroVisualsProps) {
     return (
-        <div className="relative h-[500px] flex items-center justify-center">
+        <div className="relative h-[450px] md:h-[500px] flex items-center justify-center">
             {/* Background Shape */}
             <div className="absolute inset-0 bg-gradient-to-tr from-accent/50 to-primary/20 rounded-full blur-3xl -z-10"></div>
             

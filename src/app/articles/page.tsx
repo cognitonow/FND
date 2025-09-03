@@ -11,7 +11,7 @@ export default async function ArticlesPage() {
   return (
     <div className="container mx-auto px-4 py-16 sm:py-24">
       <section className="text-center mb-16">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">
           Thoughts & Insights
         </h1>
         <p className="text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground">

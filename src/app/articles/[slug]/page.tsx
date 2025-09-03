@@ -19,7 +19,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <article className="container mx-auto px-4 py-16 sm:py-24 max-w-4xl">
       <header className="mb-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4">
+        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tighter mb-4">
           {article.title}
         </h1>
         <p className="text-muted-foreground">

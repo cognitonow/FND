@@ -26,7 +26,7 @@ export function HeroContent() {
             </span>
             Available for Work
           </Badge>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter">
             Hi Im Fanisa Mpofu
           </h1>
           <p className="text-lg md:text-xl max-w-xl text-muted-foreground">
