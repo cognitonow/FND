@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from './ui/button';
 import { NavLinks } from './home/NavLinks';
 import { usePathname } from 'next/navigation';
+import { ThemeToggle } from './ThemeToggle';
 
 
 const sections = [
@@ -37,6 +38,7 @@ export default function Header() {
               </Button>
             </>
           )}
+          <ThemeToggle />
           <Button variant="outline" asChild>
             <Link href="/admin/login">Admin</Link>
           </Button>
