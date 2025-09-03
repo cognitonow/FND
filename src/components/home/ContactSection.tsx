@@ -12,7 +12,7 @@ export function ContactSection({ onScrollToTop }: ContactSectionProps) {
     const year = new Date().getFullYear();
   return (
     <section className="container mx-auto px-4 w-full h-full flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 w-full">
             <div className="flex flex-col gap-6 items-start lg:sticky lg:top-24">
                 <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
                 Get In Touch
@@ -61,7 +61,7 @@ export function ContactSection({ onScrollToTop }: ContactSectionProps) {
                         </CardHeader>
                     </Card>
                 </Link>
-                 <div className="md:col-span-2 p-6 shadow-md hover:shadow-xl transition-shadow h-full rounded-lg border bg-background text-card-foreground">
+                 <div className="md:col-span-2 border-t pt-8 mt-8">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                         <p className="text-sm text-muted-foreground">&copy; {year} FND.ME. All rights reserved.</p>
                         <Button variant="ghost" onClick={onScrollToTop}>Back to Top <ArrowUp className="ml-2 h-4 w-4"/></Button>
