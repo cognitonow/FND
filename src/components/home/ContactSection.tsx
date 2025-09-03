@@ -4,12 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowUp, Linkedin, Mail, Youtube } from 'lucide-react';
 import Link from 'next/link';
 
-type ContactSectionProps = {
-    onScrollToTop: () => void;
-};
-
-export function ContactSection({ onScrollToTop }: ContactSectionProps) {
-    const year = new Date().getFullYear();
+export function ContactSection() {
   return (
     <section className="container mx-auto px-4 w-full h-full flex flex-col justify-center py-16 lg:py-0">
         <div className="w-full lg:grid lg:grid-cols-3 lg:gap-12 lg:items-start">
@@ -63,12 +58,6 @@ export function ContactSection({ onScrollToTop }: ContactSectionProps) {
                         </CardHeader>
                     </Card>
                 </Link>
-                 <div className="md:col-span-2 border-t pt-8 mt-8">
-                    <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <p className="text-sm text-muted-foreground">&copy; {year} FND.ME. All rights reserved.</p>
-                        <Button variant="ghost" onClick={onScrollToTop}>Back to Top <ArrowUp className="ml-2 h-4 w-4"/></Button>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

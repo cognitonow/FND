@@ -12,6 +12,7 @@ import { ContactSection } from '@/components/home/ContactSection';
 import { PageNavigation } from '@/components/home/PageNavigation';
 import { getArticles } from '@/lib/actions';
 import type { Article } from '@/types';
+import { HomeFooter } from '@/components/home/HomeFooter';
 
 const sections = [
   { id: 'hero', name: 'Home' },
@@ -19,6 +20,7 @@ const sections = [
   { id: 'portfolio', name: 'Selected work' },
   { id: 'tutorials', 'name': 'Revit Tutorials' },
   { id: 'contact', name: 'Get In Touch' },
+  { id: 'footer', name: 'Footer' },
 ];
 
 export default function HomePage() {
@@ -110,8 +112,15 @@ export default function HomePage() {
           <div className="border-t"></div>
 
           <section id="contact" className="h-auto md:h-full w-full snap-start flex items-center justify-center">
-            <ContactSection onScrollToTop={scrollToTop} />
+            <ContactSection />
           </section>
+          
+          <div className="border-t"></div>
+
+          <section id="footer" className="h-auto w-full snap-start flex items-center justify-center bg-muted/50">
+            <HomeFooter onScrollToTop={scrollToTop} />
+          </section>
+
         </div>
         <div className="relative h-full hidden md:flex items-center">
             <PageNavigation 
